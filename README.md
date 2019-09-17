@@ -1,1 +1,8 @@
 # BeePODYNA
+
+## Aims
+
+## Models
+
+## Functionalities
+
