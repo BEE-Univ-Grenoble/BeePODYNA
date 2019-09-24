@@ -34,3 +34,7 @@ population <- function(label,
             class = "population"
             )
 }
+
+names.population <- function(pop) {
+  pop$label
+}
