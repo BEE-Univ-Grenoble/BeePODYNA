@@ -21,7 +21,21 @@ Une population est définie par :
   + Taux de mortalité
   + Capacité biotique
   
+#### Fonctions utilitaires
+
+- is.population
+- growth_rate_estimate
+- as.population (à partir d'une liste, à partir d'une population)
+- Récuperation des attibuts:
+  + size (taille de la pop et temps associé) 
+  + capacity 
+  + growth_rate ()
+- summary (julia)
+- plot (maxime)
+
 ### Description d'un modèle
+
+IMPLEMENTER LA FONCTION dynapop (modèle de dynamic des pop)
 
 - Une liste de populations
 - Une matrice d'interactions
