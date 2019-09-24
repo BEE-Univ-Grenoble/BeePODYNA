@@ -29,6 +29,7 @@ population <- function(label,
 
   structure(list(label = label,
             size  = initial_size,
+            time  = 0.0,
             growth_rate = growth_rate,
             capacity = capacity),
             class = "population"
