@@ -7,8 +7,7 @@
 #' @param log.time TRUE/FALSE if time axis (x axis) must be logarithmic
 #' @param log.pop TRUE/FALSE if population axis (y axis) must be logarithmic
 #'
-#' @example
-#' hirsu = population("hirsuta",20,1,100)
+#' @examples hirsu = population("hirsuta",20,1,100)
 #' daonen = population("daonensis",30,1.2,100)
 #'
 #' daonen[[2]]=c(30,34)
@@ -17,16 +16,17 @@
 #' liste = list(hirsu,daonen)
 #' plot.population(list = liste)
 #'
-#' @author JAUNATRE Maxime
+#' @author Jaunatre Maxime
 #'
 #' @export
 plot.population = function(list = population("Primula",1,1,100),
                            capacity.line = F,
-                           #log.time = F,
+                           log.time = F,
                            log.pop = F,
                            color = c("black","red"),
                            ylabel = "",
-                           xlabel = "") {
+                           xlabel = "",
+                           main = "") {
 # check each parameter
   if( !is.logical(capacity.line)){
     stop( paste("capacity.line must be a single logical value"))
@@ -73,6 +73,7 @@ plot.population = function(list = population("Primula",1,1,100),
     for(i in 1:length(list)){
       if(log.pop){
         list[[i]][[2]] = log(list[[i]][[2]])
+        list[[i]][[4]] = log(list[[i]][[4]])
       }else{}
 
       ####log ####
@@ -99,6 +100,7 @@ plot.population = function(list = population("Primula",1,1,100),
 
   plot(x= 1, y =1, type = "n",
        xlab = xlabel, ylab = ylabel,
+       main = main,
        xlim = c(time.min,time.max),
        ylim = c(pop.min,pop.max))
 
