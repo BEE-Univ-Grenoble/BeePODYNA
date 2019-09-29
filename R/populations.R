@@ -2,6 +2,10 @@ growth_rate <- function(birth_rate,death_rate) {
 
 }
 
+
+#' population
+#'
+#' @export
 population <- function(label,
                        initial_size,
                        growth_rate,
