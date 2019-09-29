@@ -1,4 +1,4 @@
-#' plot.population
+#' plot_population
 #'
 #' plot one or multiple given populations
 #'
@@ -19,14 +19,12 @@
 #' @author Jaunatre Maxime
 #'
 #' @export
-plot.population = function(list = population("Primula",1,1,100),
+plot_population = function(list = population("Primula",1,1,100),
                            capacity.line = F,
                            log.time = F,
                            log.pop = F,
                            color = c("black","red"),
-                           ylabel = "",
-                           xlabel = "",
-                           main = "") {
+                           ...) {
 # check each parameter
   if( !is.logical(capacity.line)){
     stop( paste("capacity.line must be a single logical value"))
@@ -45,14 +43,6 @@ plot.population = function(list = population("Primula",1,1,100),
   # if( !is.character(color)){
   #   stop( paste("color must be a vector of character strings, with colors for a plot."))
   # }
-
-  if( !is.character(xlabel)){
-    stop( paste("xlabel must be a single character string"))
-  }
-
-  if( !is.character(ylabel)){
-    stop( paste("ylabel must be a single character string"))
-  }
 
 # check each population
   # check.pop = rep( F, length( list ) )
@@ -99,10 +89,9 @@ plot.population = function(list = population("Primula",1,1,100),
   time.max = time.max + x.dist * 0.1
 
   plot(x= 1, y =1, type = "n",
-       xlab = xlabel, ylab = ylabel,
-       main = main,
        xlim = c(time.min,time.max),
-       ylim = c(pop.min,pop.max))
+       ylim = c(pop.min,pop.max),
+       ... = ...)
 
 # plot ablines
   if(capacity.line){
