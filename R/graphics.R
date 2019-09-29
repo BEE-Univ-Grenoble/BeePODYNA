@@ -6,6 +6,8 @@
 #' @param capacity.line TRUE/FALSE if a dashed line must be drawned for each populations
 #' @param log.time TRUE/FALSE if time axis (x axis) must be logarithmic
 #' @param log.pop TRUE/FALSE if population axis (y axis) must be logarithmic
+#' @param color a color vector for each population
+#' @param ... every argument for the plot() function such as graphical parameters for labels. Does NOT apply for lines and capacity ablines.
 #'
 #' @examples hirsu = population("hirsuta",20,1,100)
 #' daonen = population("daonensis",30,1.2,100)
@@ -14,7 +16,7 @@
 #' daonen[[3]]=c(0,5)
 #'
 #' liste = list(hirsu,daonen)
-#' plot.population(list = liste)
+#' plot_population(list = liste, log.pop = T, color = c(3,2), xlab = "Time")
 #'
 #' @author Jaunatre Maxime
 #'

@@ -16,6 +16,10 @@ plot_population(list = population("Primula", 1, 1, 100),
 \item{log.time}{TRUE/FALSE if time axis (x axis) must be logarithmic}
 
 \item{log.pop}{TRUE/FALSE if population axis (y axis) must be logarithmic}
+
+\item{color}{a color vector for each population}
+
+\item{...}{every argument for the plot() function such as graphical parameters for labels. Does NOT apply for lines and capacity ablines.}
 }
 \description{
 plot one or multiple given populations
@@ -28,7 +32,7 @@ daonen[[2]]=c(30,34)
 daonen[[3]]=c(0,5)
 
 liste = list(hirsu,daonen)
-plot.population(list = liste)
+plot_population(list = liste, log.pop = T, color = c(3,2), xlab = "Time")
 
 }
 \author{
