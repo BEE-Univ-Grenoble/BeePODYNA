@@ -6,8 +6,8 @@
 #' @author Cresciense Lecaude
 #' @export
 
-is.population  = function(x)
-  if (x$class = "population"){
+is.population <- function(x){
+  if (x$class <- "population"){
     return("TRUE")
   }
  else {
