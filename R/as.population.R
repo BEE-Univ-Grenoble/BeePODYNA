@@ -60,15 +60,23 @@ as.population = function(object){
   approx.gr = mean(gr.tempo)
 
   df.GR = as.data.frame(cbind(df.object$time,df.object$pop,gr.tempo)) #make a DF with the time and the growth rate
-
+  colnames(df.GR) = c("time","pop","growth_rate")
 
   ### maybe try to fit a model on the data and extract the GR,
 
 ## Find the limit capacity : (where pop is stable ie. GR = 0)
 
+  for (i in length(df.GR$time)) {
+
+    if(sum(df.GR$growth_rates[i],df.GR$growth_rates[i+1]) == 0 ){
+
+      K = df.GR$pop[i]
+    }
+
+     }
+
+  }
 
 
-
-}
 
 
