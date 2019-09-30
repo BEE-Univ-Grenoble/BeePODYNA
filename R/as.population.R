@@ -18,6 +18,7 @@
 as.population = function(object){
 
   object = object
+  setClass("population",representation("list"),contains = c("character","numeric"))
 
 # Check list element
   if(class(object) == "list"){
@@ -25,7 +26,13 @@ as.population = function(object){
 
     if(check.pop == TRUE){
 
-       print("The object ",object," is already a population")
+      return(new("population",object))
+
+    print("The object ",object," is already a population,
+          now class have been converted to 'population'")
+
+
+
       return(object)
     }
     if(check.pop == FALSE){
@@ -39,7 +46,7 @@ as.population = function(object){
 
 # If object is a data frame
 
-   df.object = as.data.frame(object)
+  df.object = as.data.frame(object)
   colnames(df.object) = c("time","pop") # /!\ DF must be in the right order
 
 ## Find the intial population :
