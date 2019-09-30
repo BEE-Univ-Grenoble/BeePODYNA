@@ -12,8 +12,14 @@ as.population(object)
 }
 \arguments{
 \item{object}{if it is list of populations objects (information on the population)
-must be in the same semantic as population. If the population is
+must be in the same semantic as population. It could be
 a dataframe containing the evolution of the population throught time.}
+}
+\value{
+If *object* is a list, the function will test if it match with the
+ the requirements of a class *population* object.
+ If *object* is a data frame the function will determine the growth rate,
+ and form a list of class *population* containing the parameter of the population*.
 }
 \description{
 The fonction *as.population* takes as argument a list

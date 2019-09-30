@@ -1,37 +1,40 @@
 #' Population summaries and trends
 #'
-#' The *summary.pop* function will allow any user of the BeePODYNA package to easily read
-#' trends and characteristics (label, initial size, growth rate) of one or several
+#' This function will allow the user to easily read
+#' trends and characteristics (label, population size(s), growth rate(s)...) of one or several
 #' population-class objects. When dealing with a list of population-type objects, il will
-#' recursively print the summaries for each of them.
+#' recursively print the summaries for each one of them.
 #'
 #' @param pop an object of class "population"
 #' @param d.printing the number of decimal digits to be printed in statistics
 #'
 #' @examples
-#' # Default usage
-#'   summary.population(pop)
+#'# Default usage
+#' pop = population("mypop", 1, 0.8, 500)
+#' summary.population(pop)
 #'
-#'#' # You might want to modify digits' printing settings
-#'  summary.population(pop,11)
-#'  summary.population(pop,getOption("digits")+2)
 #'
-#'  # Several generations and population lists
-#'  pop1 = population("eva", 1, 0.8, 500)
-#'  pop2 = population("teo", 1, 0.7, 850)
-#'  pop2$size = c(1,50,750)
 #'
-#'  pops = list(pop1, pop2)
+#'# Several generations and population lists
+#' pop1 = population("eva", 1, 0.8, 500)
+#' pop2 = population("teo", 1, 0.7, 850)
+#' pop2$size = c(1,50,750)
 #'
-#'  summary.population(pop2)
-#'  summary.population(pops)
+#' pops = list(pop1, pop2)
 #'
+#' summary.population(pop2)
+#' summary.population(pops)
+#'
+#'
+#'
+#'# In case you want to modify digits' printing settings
+#'
+#' summary.population(pop,11)
+#' summary.population(pop,getOption("digits")+2)
 #'
 #'
 #' @export
-
-summary.population <- function(populations,
-                               d.printing = getOption("digits")){
+summary.population <- function(populations, d.printing = getOption("digits")){
 
   if( !is.numeric(d.printing)||!is.integer(d.printing) ) stop ("'d.printing' parameter must be an integer number")
 
