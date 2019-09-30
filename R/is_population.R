@@ -7,7 +7,7 @@
 #' @export
 
 is.population <- function(x){
-  if (x$class <- "population"){
+  if (class(x) == "population"){
     return("TRUE")
   }
  else {
