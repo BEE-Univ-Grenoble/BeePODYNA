@@ -1,8 +1,3 @@
-growth_rate <- function(birth_rate,death_rate) {
-
-}
-
-
 #' population
 #'
 #' @export
@@ -43,3 +38,11 @@ population <- function(label,
 names.population <- function(pop) {
   pop$label
 }
+
+
+
+
+growth_rate <- function(birth_rate,death_rate) {
+
+}
+
