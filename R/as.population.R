@@ -18,6 +18,9 @@
 as.population = function(object){
 
   object = object
+
+# creation of a new class, type : List, containing characters and numeric.
+
   setClass("population",representation("list"),contains = c("character","numeric"))
 
 # Check list element
@@ -31,14 +34,10 @@ as.population = function(object){
     print("The object ",object," is already a population,
           now class have been converted to 'population'")
 
-
-
-      return(object)
     }
     if(check.pop == FALSE){
 
       population(object)
-
 
     }
 
@@ -80,7 +79,9 @@ as.population = function(object){
       K = df.GR$pop[i]
     }
 
-     }
+  }
+
+#' @example
 
   }
 
