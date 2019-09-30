@@ -11,6 +11,13 @@
 #' @export
 
 growth_rate <- function(birth_rate,death_rate) {
+  if(!is.numeric(birth_rate)||
+     birth_rate < 0)
+    stop("Birth rate must be a positive number")
+  if(!is.numeric(death_rate)||
+     death_rate < 0)
+    stop("Death rate must be a positive number")
+
   return(birth_rate - death_rate)
 }
 
