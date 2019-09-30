@@ -1,11 +1,32 @@
-growth_rate <- function(birth_rate,death_rate) {
+#' Calculates a growth rate from a birth rate and a death rate.
+#'
+#' @param birth_rate the birth rate of the population
+#' @param death_rate the death rate of the population
+#'
+#' @return returns the growth rate of the population
+#'
+#' @examples
+#'   growth_rate(0.5, 0.2)
+#'
+#' @export
 
+growth_rate <- function(birth_rate,death_rate) {
+  return(birth_rate - death_rate)
 }
 
 
-#' population
+#' Create a population with giving its name, initial size, growth rate and capacity.
+#'
+#' @param label the name of the population
+#' @param initial_size the size of the population at TO
+#' @param growth_rate the growth_rate of the population, given by the user or calculated by function growth_rate with birth_rate and death_rate
+#' @param capacity the capacity limit of the environment for the population
+#'
+#' @examples
+#'   population(example, 2, 0.5, 10)
 #'
 #' @export
+
 population <- function(label,
                        initial_size,
                        growth_rate,
@@ -39,6 +60,17 @@ population <- function(label,
             class = "population"
             )
 }
+
+#' Return the name of the population
+#'
+#' @param pop the population
+#'
+#' @return returns the name of the population
+#'
+#' @examples
+#'   names.population(population(example, 2, 0.5, 10))
+#'
+#' @export
 
 names.population <- function(pop) {
   pop$label
