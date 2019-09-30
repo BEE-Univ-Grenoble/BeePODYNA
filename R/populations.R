@@ -35,10 +35,6 @@ population <- function(label,
             )
 }
 
-names.population <- function(pop) {
-  pop$label
-}
-
 
 
 

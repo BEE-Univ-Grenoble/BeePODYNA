@@ -26,7 +26,7 @@ Une population est définie par :
 - is.population
 - growth_rate_estimate
 - as.population (à partir d'une liste, à partir d'une population)
-- Récuperation des attibuts:
+- Récuperation des attibuts: (ces trois fonctions sont dans le fichier attributes.R)
   + size (taille de la pop et temps associé) 
   + capacity 
   + growth_rate ()
