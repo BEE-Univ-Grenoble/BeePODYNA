@@ -26,7 +26,6 @@ growth_rate <- function(birth_rate,death_rate) {
 #'   population(example, 2, 0.5, 10)
 #'
 #' @export
-
 population <- function(label,
                        initial_size,
                        growth_rate,
@@ -59,19 +58,4 @@ population <- function(label,
             capacity = capacity),
             class = "population"
             )
-}
-
-#' Return the name of the population
-#'
-#' @param pop the population
-#'
-#' @return returns the name of the population
-#'
-#' @examples
-#'   names.population(population(example, 2, 0.5, 10))
-#'
-#' @export
-
-names.population <- function(pop) {
-  pop$label
 }
