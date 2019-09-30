@@ -13,6 +13,6 @@
 #' @export
 
 names.population = function(pop) {
-  if is.population(pop)==T {pop$label}
+  if (is.population(pop)==T) {pop$label}
   else {stop("The object must be a population.")}
 }

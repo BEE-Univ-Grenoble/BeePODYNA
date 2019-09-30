@@ -1,5 +1,5 @@
 #' Is.population
-#' The function determinines if the object is a population or not
+#' The function determines if the object is a population or not
 #' @param x the object which must be a population to validate the condition
 #' @return a logical "TRUE" or "FALSE"
 #' @example
@@ -8,9 +8,9 @@
 
 is.population <- function(x){
   if (class(x) == "population"){
-    return("TRUE")
+    return(TRUE)
   }
  else {
-  return("FALSE")
+  return(FALSE)
   }
 }
