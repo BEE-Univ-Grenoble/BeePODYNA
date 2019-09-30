@@ -5,7 +5,6 @@
 #' @example
 #' @author Cresciense Lecaude
 #' @export
-
 is.population <- function(x){
   if (class(x) == "population"){
     return(TRUE)

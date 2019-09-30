@@ -3,7 +3,7 @@
 \name{is.population}
 \alias{is.population}
 \title{Is.population
-The function determinines if the object is a population or not}
+The function determines if the object is a population or not}
 \usage{
 is.population(x)
 }
@@ -15,7 +15,7 @@ a logical "TRUE" or "FALSE"
 }
 \description{
 Is.population
-The function determinines if the object is a population or not
+The function determines if the object is a population or not
 }
 \author{
 Cresciense Lecaude

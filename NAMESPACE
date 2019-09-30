@@ -2,5 +2,6 @@
 
 export(as.population)
 export(is.population)
+export(names_population)
 export(plot_population)
 export(population)

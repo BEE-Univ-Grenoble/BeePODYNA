@@ -6,13 +6,12 @@
 #'
 #' @examples
 #'     pop=population("test",42,2,200)
-#'     names.population(pop)
+#'     names_population(pop)
 #'
-#' @author
+#' @author Nicolas BARTALUCCI
 #'
 #' @export
-
-names.population = function(pop) {
+names_population = function(pop) {
   if (is.population(pop)==T) {pop$label}
   else {stop("The object must be a population.")}
 }
