@@ -2,10 +2,23 @@
 % Please edit documentation in R/populations.R
 \name{population}
 \alias{population}
-\title{population}
+\title{Create a population with giving its name, initial size, growth rate and capacity.}
 \usage{
 population(label, initial_size, growth_rate, capacity = Inf)
 }
+\arguments{
+\item{label}{the name of the population}
+
+\item{initial_size}{the size of the population at TO}
+
+\item{growth_rate}{the growth_rate of the population, given by the user or calculated by function growth_rate with birth_rate and death_rate}
+
+\item{capacity}{the capacity limit of the environment for the population}
+}
 \description{
-population
+Create a population with giving its name, initial size, growth rate and capacity.
+}
+\examples{
+  population(example, 2, 0.5, 10)
+
 }
