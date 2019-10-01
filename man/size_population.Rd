@@ -16,7 +16,7 @@ returns the size of the population.
 Returns the size of the population
 }
 \examples{
-    pop=population("Pop_1",42,2,200)
+    pop<-population("Pop_1",42,2,200)
     size_population(pop)
 
 }

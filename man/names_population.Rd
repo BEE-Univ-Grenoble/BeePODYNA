@@ -16,7 +16,7 @@ returns the name of the population.
 Returns the name of the population
 }
 \examples{
-    pop=population("Pop_1",42,2,200)
+    pop<-population("Pop_1",42,2,200)
     names_population(pop)
 
 }
