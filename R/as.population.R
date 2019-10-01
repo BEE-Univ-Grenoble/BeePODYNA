@@ -3,87 +3,145 @@
 #' number at initial time, growth rates or birth rate and
 #' death rate) or a poputaion monitored throught time.
 #' And return the inoramtion as a list duable by BeePODyna package
-
+#'
 #' @param object if it is list of populations objects (information on the population)
 #' must be in the same semantic as population. It could be
 #' a dataframe containing the evolution of the population throught time.
-
+#'
 #' @return If *object* is a list, the function will test if it match with the
 #'  the requirements of a class *population* object.
 #'  If *object* is a data frame the function will determine the growth rate,
 #'  and form a list of class *population* containing the parameter of the population*.
-
+#'
 #' @export
+as_population = function(object){
+  UseMethod("as_population")
+}
 
-as.population = function(object){
+#' @rdname as_population
+#' @export
+as.population <- as_population
 
-  object = object
+#' @rdname as_population
+#' @export
+as_population.default <- function(object) {
+  stop(sprintf("I cannot cast an object of type %s to population object",
+               class(object)
+              )
+      )
+}
 
-# creation of a new class, type : List, containing characters and numeric.
 
-  setClass("population",representation("list"),contains = c("character","numeric"))
+#' @rdname as_population
+#' @export
+as_population.population <- function(object) {
+  object
+}
 
-# Check list element
-  if(class(object) == "list"){
-    check_pop = is.population(object)
 
-    if(check_pop == TRUE){
+#' @rdname as_population
+#' @export
+as_population.list <- function(object) {
+   n = names(object)
 
-      return(new("population",object))
+   if ("label" %in% n) {
+     label <- object$label
+   }
+   else {
+     stop("no label defined in list")
+   }
 
-    print("The object ",object," is already a population,
-          now class has been converted to 'population'")
+   if ("size" %in% n) {
+     size <- object$size[1]
+   }
+   else {
+     stop("no size defined in list")
+   }
 
-    }
-    if(check_pop == FALSE){
+   if ("growth_rate" %in% n) {
+     growth_rate <- object$growth_rate
+   }
+   else {
+     stop("no growth_rate defined in list")
+   }
 
-      population(object)
+   if ("capacity" %in% n) {
+     capacity <- object$capacity
+   }
+   else {
+     stop("no capacity defined in list")
+   }
 
-    }
+   newpop <- population(label,size,growth_rate,capacity)
 
-  }
+   if ("time" %in% n &&
+       (length(object$size) == length(object$time))
+      ) {
+     newpop$size = object$size
+     newpop$time = object$time
+   }
+   else {
+     if (length(object$size) > 1)
+       warning("No time information available, only intial size has been conservec")
+   }
 
-# If object is a data frame
+   newpop
 
-  df_object = as.data.frame(object)
-  colnames(df_object) = c("time","pop") # /!\ DF must be in the right order
+}
 
-## Find the intial population :
-
-  init = df_object$pop[which(df.object$time == 0)]
-
-## Find the growth rate
-
-  ### (too?) simple way :
-  gr.tempo = numeric(length(df_object$time))
-
-  for (i in c(1:length(df_object$time)-1)) {
-
-    gr_tempo[i] = (df_object$pop[i+1]-df_object$pop[i])/(df_object$time[i+1]-df_object$time[i])
-
-  }
-# GR : Growth Rate
-  approx_GR = mean(gr_tempo)
-
-  df_GR = as.data.frame(cbind(df_object$time,df_object$pop,gr_tempo)) #make a DF with the time and the growth rate
-  colnames(df_GR) = c("time","pop","growth_rate")
-
-  ### maybe try to fit a model on the data and extract the GR,
-
-## Find the limit capacity : (where pop is stable ie. GR = 0)
-
-  for (i in length(df_GR$time)) {
-
-    if(sum(df_GR$growth_rates[i],df_GR$growth_rates[i+1]) == 0 ){
-
-      K = df_GR$pop[i]
-    }
-
-  }
-
-#' @example
-
-  }
+# # creation of a new class, type : List, containing characters and numeric.
+#
+#   setClass("population",representation("list"),contains = c("character","numeric"))
+#
+# # Check list element
+#   if(class(object) == "list"){
+#       population(object)
+#
+#     }
+#
+#   }
+#
+# # If object is a data frame
+#
+#   df_object = as.data.frame(object)
+#   colnames(df_object) = c("time","pop") # /!\ DF must be in the right order
+#
+# ## Find the intial population :
+#
+#   init = df_object$pop[which(df.object$time == 0)]
+#
+# ## Find the growth rate
+#
+#   ### (too?) simple way :
+#   gr.tempo = numeric(length(df_object$time))
+#
+#   for (i in c(1:length(df_object$time)-1)) {
+#
+#     gr_tempo[i] = (df_object$pop[i+1]-df_object$pop[i])/(df_object$time[i+1]-df_object$time[i])
+#
+#   }
+# # GR : Growth Rate
+#   approx_GR = mean(gr_tempo)
+#
+#   df_GR = as.data.frame(cbind(df_object$time,df_object$pop,gr_tempo)) #make a DF with the time and the growth rate
+#   colnames(df_GR) = c("time","pop","growth_rate")
+#
+#   ### maybe try to fit a model on the data and extract the GR,
+#
+# ## Find the limit capacity : (where pop is stable ie. GR = 0)
+#
+#   for (i in length(df_GR$time)) {
+#
+#     if(sum(df_GR$growth_rates[i],df_GR$growth_rates[i+1]) == 0 ){
+#
+#       K = df_GR$pop[i]
+#     }
+#
+#   }
+#
+# # @example
+#
+#   }
 
 
 
