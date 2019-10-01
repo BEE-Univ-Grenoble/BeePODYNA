@@ -8,9 +8,9 @@
 
 is.population <- function(x){
   if (class(x) == "population"){
-    return("TRUE")
+    return(TRUE)
   }
  else {
-  return("FALSE")
+  return(FALSE)
   }
 }
