@@ -2,7 +2,10 @@
 
 S3method(summary,population)
 export(as.population)
+export(capacity_population)
+export(grate_population)
 export(growth_rate)
 export(is.population)
 export(plot_population)
 export(population)
+export(size_population)
