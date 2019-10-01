@@ -25,17 +25,17 @@ as.population = function(object){
 
 # Check list element
   if(class(object) == "list"){
-    check.pop = is.population(object)
+    check_pop = is.population(object)
 
-    if(check.pop == TRUE){
+    if(check_pop == TRUE){
 
       return(new("population",object))
 
     print("The object ",object," is already a population,
-          now class have been converted to 'population'")
+          now class has been converted to 'population'")
 
     }
-    if(check.pop == FALSE){
+    if(check_pop == FALSE){
 
       population(object)
 
@@ -45,38 +45,38 @@ as.population = function(object){
 
 # If object is a data frame
 
-  df.object = as.data.frame(object)
-  colnames(df.object) = c("time","pop") # /!\ DF must be in the right order
+  df_object = as.data.frame(object)
+  colnames(df_object) = c("time","pop") # /!\ DF must be in the right order
 
 ## Find the intial population :
 
-  init = df.object$pop[which(df.object$time == 0)]
+  init = df_object$pop[which(df.object$time == 0)]
 
 ## Find the growth rate
 
   ### (too?) simple way :
-  gr.tempo = numeric(length(df.object$time))
+  gr.tempo = numeric(length(df_object$time))
 
-  for (i in c(1:length(df.object$time)-1)) {
+  for (i in c(1:length(df_object$time)-1)) {
 
-    gr.tempo[i] = (object$pop[i+1]-object$pop[i])/(df.object$time[i+1]-df.object$time[i])
+    gr_tempo[i] = (df_object$pop[i+1]-df_object$pop[i])/(df_object$time[i+1]-df_object$time[i])
 
   }
+# GR : Growth Rate
+  approx_GR = mean(gr_tempo)
 
-  approx.gr = mean(gr.tempo)
-
-  df.GR = as.data.frame(cbind(df.object$time,df.object$pop,gr.tempo)) #make a DF with the time and the growth rate
-  colnames(df.GR) = c("time","pop","growth_rate")
+  df_GR = as.data.frame(cbind(df_object$time,df_object$pop,gr_tempo)) #make a DF with the time and the growth rate
+  colnames(df_GR) = c("time","pop","growth_rate")
 
   ### maybe try to fit a model on the data and extract the GR,
 
 ## Find the limit capacity : (where pop is stable ie. GR = 0)
 
-  for (i in length(df.GR$time)) {
+  for (i in length(df_GR$time)) {
 
-    if(sum(df.GR$growth_rates[i],df.GR$growth_rates[i+1]) == 0 ){
+    if(sum(df_GR$growth_rates[i],df_GR$growth_rates[i+1]) == 0 ){
 
-      K = df.GR$pop[i]
+      K = df_GR$pop[i]
     }
 
   }
