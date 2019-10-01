@@ -231,5 +231,5 @@ summary_population <- function(populations, d.printing = getOption("digits")){
 
 
   }
-  return(summaries)
+  invisible(summaries)
 }
