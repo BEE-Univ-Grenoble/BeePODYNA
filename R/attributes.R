@@ -65,5 +65,5 @@ capacity_population <- function(pop) {
 #' @export
 grate_population <- function(pop) {
   if (is.population(pop)) {pop$growth_rate}
-  else {stop("The object must be a population.")}s
+  else {stop("The object must be a population.")}
 }
