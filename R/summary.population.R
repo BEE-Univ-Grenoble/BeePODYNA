@@ -38,10 +38,11 @@ summary.population <- function(populations, d.printing = getOption("digits")){
 
   if( !is.numeric(d.printing)||!is.integer(d.printing) ) stop ("'d.printing' parameter must be an integer number")
 
-  if(is.list(pop)){
+  if(is.list(populations)){
 
-    summaries = list()
-    for (i in 1:length(pop)){
+    summaries = as.list(1:length(populations))
+
+    for (i in 1:length(populations)){
 
       pop = populations[[i]]
 
