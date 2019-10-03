@@ -2,18 +2,18 @@
 % Please edit documentation in R/attributes.R
 \name{capacity_population}
 \alias{capacity_population}
-\title{Returns the capacity of the population}
+\title{capacity_population}
 \usage{
 capacity_population(pop)
 }
 \arguments{
-\item{pop}{is an object of the class 'population'}
+\item{pop}{is an object of the class 'population'.}
 }
 \value{
-returns the capacity of the population.
+It returns the capacity of the population.
 }
 \description{
-Returns the capacity of the population
+\code{capacity_population} returns the size of the population given in parameter.
 }
 \examples{
     pop<-population("Pop_1",42,2,200)

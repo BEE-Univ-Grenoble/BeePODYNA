@@ -1,6 +1,6 @@
-#' 'mat-interaction' creates an interactions matrix object
+#' mat-interaction
 #'
-#' Creates an interactions matrix object defining the positive and negative interactions between populations.
+#' \code{mat-interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
 #' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 #' The interaction of a population on itself is equal to 0.
 #' If no interaction vector is given, the default values are 0.
@@ -43,4 +43,30 @@ mat_interaction <- function(nb_pop,
   colnames(interactions)=rownames(interactions)
   class(interactions)="interaction"
   return(interactions)
+}
+
+
+#' is.interaction
+#'
+#' \code{is.interaction} returns TRUE if x is an interaction matrix of the class 'interaction'.
+#' It returns FALSE otherwise.
+#' To create such an object you can use the \code{\link[BeePODYNA]{mat_interaction}} function.
+#'
+#' @param x is an \code{R} object.
+#'
+#' @examples
+#'   is.interaction(3)
+#'   x=mat_interaction(nb_pop=3, interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+#'   is.interaction(x)
+#'
+#' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
+#'
+#' @export
+is.interaction <- function(x){
+  if (class(x) == "interaction"){
+    return(TRUE)
+  }
+  else {
+    return(FALSE)
+  }
 }

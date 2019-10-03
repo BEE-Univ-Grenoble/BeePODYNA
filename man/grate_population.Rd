@@ -2,18 +2,18 @@
 % Please edit documentation in R/attributes.R
 \name{grate_population}
 \alias{grate_population}
-\title{Returns the growth rate of the population}
+\title{grate_population}
 \usage{
 grate_population(pop)
 }
 \arguments{
-\item{pop}{is an object of the class 'population'}
+\item{pop}{is an object of the class 'population'.}
 }
 \value{
-returns the growth rate of the population.
+It returns the growth rate of the population.
 }
 \description{
-Returns the growth rate of the population
+\code{grate_population} returns the size of the population given in parameter.
 }
 \examples{
     pop<-population("Pop_1",42,2,200)

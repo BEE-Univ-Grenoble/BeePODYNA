@@ -2,7 +2,7 @@
 % Please edit documentation in R/interaction.R
 \name{mat_interaction}
 \alias{mat_interaction}
-\title{'mat-interaction' creates an interactions matrix object}
+\title{mat-interaction}
 \usage{
 mat_interaction(nb_pop, interactions = rep(0, nb_pop * (nb_pop - 1)))
 }
@@ -15,7 +15,7 @@ The vector starts with the vector of the interactions of the first population on
 and then the vector of the interactions of the second population on the others...}
 }
 \description{
-Creates an interactions matrix object defining the positive and negative interactions between populations.
+\code{mat-interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
 The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 The interaction of a population on itself is equal to 0.
 If no interaction vector is given, the default values are 0.
