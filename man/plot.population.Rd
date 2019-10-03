@@ -38,5 +38,5 @@ plot_population(list = liste, log.pop = T, color = c(3,2), xlab = "Time")
 \code{\link[graphics]{plot}} and \code{\link[graphics]{par}} for graphical parameter that were omitted on this documentation
 }
 \author{
-Jaunatre Maxime
+Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 }

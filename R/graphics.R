@@ -22,7 +22,7 @@
 #' liste = list(hirsu,daonen)
 #' plot_population(list = liste, log.pop = T, color = c(3,2), xlab = "Time")
 #'
-#' @author Jaunatre Maxime
+#' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @export
 plot.population = function(pop,
