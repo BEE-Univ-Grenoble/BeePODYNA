@@ -2,9 +2,11 @@
 % Please edit documentation in R/community.R
 \name{community}
 \alias{community}
-\title{Create a community with giving its name, a minimum of one population.}
+\title{Community}
 \usage{
-community(label, population, ...)
+community(label = "label", population = first_pop)
+community(label = "label", population = first_pop , pop2 = second_pop)
+community(label = "label", population = first_pop , second_pop)
 }
 \arguments{
 \item{label}{the name of the community (character string)}
@@ -14,7 +16,10 @@ community(label, population, ...)
 \item{...}{additionnal populations objects. All other objects will be rejected and a warning will be print.}
 }
 \description{
-Create a community with giving its name, a minimum of one population.
+Create a community with giving its name and a minimum of one population.
+}
+\details{
+There is no need to put a name as shown in the first line of \code{Usage}, because each element of community will be named after the label which is in every population object you provide.
 }
 \examples{
 hirsu = population("hirsuta",20,1,100)
@@ -27,7 +32,7 @@ alpha = community('alpha',hirsu,daonen)
 
 }
 \seealso{
-\code{\link[BeePODYNA]{population}} to see how to make an object of class population
+\code{\link[BeePODYNA]{population}} to see how to make an object of class population.
 }
 \author{
 Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
