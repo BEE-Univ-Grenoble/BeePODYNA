@@ -9,6 +9,8 @@
 #'     names_population(pop)
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
+#'
+#' @export
 names_population <- function(pop) {
   if (is.population(pop)) {pop$label}
   else {stop("The object must be a population.")}
