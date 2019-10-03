@@ -10,8 +10,8 @@ is.interaction(x)
 \item{x}{is an \code{R} object.}
 }
 \description{
-\code{is.interaction} returns TRUE if x is an interaction matrix of the class 'interaction'.
-It returns FALSE otherwise.
+\code{is.interaction} returns \code{TRUE} if x is an interaction matrix of the class 'interaction'.
+It returns \code{FALSE} otherwise.
 To create such an object you can use the \code{\link[BeePODYNA]{mat_interaction}} function.
 }
 \examples{

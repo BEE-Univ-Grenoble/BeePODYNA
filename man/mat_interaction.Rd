@@ -2,20 +2,20 @@
 % Please edit documentation in R/interaction.R
 \name{mat_interaction}
 \alias{mat_interaction}
-\title{mat-interaction}
+\title{mat_interaction}
 \usage{
 mat_interaction(nb_pop, interactions = rep(0, nb_pop * (nb_pop - 1)))
 }
 \arguments{
 \item{nb_pop}{is the number of populations in the model.}
 
-\item{interactions}{is a vector of length nb_pop*(nb_pop-1) giving the interaction of each population on the other one.
+\item{interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
 Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
 and then the vector of the interactions of the second population on the others...}
 }
 \description{
-\code{mat-interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
+\code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
 The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 The interaction of a population on itself is equal to 0.
 If no interaction vector is given, the default values are 0.
