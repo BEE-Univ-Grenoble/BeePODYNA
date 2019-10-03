@@ -2,7 +2,7 @@
 % Please edit documentation in R/community.R
 \name{community}
 \alias{community}
-\title{Community}
+\title{community}
 \usage{
 community(label = "label", population = first_pop)
 community(label = "label", population = first_pop , pop2 = second_pop)

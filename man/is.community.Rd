@@ -2,21 +2,45 @@
 % Please edit documentation in R/community.R
 \name{is.community}
 \alias{is.community}
-\title{Is.Community
-The function determinines if the object is a population or not}
+\title{is.community}
 \usage{
-is.community(x)
+community(label = "label", population = first_pop)
+community(label = "label", population = first_pop , pop2 = second_pop)
+community(label = "label", population = first_pop , second_pop)
 }
 \arguments{
-\item{x}{the object which must be a population to validate the condition}
+\item{x}{the object which must be a community to validate the condition}
+
+\item{label}{the name of the community (character string)}
+
+\item{population}{a population object}
+
+\item{...}{additionnal populations objects. All other objects will be rejected and a warning will be print.}
 }
 \value{
 a logical "TRUE" or "FALSE"
 }
 \description{
-Is.Community
-The function determinines if the object is a population or not
+Check if the object is a community or not.
+}
+\details{
+There is no need to put a name as shown in the first line of \code{Usage}, because each element of community will be named after the label which is in every population object you provide.
+}
+\examples{
+hirsu = population("hirsuta",20,1,100)
+daonen = population("daonensis",30,1.2,100)
+
+daonen[[2]]=c(30,34)
+daonen[[3]]=c(0,5)
+
+alpha = community('alpha',hirsu,daonen)
+
+}
+\seealso{
+\code{\link[BeePODYNA]{population}} to see how to make an object of class population.
 }
 \author{
+Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
+
 Jaunatre Maxime
 }
