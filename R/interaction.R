@@ -3,6 +3,7 @@
 #' Creates an interactions matrix object defining the positive and negative interactions between populations.
 #' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 #' The interaction of a population on itself is equal to 0.
+#' If no interaction vector is given, the default values are 0.
 #'
 #' @param nb_pop is the number of populations in the model.
 #' @param interactions is a vector of length nb_pop*(nb_pop-1) giving the interaction of each population on the other one.
@@ -12,6 +13,7 @@
 #'
 #' @examples
 #'   mat_interaction(nb_pop=3, interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+#'   mat_interaction(nb_pop=2)
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
 #'
@@ -19,7 +21,7 @@
 #'
 #' @export
 mat_interaction <- function(nb_pop,
-                            interactions) {
+                            interactions=rep(0,nb_pop*(nb_pop-1))) {
 
   if (!is.numeric(nb_pop) ||
       as.integer(nb_pop)!=nb_pop ||
