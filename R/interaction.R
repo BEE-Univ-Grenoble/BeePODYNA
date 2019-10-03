@@ -1,4 +1,4 @@
-library(R.utils)
+#' @import R.utils
 
 #' 'mat-interaction' creates an interactions matrix object
 #'
