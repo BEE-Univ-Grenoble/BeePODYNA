@@ -1,5 +1,3 @@
-#' @import R.utils
-
 #' 'mat-interaction' creates an interactions matrix object
 #'
 #' Creates an interactions matrix object defining the positive and negative interactions between populations.
@@ -16,6 +14,8 @@
 #'   mat_interaction(nb_pop=3, interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
+#'
+#' @import R.utils
 #'
 #' @export
 mat_interaction <- function(nb_pop,
