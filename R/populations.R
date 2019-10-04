@@ -22,6 +22,8 @@ growth_rate <- function(birth_rate,death_rate) {
 }
 
 
+#' Population
+#'
 #' Create a population with giving its name, initial size, growth rate and capacity.
 #'
 #' @param label the name of the population
@@ -30,7 +32,7 @@ growth_rate <- function(birth_rate,death_rate) {
 #' @param capacity the capacity limit of the environment for the population
 #'
 #' @examples
-#'   population(example, 2, 0.5, 10)
+#'   population('example', 2, 0.5, 10)
 #'
 #' @export
 population <- function(label,

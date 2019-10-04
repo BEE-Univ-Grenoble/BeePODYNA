@@ -3,15 +3,13 @@
 #' Create a community with giving its name and a minimum of one population.
 #'
 #' @usage
-#' community(label = "label", population = first_pop)
-#' community(label = "label", population = first_pop , pop2 = second_pop)
-#' community(label = "label", population = first_pop , second_pop)
+#' community(label, population, ...)
 #'
 #' @param label the name of the community (character string)
 #' @param population a population object
 #' @param ... additionnal populations objects. All other objects will be rejected and a warning will be print.
 #'
-#' @details There is no need to put a name as shown in the first line of \code{Usage}, because each element of community will be named after the label which is in every population object you provide.
+#' @details There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 #'
 #' @seealso \code{\link[BeePODYNA]{population}} to see how to make an object of class population.
 #'
@@ -30,6 +28,7 @@
 community <- function(label,
                       population,
                       ...) {
+  # checking entry
   if (!is.character(label) ||
     length(label) > 1) {
     stop("Label must be a single charactere string")
@@ -39,6 +38,7 @@ community <- function(label,
     stop("population must be an object of classe population")
   }
 
+  # supplement populations
   liste <- list(...)
 
   if (length(liste) > 0) {
@@ -46,6 +46,7 @@ community <- function(label,
     pop_id <- c()
     pop_name <- population$label
 
+    # checking supplement populations class
     for (i in 1:length(liste)) {
       if (!is.population(liste[[i]])) {
         not_pop_label <- TRUE
@@ -55,12 +56,15 @@ community <- function(label,
       }
     }
 
+    # not all supplement populations are populations objects
     if (not_pop_label == TRUE) {
       warning(sprintf(
         "Check other objects class, only '%s' objects are in '%s' community because of their population class",
         paste(pop_name, collapse = ", "), label
       ))
     }
+
+    # building the community object (multiple pop)
     begin <- list(
       label = label,
       population = population
@@ -71,6 +75,7 @@ community <- function(label,
       class = "community"
     )
   } else {
+    #building the community object (1 pop)
     community <- structure(list(
       label = label,
       population = population
@@ -78,8 +83,8 @@ community <- function(label,
     class = "community"
     )
   }
-
-  names(community)[2] <- community[[2]][[1]]
+  #renaming the element of the community with populations labels
+  names(community) <- sapply( community, "[[", 1 )
 
   return(community)
 }
@@ -90,17 +95,13 @@ community <- function(label,
 #' Check if the object is a community or not.
 #'
 #' @usage
-#' community(label = "label", population = first_pop)
-#' community(label = "label", population = first_pop , pop2 = second_pop)
-#' community(label = "label", population = first_pop , second_pop)
+#' is.community(x)
 #'
-#' @param label the name of the community (character string)
-#' @param population a population object
-#' @param ... additionnal populations objects. All other objects will be rejected and a warning will be print.
+#' @param x the object which must be a community to validate the condition
 #'
-#' @details There is no need to put a name as shown in the first line of \code{Usage}, because each element of community will be named after the label which is in every population object you provide.
+#' @return a logical "TRUE" or "FALSE"
 #'
-#' @seealso \code{\link[BeePODYNA]{population}} to see how to make an object of class population.
+#' @seealso \code{\link[BeePODYNA]{community}} to see how to make an object of class community.
 #'
 #' @examples
 #'hirsu = population("hirsuta",20,1,100)
@@ -110,16 +111,10 @@ community <- function(label,
 #'daonen[[3]]=c(0,5)
 #'
 #'alpha = community('alpha',hirsu,daonen)
+#'is.community(alpha)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
-#' @export
-#' Is.Community
-#' The function determinines if the object is a population or not
-#' @param x the object which must be a community to validate the condition
-#' @return a logical "TRUE" or "FALSE"
-#' @example
-#' @author Jaunatre Maxime
 #' @export
 is.community <- function(x){
   if (class(x) == "community"){

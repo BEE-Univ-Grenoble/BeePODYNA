@@ -4,9 +4,7 @@
 \alias{community}
 \title{community}
 \usage{
-community(label = "label", population = first_pop)
-community(label = "label", population = first_pop , pop2 = second_pop)
-community(label = "label", population = first_pop , second_pop)
+community(label, population, ...)
 }
 \arguments{
 \item{label}{the name of the community (character string)}
@@ -19,7 +17,7 @@ community(label = "label", population = first_pop , second_pop)
 Create a community with giving its name and a minimum of one population.
 }
 \details{
-There is no need to put a name as shown in the first line of \code{Usage}, because each element of community will be named after the label which is in every population object you provide.
+There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 }
 \examples{
 hirsu = population("hirsuta",20,1,100)
