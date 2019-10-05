@@ -8,9 +8,12 @@
 #'   \item \strong{capacity_line} set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
 #'   \item \strong{capacity_lty} set to \code{3} by default.
 #'   \item \strong{type} for the size line, set to \code{'b'} by default.
-#'   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}
-#'   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}
-#'   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}
+#'   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
+#'   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
+#'   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
+#'   \item \strong{add} set to \code{TRUE} by default, to add another population plot on a precedent one.
+#'   \item \strong{text_print} set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
+#'   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
 #'   }
 #'
 #' @seealso \code{\link[graphics]{plot}}, \code{\link[graphics]{title}} and \code{\link[graphics]{par}} for plot parameter that were omitted on this documentation
@@ -29,10 +32,153 @@
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @export
+plot.population <- function(x, ...) {
+  pop <- x
+  mc <- match.call()
 
-# plot_population = function(pop, ...) {
-#   UseMethod('plot_population')
-# }
+  # checks for arguments
+  if (!is.population(pop)) {
+    stop("The object must be a population.")
+  }
+  # check for custom graphical parameters
+  if (is.null(mc$col)) {
+    color <- 1
+  } else {
+    color <- eval(mc$col)
+  }
+
+  if (is.null(mc$text_print)) {
+    text_print <- TRUE
+  } else {
+    text_print <- eval(mc$text_print)
+  }
+
+  if (is.null(mc$text_x)) {
+    text_x <- 0
+  } else {
+    text_x <- eval(mc$text_x)
+  }
+
+  if (is.null(mc$capacity_line)) {
+    capacity_line <- TRUE
+  } else {
+    capacity_line <- eval(mc$capacity_line)
+  }
+
+  if (is.null(mc$capacity_lty)) {
+    capacity_lty <- 3
+  } else {
+    capacity_lty <- eval(mc$capacity_lty)
+  }
+
+  if (is.null(mc$type)) {
+    type <- "b"
+  } else {
+    type <- eval(mc$type)
+  }
+
+  if (is.null(mc$xlab)) {
+    xlab <- "Time"
+  } else {
+    xlab <- eval(mc$xlab)
+  }
+
+  if (is.null(mc$ylab)) {
+    ylab <- "Size"
+  } else {
+    ylab <- eval(mc$ylab)
+  }
+
+  if (is.null(mc$main)) {
+    main <- pop$label
+  } else {
+    main <- eval(mc$main)
+  }
+
+  # remove log_pop or not?
+  if (is.null(mc$log_pop)) {
+    log_pop <- FALSE
+  } else {
+    log_pop <- eval(mc$log_pop)
+  }
+
+  # #checks to remove
+  # if(log_pop){
+  #   pop$size[pop$size<1] = 1 #arbitrory choice
+  #   pop$size = log(pop$size)
+  #   pop$capacity = log(pop$capacity)
+  # }
+
+  if (is.null(mc$add)) {
+    add <- FALSE
+  } else {
+    add <- eval(mc$add)
+  }
+
+  if (!add) {
+    # limitations
+    if (is.null(mc$xlim)) {
+      time_min <- min(pop$time)
+      time_max <- max(pop$time)
+      x_dist <- time_max - time_min
+      time_min <- time_min - x_dist * 0.1
+      time_max <- time_max + x_dist * 0.1
+
+      xlim <- c(time_min, time_max)
+    } else {
+      xlim <- eval(mc$xlim)
+      time_min <- xlim[1]
+      time_max <- xlim[2]
+    }
+    if (is.null(mc$ylim)) {
+      pop_min <- min(pop$size)
+      pop_max <- max(pop$size)
+      y_dist <- pop_max - pop_min
+      pop_min <- pop_min - y_dist * 0.1
+      pop_max <- pop_max + y_dist * 0.1
+
+      ylim <- c(pop_min, pop_max)
+    } else {
+      ylim <- eval(mc$ylim)
+      pop_min <- ylim[1]
+      pop_max <- ylim[2]
+    }
+
+    # plotting env
+    localplot <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
+                              capacity_lty, capacity_line, log_pop, add, text_x, text_print) {
+      plot(x, y, ..., type = "n", xlab = " ", ylab = " ", main = " ")
+    }
+    localplot(x = 1, y = 1, xlim, ylim, ...)
+
+    # setting titles
+    localTitle <- function(..., type, xlim, ylim, xlab, ylab, main,
+                               capacity_lty, capacity_line, log_pop, add, text_x, text_print) title(...)
+    localTitle(main, sub = NULL, xlab, ylab)
+
+  } else {}
+  # plotting the pop itself
+  localLines <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
+                           capacity_lty, capacity_line, log_pop, add, text_x, text_print) lines(x, y, ...)
+  localLines(pop$time, pop$size, type, ...)
+
+  if (capacity_line) {
+    localAbline <- function(..., type, xlim, ylim, xlab, ylab, main,
+                            capacity_lty, capacity_line, log_pop, add, text_x, text_print) abline(...)
+    localAbline(h = pop$capacity, lty = capacity_lty, col = color)
+  }
+
+  if (text_print) {
+    localTexte  <- function(..., type, xlim, ylim, xlab, ylab, main,
+                            capacity_lty, capacity_line, log_pop, add, text_x, text_print) text(...)
+    localTexte(text_x, pop$capacity, paste("K", pop$label, sep =" "), pos = 4, col = color)
+  }
+
+}
+
+#plot.population = function(pop, ...) {
+#  UseMethod('plot.population')
+#}
 #
 # # @rdname plot_population
 # # @export
@@ -151,116 +297,3 @@
 #     text(time_min, pop$capacity, "Capacity", pos = 4)
 #   }
 # }
-
-
-#' @rdname plot_population
-#' @export
-plot.population <- function(x, ...) {
-
-  pop = x
-  mc <- match.call()
-
-  # checks for arguments
-  if (!is.population(pop)) {
-    stop("The object must be a population.")
-  }
-  # check for custom graphical parameters
-  if (is.null(mc$capacity_lty)) {
-    capacity_lty <- 3
-  } else {
-    capacity_lty <- eval(mc$capacity_lty)
-  }
-
-  if (is.null(mc$type)) {
-    type <- "b"
-  } else {
-    type <- eval(mc$type)
-  }
-
-  if (is.null(mc$xlab)) {
-    xlab <- "Time"
-  } else {
-    xlab <- eval(mc$xlab)
-  }
-
-  if (is.null(mc$ylab)) {
-    ylab <- "Size"
-  } else {
-    ylab <- eval(mc$ylab)
-  }
-
-  if (is.null(mc$main)) {
-    main <- pop$label
-  } else {
-    main <- eval(mc$main)
-  }
-
-  if (is.null(mc$capacity_line)) {
-    capacity_line <- TRUE
-  } else {
-    capacity_line <- eval(mc$capacity_line)
-  }
-
-  # remove log_pop or not?
-  if (is.null(mc$log_pop)) {
-    log_pop <- FALSE
-  } else {
-    log_pop <- eval(mc$log_pop)
-  }
-
-  # #checks to remove
-  # if(log_pop){
-  #   pop$size[pop$size<1] = 1 #arbitrory choice
-  #   pop$size = log(pop$size)
-  #   pop$capacity = log(pop$capacity)
-  # }
-
-  # limitations
-  if (is.null(mc$xlim)) {
-    time_min <- min(pop$time)
-    time_max <- max(pop$time)
-    x_dist <- time_max - time_min
-    time_min <- time_min - x_dist * 0.1
-    time_max <- time_max + x_dist * 0.1
-
-    xlim <- c(time_min, time_max)
-  } else {
-    xlim <- eval(mc$xlim)
-    time_min <- xlim[1]
-    time_max <- xlim[2]
-  }
-  if (is.null(mc$ylim)) {
-    pop_min <- min(pop$size)
-    pop_max <- max(pop$size)
-    y_dist <- pop_max - pop_min
-    pop_min <- pop_min - y_dist * 0.1
-    pop_max <- pop_max + y_dist * 0.1
-
-    ylim <- c(pop_min, pop_max)
-  } else {
-    ylim <- eval(mc$ylim)
-    pop_min <- ylim[1]
-    pop_max <- ylim[2]
-  }
-
-  # plotting env
-  localplot <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
-                          capacity_lty, capacity_line, log_pop) {
-    plot(x, y, ..., type = "n", xlab = " ", ylab = " ", main = " ")
-  }
-  localplot(x = 1, y = 1, xlim, ylim, ...)
-  # setting titles
-  localTitle <- function(..., type, xlim, ylim, xlab, ylab, main,
-                           capacity_lty, capacity_line, log_pop) title(...)
-  localTitle(main, sub = NULL, xlab, ylab)
-  # plotting the pop itself
-  localLines <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
-                           capacity_lty, capacity_line, log_pop) lines(x, y, ...)
-  localLines(pop$time, pop$size, type, ...)
-
-  # plotting capacity line
-  if (capacity_line) {
-    abline(h = pop$capacity, lty = capacity_lty)
-    text(time_min, pop$capacity, "Capacity", pos = 4)
-  }
-}

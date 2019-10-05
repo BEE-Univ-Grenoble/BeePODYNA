@@ -14,9 +14,12 @@
   \item \strong{capacity_line} set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
   \item \strong{capacity_lty} set to \code{3} by default.
   \item \strong{type} for the size line, set to \code{'b'} by default.
-  \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}
-  \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}
-  \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}
+  \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
+  \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
+  \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
+  \item \strong{add} set to \code{TRUE} by default, to add another population plot on a precedent one.
+  \item \strong{text_print} set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
+  \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
   }}
 }
 \description{
