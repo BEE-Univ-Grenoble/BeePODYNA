@@ -96,10 +96,10 @@ is_community <- function(x){
 
 #' @export
 `$.community` <- function(x,name) {
-  if ("name" == "label")
+  if (name == "label")
     return(x[['label']])
 
-  if ("populations" == "populations")
+  if (name == "populations")
     return(x[['populations']])
 
   x[["populations"]][[name]]

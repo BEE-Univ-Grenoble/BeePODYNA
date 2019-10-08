@@ -1,22 +1,40 @@
-#' names_population
+#' Returns the label of a BeePODYNA object
 #'
-#' \code{names_population} returns the name of the population given in parameter.
+#' \code{label} returns the label of \code{\link[BeePODYNA]{population}},
+#' \code{\link[BeePODYNA]{community}} or \code{\link[BeePODYNA]{beepodina}} object.
 #'
-#' @param pop is an object of the class 'population'.
 #'
-#' @return It returns a character with the name of the population.
+#' @param object is BeePODYNA object.
+#'
+#' @return It returns a character with the label of the object
 #'
 #' @examples
 #'     pop<-population("Pop_1",42,2,200)
-#'     names_population(pop)
+#'     label(pop)
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
 #'
 #' @export
-names_population <- function(pop) {
-  if (is.population(pop)) {pop$label}
-  else {stop("The object must be a population.")}
+label <- function(object) {
+  UseMethod("label")
 }
+
+#' @rdname label
+#' @export
+label.population <- function(object) {
+  object$label
+}
+
+#' @rdname label
+#' @export
+label.community <- label.population
+
+
+#' @rdname label
+#' @export
+label.beepodyna <- label.population
+
+
 
 #' size_population
 #'
