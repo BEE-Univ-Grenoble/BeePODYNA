@@ -5,6 +5,7 @@
 \alias{as.interaction}
 \alias{as_interaction.default}
 \alias{as_interaction.interaction}
+\alias{as_interaction.numeric}
 \title{as.interaction}
 \usage{
 as_interaction(object)
@@ -14,11 +15,21 @@ as.interaction(object)
 \method{as_interaction}{default}(object)
 
 \method{as_interaction}{interaction}(object)
+
+\method{as_interaction}{numeric}(object)
+}
+\arguments{
+\item{object}{is an \code{R} object to transform into an interaction matrix.}
 }
 \description{
 \code{as.interaction} transforms a vector in an interactions matrix object defining the positive and negative interactions between populations.
 The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 The interaction of a population on itself is equal to 0. If no interaction vector is given, the default values are 0.
+See \code{\link[BeePODYNA]{mat_interaction}} function to create a new interaction matrix from scratch.
+If the object is of the type \code{numeric}, it should be a vector of numeric of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
+Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact like facilitation while a negative value means a negative impact like predation, competition.
+The vector starts with the vector of the interactions of the first population on the other ones ranging from 2 to the last one, not including itself,
+and then the vector of the interactions of the second population on the others...
 }
 \examples{
   as.interaction(c(0.2,-0.5, 0.1,0.2,0.3,0.8))

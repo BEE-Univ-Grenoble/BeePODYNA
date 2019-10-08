@@ -7,7 +7,7 @@
 mat_interaction(nb_pop, interactions = rep(0, nb_pop * (nb_pop - 1)))
 }
 \arguments{
-\item{nb_pop}{is the number of populations in the model.}
+\item{nb_pop}{is the number of populations in the model. The matrix interaction with only one population is set to 0.}
 
 \item{interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
 Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
@@ -23,6 +23,7 @@ If no interaction vector is given, the default values are 0.
 \examples{
   mat_interaction(nb_pop=3, interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
   mat_interaction(nb_pop=2)
+  mat_interaction(nb_pop=1)
 
 }
 \author{
