@@ -19,20 +19,28 @@ NULL
 #' @param interactions is the interaction matrix of the class \code{interactions} between the populations of the community. Default is a matrix without interactions.
 #' @param functions is a function or a list of functions to apply to each population in the same order as it is in the community.
 #' If the length of the list is not the same as the community, the functions are repeated so the length of the list is the same as the number of populations.
-#' @param verbose Default is TRUE. Set to FALSE if you don't want the warnings.
+#' @param verbose Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.
 #'
-#' @seealso \code{\link{[BeePODYNA]{community}}} and \code{\link{[BeePODYNA]{interactions}}} to create the object in parameters.
+#' @seealso \code{\link[BeePODYNA]{community}} and \code{\link[BeePODYNA]{interactions}} to create the object in parameters.
 #'
 #' @examples
+#` hare = population("hirsuta",30,2,80)
+#' lynx = population("daonensis",4,1.2,60)
+#' hudson = community("hudson",hare,lynx)
 #'
+#' beepodyna(community=hudson,
+#'                 interactions=interactions(2),
+#'                 exp,
+#'                 verbose = FALSE
+#'                 )
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
 #'
 #' @export
 beepodyna <- function(community,
-                      interactions = interactions(length(community)),
-                      functions = identity,
-                      verbose = TRUE) {
+                            interactions = interactions(length(community)),
+                            functions = identity,
+                            verbose = TRUE) {
 
   ### check the class of the parameters
 
@@ -45,7 +53,7 @@ beepodyna <- function(community,
   if (class(functions) != "function" && class(functions) != "list") {
     stop("The functions given are not a single function or a list.")
   }
-  if (class(functions == "list")) {
+  if (class(functions) == "list") {
     for (l in 1:length(functions)) {
       if (class(functions[[l]]) != "function") {
         stop(sprintf("The %d element of the functions list in not a function."))
@@ -84,5 +92,4 @@ beepodyna <- function(community,
   )
   class(beepodyna) <- "beepodyna"
   return(beepodyna)
-  #pb length(hudson) !!!
 }

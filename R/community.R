@@ -32,38 +32,37 @@ community <- function(label,
 
   pops <- list(...)
 
-  is_pops <- sapply(pops,is_population)
+  is_pops <- sapply(pops, is_population)
 
   good_pops <- pops[is_pops]
-  bad_pops  <- pops[!is_pops]
+  bad_pops <- pops[!is_pops]
 
   if (length(good_pops) == 0) {
     stop("no population provides as arguments")
   }
 
   if (length(bad_pops) > 0) {
-    warning(sprintf("%d provided arguments (%s) are not belonging the population class",
-                    length(bad_pops),
-                    which(!is_pops) + 1
-                   )
-            )
+    warning(sprintf(
+      "%d provided arguments (%s) are not belonging the population class",
+      length(bad_pops),
+      which(!is_pops) + 1
+    ))
   }
 
-  name_pops = sapply(good_pops, function(x) x$label)
+  name_pops <- sapply(good_pops, function(x) x$label)
 
-  if (grep('^label|populations$',name_pops))
+  if (length(grep("^label|populations$", name_pops)) == 1) {
     stop("a population cannot be named `label` or `populations`")
+  }
 
   names(good_pops) <- name_pops
 
-
   structure(list(
-      label = label,
-      populations = good_pops
-    ),
-    class = "community"
+    label = label,
+    populations = good_pops
+  ),
+  class = "community"
   )
-
 }
 
 
