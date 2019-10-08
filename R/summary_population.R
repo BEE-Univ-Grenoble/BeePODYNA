@@ -7,7 +7,7 @@
 #' population-class objects. When dealing with a list of population-type objects, il will
 #' recursively print the summaries for each one of them.
 #'
-#' @param pop an object of class "population"
+#' @param populations an object of class "population"
 #' @param d.printing the number of decimal digits to be printed in statistics
 #'
 #' @examples
@@ -25,8 +25,9 @@
 #' pops = community('pops', pop1, pop2)
 #'
 #' summary(pop2)
-#' summary(pops)
 #'
+#' toto = summary(pops) #for saving summaries list
+#' toto
 #'
 #'
 #'# In case you want to modify digits' printing settings
@@ -34,11 +35,12 @@
 #' summary(pop,11)
 #' summary(pop,getOption("digits")+2)
 #'
-#'
+#' @rdname summary
 #' @export
-summary.population <- function(populations, d.printing = getOption("digits")){
+summary.population <- function(populations, d.printing = as.integer(getOption("digits"))){
 
-  if(!is.numeric(d.printing)||!is.integer(d.printing) ) stop ("'d.printing' parameter must be an integer number")
+  if(!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
+  if(!is.integer(d.printing)) d.printing = as.integer(d.printing)
 
   if(!is.community(populations) && !is.population(populations) ) stop ("Your 'pop' argument does not contain a 'population' class object or a list of 'population' objects")
 
