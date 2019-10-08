@@ -8,6 +8,26 @@ NULL
 
 
 
+#' beepodyna
+#'
+#' The \code{beepodyna} function creates a \code{R} object of the class \code{beepodyna}.
+#'
+#' @details The \code{beepodyna} object is a list containing a community, the corresponding interaction matrix
+#' and a list of the functions to apply to each population, in the order they appear in the community object.
+#'
+#' @param community is the community object of class \code{community} to study
+#' @param interactions is the interaction matrix of the class \code{interactions} between the populations of the community. Default is a matrix without interactions.
+#' @param functions is a function or a list of functions to apply to each population in the same order as it is in the community.
+#' If the length of the list is not the same as the community, the functions are repeated so the length of the list is the same as the number of populations.
+#' @param verbose Default is TRUE. Set to FALSE if you don't want the warnings.
+#'
+#' @seealso \code{\link{[BeePODYNA]{community}}} and \code{\link{[BeePODYNA]{interactions}}} to create the object in parameters.
+#'
+#' @examples
+#'
+#'
+#' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
+#'
 #' @export
 beepodyna <- function(community,
                       interactions = interactions(length(community)),
@@ -64,6 +84,5 @@ beepodyna <- function(community,
   )
   class(beepodyna) <- "beepodyna"
   return(beepodyna)
-
   #pb length(hudson) !!!
 }
