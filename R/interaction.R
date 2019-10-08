@@ -22,36 +22,33 @@
 #'
 #' @export
 mat_interaction <- function(nb_pop,
-                            interactions=rep(0,nb_pop*(nb_pop-1))) {
-
-  if (nb_pop==1) {
+                            interactions = rep(0, nb_pop * (nb_pop - 1))) {
+  if (nb_pop == 1) {
     warning("As there is only one population, the interaction matrix has only one element equal to 0.")
-    interactions=matrix(0)
-    rownames(interactions)="Pop_1"
-    colnames(interactions)=rownames(interactions)
-    class(interactions)="interaction"
+    interactions <- matrix(0)
+    rownames(interactions) <- "Pop_1"
+    colnames(interactions) <- rownames(interactions)
+    class(interactions) <- "interaction"
   }
 
   else if (!is.numeric(nb_pop) ||
-      as.integer(nb_pop)!=nb_pop ||
-      nb_pop < 2 )
+    as.integer(nb_pop) != nb_pop ||
+    nb_pop < 2) {
     stop("Nb_pop must be an integer superior to 1.")
-
-  else if (!is.vector(interactions) ||
-      !is.numeric(interactions) ||
-      length(interactions)!=nb_pop*(nb_pop-1) ||
-      sum(as.integer(interactions< -1))>0 ||
-      sum(as.integer(interactions>1))>0
-  )
+  } else if (!is.vector(interactions) ||
+    !is.numeric(interactions) ||
+    length(interactions) != nb_pop * (nb_pop - 1) ||
+    sum(as.integer(interactions < -1)) > 0 ||
+    sum(as.integer(interactions > 1)) > 0
+  ) {
     stop("Interactions vector must be fill with decimals ranging between -1 and 1, and is length must be equal to nb_pop*(nb_pop-1).")
-
-  else {
-  interactions=insert(interactions,c(0:(nb_pop-1))*nb_pop+1,0)
-  dim(interactions)=c(nb_pop,nb_pop)
-  interactions=t(interactions)
-  rownames(interactions)=paste0("Pop_",c(1:nb_pop))
-  colnames(interactions)=rownames(interactions)
-  class(interactions)="interaction"
+  } else {
+    interactions <- insert(interactions, c(0:(nb_pop - 1)) * nb_pop + 1, 0)
+    dim(interactions) <- c(nb_pop, nb_pop)
+    interactions <- t(interactions)
+    rownames(interactions) <- paste0("Pop_", c(1:nb_pop))
+    colnames(interactions) <- rownames(interactions)
+    class(interactions) <- "interaction"
   }
   return(interactions)
 }
@@ -104,7 +101,7 @@ is.interaction <- function(x){
 #' @import R.utils
 #'
 #' @export
-as_interaction = function(object){
+as_interaction <- function(object) {
   UseMethod("as_interaction")
 }
 
@@ -127,23 +124,24 @@ as_interaction.interaction <- function(object) {
 #' @rdname as_interaction
 #' @export
 as_interaction.numeric <- function(object) {
-
   if (!is.numeric(object) ||
-      sum(as.integer(object< -1))>0 ||
-      sum(as.integer(object>1))>0 )
+    sum(as.integer(object < -1)) > 0 ||
+    sum(as.integer(object > 1)) > 0) {
     stop("Interactions vector must be fill with decimals ranging between -1 and 1, and is length must be equal to nb_pop*(nb_pop-1).")
+  }
 
-  nb_pop=(1+sqrt(1+4*length(object)))/2
+  nb_pop <- (1 + sqrt(1 + 4 * length(object))) / 2
 
-  if ( as.integer(nb_pop)!=nb_pop ||
-       nb_pop < 2 )
+  if (as.integer(nb_pop) != nb_pop ||
+    nb_pop < 2) {
     stop("Interactions vector must be fill with decimals ranging between -1 and 1, and is length must be equal to nb_pop*(nb_pop-1).")
+  }
 
-  object=insert(object,c(0:(nb_pop-1))*nb_pop+1,0)
-  dim(object)=c(nb_pop,nb_pop)
-  object=t(object)
-  rownames(object)=paste0("Pop_",c(1:nb_pop))
-  colnames(object)=rownames(object)
-  class(object)="interaction"
+  object <- insert(object, c(0:(nb_pop - 1)) * nb_pop + 1, 0)
+  dim(object) <- c(nb_pop, nb_pop)
+  object <- t(object)
+  rownames(object) <- paste0("Pop_", c(1:nb_pop))
+  colnames(object) <- rownames(object)
+  class(object) <- "interaction"
   return(object)
 }
