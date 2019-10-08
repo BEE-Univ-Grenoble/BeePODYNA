@@ -35,9 +35,9 @@
 #' summary(pop,11)
 #' summary(pop,getOption("digits")+2)
 #'
-#'
+#' @rdname summary
 #' @export
-summary <- function(populations, d.printing = as.integer(getOption("digits"))){
+summary.population <- function(populations, d.printing = as.integer(getOption("digits"))){
 
   if(!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
   if(!is.integer(d.printing)) d.printing = as.integer(d.printing)
