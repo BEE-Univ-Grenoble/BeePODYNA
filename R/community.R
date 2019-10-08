@@ -23,7 +23,6 @@
 #'
 #' @export
 community <- function(label,
-                      population,
                       ...) {
   # checking entry
   if (!is.character(label) ||
@@ -31,68 +30,49 @@ community <- function(label,
     stop("Label must be a single charactere string")
   }
 
-  if (!is.population(population)) {
-    stop("population must be an object of classe population")
+  pops <- list(...)
+
+  is_pops <- sapply(pops,is_population)
+
+  good_pops <- pops[is_pops]
+  bad_pops  <- pops[!is_pops]
+
+  if (length(good_pops) == 0) {
+    stop("no population provides as arguments")
   }
 
-  # supplement populations
-  liste <- list(...)
+  if (length(bad_pops) > 0) {
+    warning(sprintf("%d provided arguments (%s) are not belonging the population class",
+                    length(bad_pops),
+                    which(!is_pops) + 1
+                   )
+            )
+  }
 
-  if (length(liste) > 0) {
-    not_pop_label <- FALSE
-    pop_id <- c()
-    pop_name <- population$label
+  name_pops = sapply(good_pops, function(x) x$label)
 
-    # checking supplement populations class
-    for (i in 1:length(liste)) {
-      if (!is.population(liste[[i]])) {
-        not_pop_label <- TRUE
-      } else {
-        pop_id <- c(pop_id, i)
-        pop_name <- c(pop_name, liste[[i]]$label)
-      }
-    }
+  if (grep('^label|populations$',name_pops))
+    stop("a population cannot be named `label` or `populations`")
 
-    # not all supplement populations are populations objects
-    if (not_pop_label == TRUE) {
-      warning(sprintf(
-        "Check other objects class, only '%s' objects are in '%s' community because of their population class",
-        paste(pop_name, collapse = ", "), label
-      ))
-    }
+  names(good_pops) <- name_pops
 
-    # building the community object (multiple pop)
-    begin <- list(
+
+  structure(list(
       label = label,
-      population = population
-    )
-    end <- liste[pop_id]
-
-    community <- structure(c(begin, end),
-      class = "community"
-    )
-  } else {
-    #building the community object (1 pop)
-    community <- structure(list(
-      label = label,
-      population = population
+      populations = good_pops
     ),
     class = "community"
-    )
-  }
-  #renaming the element of the community with populations labels
-  names(community) <- sapply( community, "[[", 1 )
+  )
 
-  return(community)
 }
 
 
-#' is.community
+#' is_community
 #'
 #' Check if the object is a community or not.
 #'
 #' @usage
-#' is.community(x)
+#' is_community(x)
 #'
 #' @param x the object which must be a community to validate the condition
 #'
@@ -110,11 +90,23 @@ community <- function(label,
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @export
-is.community <- function(x){
-  if (class(x) == "community"){
-    return(TRUE)
-  }
-  else {
-    return(FALSE)
-  }
+is_community <- function(x){
+  class(x) == "community"
 }
+
+#' @export
+`$.community` <- function(x,name) {
+  if ("name" == "label")
+    return(x[['label']])
+
+  if ("populations" == "populations")
+    return(x[['populations']])
+
+  x[["populations"]][[name]]
+}
+
+#' @export
+length.community <- function(x) {
+  length(x[["populations"]])
+}
+

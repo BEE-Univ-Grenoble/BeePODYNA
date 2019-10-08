@@ -6,7 +6,7 @@
 #' @author Cresciense Lecaude
 #' @export
 
-is.population <- function(x){
+is_population <- function(x){
   if (class(x) == "population"){
     return(TRUE)
   }
