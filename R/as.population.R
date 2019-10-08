@@ -1,4 +1,4 @@
-#' The fonction *as.population* takes as argument a list
+#' The fonction *as_population* takes as argument a list
 #' containing the population caracteristics (population,
 #' number at initial time, growth rates or birth rate and
 #' death rate) or a poputaion monitored throught time.
@@ -17,10 +17,6 @@
 as_population = function(object){
   UseMethod("as_population")
 }
-
-#' @rdname as_population
-#' @export
-as.population <- as_population
 
 #' @rdname as_population
 #' @export
