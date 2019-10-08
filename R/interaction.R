@@ -1,16 +1,16 @@
 #' @import R.utils
 NULL
 
-#' mat_interaction
+#' interactions
 #'
 #' \code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
 #' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
-#' The interaction of a population on itself is equal to 0.
+#' The interaction of a population on itself is equal to 0. The element \code{[i,j]} of the matrix is the effect of the population on the j column on the population of the i line.
 #' If no interaction vector is given, the default values are 0.
 #'
 #' @param nb_pop is the number of populations in the model. The matrix interaction with only one population is set to 0.
 #' @param interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
-#' Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
+#' A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 #' The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
 #' and then the vector of the interactions of the second population on the others...
 #'
