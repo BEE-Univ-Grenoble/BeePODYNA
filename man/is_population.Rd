@@ -2,8 +2,7 @@
 % Please edit documentation in R/is_population.R
 \name{is_population}
 \alias{is_population}
-\title{Is.population
-The function determinines if the object is a population or not}
+\title{is_population}
 \usage{
 is_population(x)
 }
@@ -14,7 +13,6 @@ is_population(x)
 a logical "TRUE" or "FALSE"
 }
 \description{
-Is.population
 The function determinines if the object is a population or not
 }
 \author{
