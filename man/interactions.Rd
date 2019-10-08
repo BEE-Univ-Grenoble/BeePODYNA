@@ -10,7 +10,7 @@ interactions(nb_pop, list.interactions = rep(0, nb_pop * (nb_pop - 1)),
 \arguments{
 \item{nb_pop}{is the number of populations in the model. The matrix interaction with only one population is set to 0.}
 
-\item{interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
+\item{list.interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
 A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
 and then the vector of the interactions of the second population on the others...}
