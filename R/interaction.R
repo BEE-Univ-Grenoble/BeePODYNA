@@ -5,7 +5,7 @@
 #' The interaction of a population on itself is equal to 0.
 #' If no interaction vector is given, the default values are 0.
 #'
-#' @param nb_pop is the number of populations in the model.
+#' @param nb_pop is the number of populations in the model. The matrix interaction with only one population is set to 0.
 #' @param interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
 #' Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 #' The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
@@ -14,6 +14,7 @@
 #' @examples
 #'   mat_interaction(nb_pop=3, interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
 #'   mat_interaction(nb_pop=2)
+#'   mat_interaction(nb_pop=1)
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>
 #'
@@ -23,12 +24,20 @@
 mat_interaction <- function(nb_pop,
                             interactions=rep(0,nb_pop*(nb_pop-1))) {
 
-  if (!is.numeric(nb_pop) ||
+  if (nb_pop==1) {
+    warning("As there is only one population, the interaction matrix has only one element equal to 0.")
+    interactions=matrix(0)
+    rownames(interactions)="Pop_1"
+    colnames(interactions)=rownames(interactions)
+    class(interactions)="interaction"
+  }
+
+  else if (!is.numeric(nb_pop) ||
       as.integer(nb_pop)!=nb_pop ||
       nb_pop < 2 )
     stop("Nb_pop must be an integer superior to 1.")
 
-  if (!is.vector(interactions) ||
+  else if (!is.vector(interactions) ||
       !is.numeric(interactions) ||
       length(interactions)!=nb_pop*(nb_pop-1) ||
       sum(as.integer(interactions< -1))>0 ||
@@ -36,12 +45,14 @@ mat_interaction <- function(nb_pop,
   )
     stop("Interactions vector must be fill with decimals ranging between -1 and 1, and is length must be equal to nb_pop*(nb_pop-1).")
 
+  else {
   interactions=insert(interactions,c(0:(nb_pop-1))*nb_pop+1,0)
   dim(interactions)=c(nb_pop,nb_pop)
   interactions=t(interactions)
   rownames(interactions)=paste0("Pop_",c(1:nb_pop))
   colnames(interactions)=rownames(interactions)
   class(interactions)="interaction"
+  }
   return(interactions)
 }
 
@@ -77,14 +88,13 @@ is.interaction <- function(x){
 #' \code{as.interaction} transforms a vector in an interactions matrix object defining the positive and negative interactions between populations.
 #' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
 #' The interaction of a population on itself is equal to 0. If no interaction vector is given, the default values are 0.
+#' See \code{\link[BeePODYNA]{mat_interaction}} function to create a new interaction matrix from scratch.
+#' If the object is of the type \code{numeric}, it should be a vector of numeric of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
+#' Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact like facilitation while a negative value means a negative impact like predation, competition.
+#' The vector starts with the vector of the interactions of the first population on the other ones ranging from 2 to the last one, not including itself,
+#' and then the vector of the interactions of the second population on the others...
 #'
 #' @param object is an \code{R} object to transform into an interaction matrix.
-#' See \code{\link[BeePODYNA]{mat_interaction}} function to create a new interaction matrix from scratch.
-#'
-#' If the object is of the type \code{numeric], it should be a vector of numeric of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
-#' Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
-#' The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
-#' and then the vector of the interactions of the second population on the others...
 #'
 #' @examples
 #'   as.interaction(c(0.2,-0.5, 0.1,0.2,0.3,0.8))
@@ -114,8 +124,7 @@ as_interaction.interaction <- function(object) {
   object
 }
 
-#' @rdname as_population
-#'
+#' @rdname as_interaction
 #' @export
 as_interaction.numeric <- function(object) {
 
