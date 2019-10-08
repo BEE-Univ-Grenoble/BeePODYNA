@@ -9,9 +9,9 @@ community(label, population, ...)
 \arguments{
 \item{label}{the name of the community (character string)}
 
-\item{population}{a population object}
-
 \item{...}{additionnal populations objects. All other objects will be rejected and a warning will be print.}
+
+\item{population}{a population object}
 }
 \description{
 Create a community with giving its name and a minimum of one population.
