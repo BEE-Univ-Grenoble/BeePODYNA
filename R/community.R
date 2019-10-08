@@ -14,13 +14,10 @@
 #' @seealso \code{\link[BeePODYNA]{population}} to see how to make an object of class population.
 #'
 #' @examples
-#'hirsu = population("hirsuta",20,1,100)
-#'daonen = population("daonensis",30,1.2,100)
+#'hare = population("hirsuta",30,2,80)
+#'lynx = population("daonensis",4,1.2,60)
 #'
-#'daonen[[2]]=c(30,34)
-#'daonen[[3]]=c(0,5)
-#'
-#'alpha = community('alpha',hirsu,daonen)
+#'hudson = community('hudson',hare,lynx)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
@@ -104,14 +101,11 @@ community <- function(label,
 #' @seealso \code{\link[BeePODYNA]{community}} to see how to make an object of class community.
 #'
 #' @examples
-#'hirsu = population("hirsuta",20,1,100)
-#'daonen = population("daonensis",30,1.2,100)
+#'hare = population("hirsuta",30,2,80)
+#'lynx = population("daonensis",4,1.2,60)
 #'
-#'daonen[[2]]=c(30,34)
-#'daonen[[3]]=c(0,5)
-#'
-#'alpha = community('alpha',hirsu,daonen)
-#'is.community(alpha)
+#'hudson = community('hudson',hare,lynx)
+#'is.community(hudson)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'

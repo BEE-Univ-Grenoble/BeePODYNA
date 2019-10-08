@@ -20,13 +20,10 @@ Create a community with giving its name and a minimum of one population.
 There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 }
 \examples{
-hirsu = population("hirsuta",20,1,100)
-daonen = population("daonensis",30,1.2,100)
+hare = population("hirsuta",30,2,80)
+lynx = population("daonensis",4,1.2,60)
 
-daonen[[2]]=c(30,34)
-daonen[[3]]=c(0,5)
-
-alpha = community('alpha',hirsu,daonen)
+hudson = community('hudson',hare,lynx)
 
 }
 \seealso{
