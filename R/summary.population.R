@@ -13,7 +13,7 @@
 #' @examples
 #'# Default usage
 #' pop = population("mypop", 1, 0.8, 500)
-#' summary_population(pop)
+#' summary.population(pop)
 #'
 #'
 #'
@@ -24,20 +24,19 @@
 #'
 #' pops = community('pops', pop1, pop2)
 #'
-#' summary_population(pop2)
-#' summary_population(pops)
+#' summary.population(pop2)
+#' summary.population(pops)
 #'
 #'
 #'
 #'# In case you want to modify digits' printing settings
 #'
-#' summary_population(pop,11)
-#' summary_population(pop,getOption("digits")+2)
+#' summary.population(pop,11)
+#' summary.population(pop,getOption("digits")+2)
 #'
 #'
 #' @export
-
-summary_population <- function(populations, d.printing = getOption("digits")){
+summary.population <- function(populations, d.printing = getOption("digits")){
 
   if(!is.numeric(d.printing)||!is.integer(d.printing) ) stop ("'d.printing' parameter must be an integer number")
 
