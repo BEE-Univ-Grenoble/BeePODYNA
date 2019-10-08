@@ -2,7 +2,7 @@
 % Please edit documentation in R/populations.R
 \name{population}
 \alias{population}
-\title{Create a population with giving its name, initial size, growth rate and capacity.}
+\title{Population}
 \usage{
 population(label, initial_size, growth_rate, capacity = Inf)
 }
@@ -19,6 +19,6 @@ population(label, initial_size, growth_rate, capacity = Inf)
 Create a population with giving its name, initial size, growth rate and capacity.
 }
 \examples{
-  population(example, 2, 0.5, 10)
+  population('example', 2, 0.5, 10)
 
 }

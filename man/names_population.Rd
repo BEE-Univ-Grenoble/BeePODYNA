@@ -2,21 +2,21 @@
 % Please edit documentation in R/attributes.R
 \name{names_population}
 \alias{names_population}
-\title{Returns the name of the population}
+\title{names_population}
 \usage{
 names_population(pop)
 }
 \arguments{
-\item{pop}{is an object of the class 'population'}
+\item{pop}{is an object of the class 'population'.}
 }
 \value{
-returns the name of the population.
+It returns a character with the name of the population.
 }
 \description{
-Returns the name of the population
+\code{names_population} returns the name of the population given in parameter.
 }
 \examples{
-    pop=population("Pop_1",42,2,200)
+    pop<-population("Pop_1",42,2,200)
     names_population(pop)
 
 }

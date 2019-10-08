@@ -2,21 +2,21 @@
 % Please edit documentation in R/attributes.R
 \name{size_population}
 \alias{size_population}
-\title{Returns the size of the population}
+\title{size_population}
 \usage{
 size_population(pop)
 }
 \arguments{
-\item{pop}{is an object of the class 'population'}
+\item{pop}{is an object of the class 'population'.}
 }
 \value{
-returns the size of the population.
+It returns the size of the population.
 }
 \description{
-Returns the size of the population
+\code{size_population} returns the size of the population given in parameter.
 }
 \examples{
-    pop=population("Pop_1",42,2,200)
+    pop<-population("Pop_1",42,2,200)
     size_population(pop)
 
 }
