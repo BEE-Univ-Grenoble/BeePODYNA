@@ -16,14 +16,14 @@ label(object)
 \method{label}{beepodyna}(object)
 }
 \arguments{
-\item{object}{is BeePODYNA object.}
+\item{object}{is a BeePODYNA object.}
 }
 \value{
-It returns a character with the label of the object
+It returns a character with the label of the object.
 }
 \description{
 \code{label} returns the label of \code{\link[BeePODYNA]{population}},
-\code{\link[BeePODYNA]{community}} or \code{\link[BeePODYNA]{beepodina}} object.
+\code{\link[BeePODYNA]{community}} or \code{\link[BeePODYNA]{beepodyna}} object.
 }
 \examples{
     pop<-population("Pop_1",42,2,200)

@@ -20,7 +20,7 @@ hare = population("hirsuta",30,2,80)
 lynx = population("daonensis",4,1.2,60)
 
 hudson = community('hudson',hare,lynx)
-is.community(hudson)
+is_community(hudson)
 
 }
 \seealso{

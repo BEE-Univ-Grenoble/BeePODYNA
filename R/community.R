@@ -84,7 +84,7 @@ community <- function(label,
 #'lynx = population("daonensis",4,1.2,60)
 #'
 #'hudson = community('hudson',hare,lynx)
-#'is.community(hudson)
+#'is_community(hudson)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'

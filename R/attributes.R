@@ -1,12 +1,12 @@
 #' Returns the label of a BeePODYNA object
 #'
 #' \code{label} returns the label of \code{\link[BeePODYNA]{population}},
-#' \code{\link[BeePODYNA]{community}} or \code{\link[BeePODYNA]{beepodina}} object.
+#' \code{\link[BeePODYNA]{community}} or \code{\link[BeePODYNA]{beepodyna}} object.
 #'
 #'
-#' @param object is BeePODYNA object.
+#' @param object is a BeePODYNA object.
 #'
-#' @return It returns a character with the label of the object
+#' @return It returns a character with the label of the object.
 #'
 #' @examples
 #'     pop<-population("Pop_1",42,2,200)
@@ -52,7 +52,7 @@ label.beepodyna <- label.population
 #'
 #' @export
 size_population <- function(pop) {
-  if (is.population(pop)) {pop$size}
+  if (is_population(pop)) {pop$size}
   else {stop("The object must be a population.")}
 }
 
@@ -72,7 +72,7 @@ size_population <- function(pop) {
 #'
 #' @export
 capacity_population <- function(pop) {
-  if (is.population(pop)) {pop$capacity}
+  if (is_population(pop)) {pop$capacity}
   else {stop("The object must be a population.")}
 }
 
@@ -92,6 +92,6 @@ capacity_population <- function(pop) {
 #'
 #' @export
 grate_population <- function(pop) {
-  if (is.population(pop)) {pop$growth_rate}
+  if (is_population(pop)) {pop$growth_rate}
   else {stop("The object must be a population.")}
 }

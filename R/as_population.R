@@ -1,3 +1,5 @@
+#' as_population
+#'
 #' The fonction *as_population* takes as argument a list
 #' containing the population caracteristics (population,
 #' number at initial time, growth rates or birth rate and

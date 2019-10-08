@@ -6,10 +6,13 @@
 \alias{beepodyna-package}
 \title{BeePODYNA}
 \usage{
-beepodyna(community, interactions = interactions(length(community)),
-  functions = identity, verbose = TRUE)
+beepodyna(label, community,
+  interactions = interactions(length(community)), functions = identity,
+  verbose = TRUE)
 }
 \arguments{
+\item{label}{is the label of the \code{beepodyna} object.}
+
 \item{community}{is the community object of class \code{community} to study}
 
 \item{interactions}{is the interaction matrix of the class \code{interactions} between the populations of the community. Default is a matrix without interactions.}
@@ -32,11 +35,12 @@ and a list of the functions to apply to each population, in the order they appea
 lynx = population("daonensis",4,1.2,60)
 hudson = community("hudson",hare,lynx)
 
-beepodyna(community=hudson,
-                interactions=interactions(2),
-                exp,
-                verbose = FALSE
-                )
+beepodyna(label="model_1",
+          community=hudson,
+          interactions=interactions(2),
+          exp,
+          verbose = FALSE
+          )
 
 }
 \seealso{

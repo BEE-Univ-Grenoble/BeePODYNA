@@ -5,11 +5,7 @@
 \alias{as_population.default}
 \alias{as_population.population}
 \alias{as_population.list}
-\title{The fonction *as_population* takes as argument a list
-containing the population caracteristics (population,
-number at initial time, growth rates or birth rate and
-death rate) or a poputaion monitored throught time.
-And return the inoramtion as a list duable by BeePODyna package}
+\title{as_population}
 \usage{
 as_population(object)
 
