@@ -13,7 +13,7 @@
 #' @examples
 #'# Default usage
 #' pop = population("mypop", 1, 0.8, 500)
-#' summary.population(pop)
+#' summary(pop)
 #'
 #'
 #'
@@ -24,15 +24,15 @@
 #'
 #' pops = community('pops', pop1, pop2)
 #'
-#' summary.population(pop2)
-#' summary.population(pops)
+#' summary(pop2)
+#' summary(pops)
 #'
 #'
 #'
 #'# In case you want to modify digits' printing settings
 #'
-#' summary.population(pop,11)
-#' summary.population(pop,getOption("digits")+2)
+#' summary(pop,11)
+#' summary(pop,getOption("digits")+2)
 #'
 #'
 #' @export
