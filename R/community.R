@@ -51,7 +51,7 @@ community <- function(label,
 
   name_pops <- sapply(good_pops, function(x) x$label)
 
-  if (length(grep("^label|populations$", name_pops)) == 1) {
+  if (length(grep("^label|populations$", name_pops)) >= 1) {
     stop("a population cannot be named `label` or `populations`")
   }
 
