@@ -1,19 +1,19 @@
 #' as_population
 #'
-#' The fonction *as_population* takes as argument a list
+#' The fonction \code{as_population} takes as argument a list
 #' containing the population caracteristics (population,
 #' number at initial time, growth rates or birth rate and
-#' death rate) or a poputaion monitored throught time.
-#' And return the inoramtion as a list duable by BeePODyna package
+#' death rate).
+#' And return a list duable by BeePODyna package
 #'
 #' @param object if it is list of populations objects (information on the population)
 #' must be in the same semantic as population. It could be
 #' a dataframe containing the evolution of the population throught time.
 #'
-#' @return If *object* is a list, the function will test if it match with the
-#'  the requirements of a class *population* object.
-#'  If *object* is a data frame the function will determine the growth rate,
-#'  and form a list of class *population* containing the parameter of the population*.
+#' @return If \code{object} is a list, the function will test if it match with the
+#'  the requirements of a class \code{population} object.
+#'  If \code{object} is a data frame the function will determine the growth rate,
+#'  and form a list of class \code{population} containing the parameter of the population*.
 #'
 #' @export
 as_population = function(object){
