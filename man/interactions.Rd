@@ -14,6 +14,8 @@ interactions(nb_pop, list.interactions = rep(0, nb_pop * (nb_pop - 1)),
 A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
 and then the vector of the interactions of the second population on the others...}
+
+\item{labels}{is a vector of characters giving the labels of the populations.}
 }
 \description{
 \code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.

@@ -13,6 +13,7 @@ NULL
 #' A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
 #' The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
 #' and then the vector of the interactions of the second population on the others...
+#' @param labels is a vector of characters giving the labels of the populations.
 #'
 #' @examples
 #'   interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
