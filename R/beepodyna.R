@@ -25,7 +25,7 @@ NULL
 #' @seealso \code{\link[BeePODYNA]{community}} and \code{\link[BeePODYNA]{interactions}} to create the object in parameters.
 #'
 #' @examples
-#` hare = population("hirsuta",30,2,80)
+#' hare = population("hirsuta",30,2,80)
 #' lynx = population("daonensis",4,1.2,60)
 #' hudson = community("hudson",hare,lynx)
 #'

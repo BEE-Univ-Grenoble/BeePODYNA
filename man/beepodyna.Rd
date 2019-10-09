@@ -32,6 +32,7 @@ The \code{beepodyna} object is a list containing a community, the corresponding 
 and a list of the functions to apply to each population, in the order they appear in the community object.
 }
 \examples{
+hare = population("hirsuta",30,2,80)
 lynx = population("daonensis",4,1.2,60)
 hudson = community("hudson",hare,lynx)
 
