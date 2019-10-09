@@ -27,4 +27,7 @@ repository with the case study.
 
 Ref : Howard, P. (2009). Modeling basics. Lecture Notes for Math 442, Texas A&M University.
 }
+\author{
+Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
+}
 \keyword{datasets}

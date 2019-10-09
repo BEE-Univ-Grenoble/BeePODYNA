@@ -15,5 +15,8 @@
 #'   \item{hare}{the population of hares, interpolated from the number of pelts}
 #'   \item{lynx}{the population of hares, interpolated from the number of pelts}
 #' }
+#'
+#' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
+#'
 #' @source \url{https://mc-stan.org/users/documentation/case-studies/lotka-volterra-predator-prey.html#data-lynx-and-hare-pelts-in-canada}
 "hudson"

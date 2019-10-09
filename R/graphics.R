@@ -40,6 +40,9 @@ NULL
 #'
 #' @export
 plot.population <- function(x, ...) {
+
+  warning("If it works, your a lucky guy")
+
   pop <- x
   mc <- match.call()
 
@@ -219,6 +222,9 @@ plot.population <- function(x, ...) {
 #'
 #' @export
 plot.community <- function(x, ...) {
+
+  warning("If it works, your a lucky guy")
+
   com <- x
   n_pop <- length(com) - 1
   mc <- match.call()
