@@ -3,11 +3,10 @@
 #' Create a community with giving its name and a minimum of one population.
 #'
 #' @usage
-#' community(label, population, ...)
+#' community(label, ...)
 #'
 #' @param label the name of the community (character string)
-#' @param population a population object
-#' @param ... additionnal populations objects. All other objects will be rejected and a warning will be print.
+#' @param ... one or several population objects. All other objects will be rejected and a warning will be print.
 #'
 #' @details There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 #'
