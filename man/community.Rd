@@ -4,14 +4,12 @@
 \alias{community}
 \title{community}
 \usage{
-community(label, population, ...)
+community(label, ...)
 }
 \arguments{
 \item{label}{the name of the community (character string)}
 
-\item{...}{additionnal populations objects. All other objects will be rejected and a warning will be print.}
-
-\item{population}{a population object}
+\item{...}{one or several population objects. All other objects will be rejected and a warning will be print.}
 }
 \description{
 Create a community with giving its name and a minimum of one population.
