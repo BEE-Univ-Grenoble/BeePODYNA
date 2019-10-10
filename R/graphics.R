@@ -41,13 +41,11 @@ NULL
 #' @export
 plot.population <- function(x, ...) {
 
-  warning("If it works, your a lucky guy")
-
   pop <- x
   mc <- match.call()
 
   # checks for arguments
-  if (!is.population(pop)) {
+  if (!is_population(pop)) {
     stop("The object must be a population.")
   }
   # check for custom graphical parameters
@@ -223,14 +221,12 @@ plot.population <- function(x, ...) {
 #' @export
 plot.community <- function(x, ...) {
 
-  warning("If it works, your a lucky guy")
-
   com <- x
-  n_pop <- length(com) - 1
+  n_pop <- length(com)
   mc <- match.call()
 
   # checks for arguments
-  if (!is.community(com)) {
+  if (!is_community(com)) {
     stop("The object must be a community.")
   }
   # check for custom graphical parameters
@@ -296,8 +292,8 @@ plot.community <- function(x, ...) {
 
   # limitations
   if (is.null(mc$xlim)) {
-    time_min <- min(as.vector(sapply(com[-1], "[[", 3)))
-    time_max <- max(as.vector(sapply(com[-1], "[[", 3)))
+    time_min <- min(as.vector(sapply(com$populations, "[[", 3)))
+    time_max <- max(as.vector(sapply(com$populations, "[[", 3)))
     x_dist <- time_max - time_min
     time_min <- time_min - x_dist * 0.1
     time_max <- time_max + x_dist * 0.1
@@ -311,8 +307,8 @@ plot.community <- function(x, ...) {
   text_x <- rep(xlim[1], n_pop)
 
   if (is.null(mc$ylim)) {
-    com_min <- min(as.vector(sapply(com[-1], "[[", 2)))
-    com_max <- max(as.vector(sapply(com[-1], "[[", 2)))
+    com_min <- min(as.vector(sapply(com$populations, "[[", 2)))
+    com_max <- max(as.vector(sapply(com$populations, "[[", 2)))
     y_dist <- com_max - com_min
     com_min <- com_min - y_dist * 0.1
     com_max <- com_max + y_dist * 0.1
@@ -344,134 +340,13 @@ plot.community <- function(x, ...) {
   localTexte <- function(..., type, xlim, ylim, xlab, ylab, main,
                          capacity_lty, capacity_line, log_pop, add, text_x, text_print) text(...)
   for (i in 1:n_pop) {
-    localLines(x = com[[i + 1]][[3]], y = com[[i + 1]][[2]], type[i], ...)
+    localLines(x = com$populations[[i]][[3]], y = com$populations[[i]][[2]], type[i], ...)
     if (capacity_line[i]) {
-      localAbline(h = com[[i + 1]]$capacity, lty = capacity_lty[i], col = color[i])
+      localAbline(h = com$populations[[i]]$capacity, lty = capacity_lty[i], col = color[i])
     }
     if (text_print[i]) {
-      localTexte(text_x[i], com[[i + 1]]$capacity, paste("K", com[[i + 1]]$label, sep = " "), pos = 4, col = color[i])
+      localTexte(text_x[i], com$populations[[i]]$capacity, paste("K", com$populations[[i]]$label, sep = " "), pos = 4, col = color[i])
     }
   }
 }
 
-#plot.population = function(pop, ...) {
-#  UseMethod('plot.population')
-#}
-#
-# # @rdname plot_population
-# # @export
-# plot_population.default <- function(pop,...) {
-#   stop(sprintf("I cannot cast an object of type %s to population object",
-#                class(pop)
-#   )
-#   )
-# }
-#
-# # @rdname plot_population
-# # @export
-# plot_population.population <- function(x, ...) {
-#
-#   mc <- match.call()
-#
-#   # checks for arguments
-#   if (!is.population(pop)) {
-#     stop("The object must be a population.")
-#   }
-#   # check for custom graphical parameters
-#   if (is.null(mc$capacity_lty)) {
-#     capacity_lty <- 3
-#   } else {
-#     capacity_lty <- eval(mc$capacity_lty)
-#   }
-#
-#   if (is.null(mc$type)) {
-#     type <- "b"
-#   } else {
-#     type <- eval(mc$type)
-#   }
-#
-#   if (is.null(mc$xlab)) {
-#     xlab <- "Time"
-#   } else {
-#     xlab <- eval(mc$xlab)
-#   }
-#
-#   if (is.null(mc$ylab)) {
-#     ylab <- "Size"
-#   } else {
-#     ylab <- eval(mc$ylab)
-#   }
-#
-#   if (is.null(mc$main)) {
-#     main <- pop$label
-#   } else {
-#     main <- eval(mc$main)
-#   }
-#
-#   if (is.null(mc$capacity_line)) {
-#     capacity_line <- TRUE
-#   } else {
-#     capacity_line <- eval(mc$capacity_line)
-#   }
-#
-#   # remove log_pop or not?
-#   if (is.null(mc$log_pop)) {
-#     log_pop <- FALSE
-#   } else {
-#     log_pop <- eval(mc$log_pop)
-#   }
-#   # #checks to remove
-#   # if(log_pop){
-#   #   pop$size[pop$size<1] = 1 #arbitrory choice
-#   #   pop$size = log(pop$size)
-#   #   pop$capacity = log(pop$capacity)
-#   # }
-#
-#   # limitations
-#   if (is.null(mc$xlim)) {
-#     time_min <- min(pop$time)
-#     time_max <- max(pop$time)
-#     x_dist <- time_max - time_min
-#     time_min <- time_min - x_dist * 0.1
-#     time_max <- time_max + x_dist * 0.1
-#
-#     xlim <- c(time_min, time_max)
-#   } else {
-#     xlim <- eval(mc$xlim)
-#     time_min <- xlim[1]
-#     time_max <- xlim[2]
-#   }
-#   if (is.null(mc$ylim)) {
-#     pop_min <- min(pop$size)
-#     pop_max <- max(pop$size)
-#     y_dist <- pop_max - pop_min
-#     pop_min <- pop_min - y_dist * 0.1
-#     pop_max <- pop_max + y_dist * 0.1
-#
-#     ylim <- c(pop_min, pop_max)
-#   } else {
-#     ylim <- eval(mc$ylim)
-#     pop_min <- ylim[1]
-#     pop_max <- ylim[2]
-#   }
-#
-#   # plotting env
-#   localplot <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
-#                           capacity_lty, capacity_line, log_pop) {
-#     plot(x, y, ..., type = "n", xlab = " ", ylab = " ", main = " ")
-#   }
-#   localplot(x = 1, y = 1, xlim, ylim, ...)
-#   # setting titles
-#   localTitle <- function(..., type, xlim, ylim, xlab, ylab, main,
-#                            capacity_lty, capacity_line, log_pop) title(...)
-#   localTitle(main, sub = NULL, xlab, ylab)
-#   # plotting the pop itself
-#   localLines <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
-#                            capacity_lty, capacity_line, log_pop) lines(x, y, ...)
-#   localLines(pop$time, pop$size, type, ...)
-#   # plotting capacity line
-#   if (capacity_line) {
-#     abline(h = pop$capacity, lty = capacity_lty)
-#     text(time_min, pop$capacity, "Capacity", pos = 4)
-#   }
-# }
