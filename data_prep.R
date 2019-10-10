@@ -18,4 +18,3 @@ usethis::use_data(hudson, overwrite = TRUE)
 #plot(hudson)
 
 #ou alors utiliser le package IBM pour produire les datas!!!
-

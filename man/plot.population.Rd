@@ -4,7 +4,8 @@
 \alias{plot.population}
 \title{plot_population}
 \usage{
-\method{plot}{population}(x, ...)
+\method{plot}{population}(x, ..., capacity_line = TRUE,
+  capacity_lty = 3, text_print = TRUE)
 }
 \arguments{
 \item{x}{a population object}
@@ -12,16 +13,19 @@
 \item{...}{every argument for the \code{\link[graphics]{plot}} function such as graphical parameters for lines.
 Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 \itemize{
-  \item \strong{capacity_line} set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
-  \item \strong{capacity_lty} set to \code{3} by default.
   \item \strong{type} for the size line, set to \code{'b'} by default.
   \item \strong{add} set to \code{TRUE} by default, to add another population plot on a precedent one.
-  \item \strong{text_print} set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
   }}
+
+\item{capacity_line}{set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.}
+
+\item{capacity_lty}{set to \code{3} by default.}
+
+\item{text_print}{set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).}
 }
 \description{
 plot one given population and its capacity line.

@@ -16,7 +16,7 @@
 \description{
 This function will allow the user to easily read
 trends and characteristics (label, population size(s), growth rate(s)...) of one or several
-population-class objects. When dealing with a list of population-type objects, il will
+population-class objects. When dealing with a list of population-type objects, it will
 recursively print the summaries for each one of them.
 }
 \examples{

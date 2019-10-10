@@ -9,16 +9,16 @@ NULL
 #' @param ... every argument for the \code{\link[graphics]{plot}} function such as graphical parameters for lines.
 #' Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 #' \itemize{
-#'   \item \strong{capacity_line} set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
-#'   \item \strong{capacity_lty} set to \code{3} by default.
 #'   \item \strong{type} for the size line, set to \code{'b'} by default.
 #'   \item \strong{add} set to \code{TRUE} by default, to add another population plot on a precedent one.
-#'   \item \strong{text_print} set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
 #'   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
 #'   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
 #'   }
+#' @param capacity_line set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
+#' @param capacity_lty set to \code{3} by default.
+#' @param text_print set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
 #'
 #' @seealso
 #' \itemize{
@@ -39,7 +39,11 @@ NULL
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @export
-plot.population <- function(x, ...) {
+plot.population <- function(x,
+                            ... ,
+                            capacity_line = TRUE,
+                            capacity_lty = 3,
+                            text_print = TRUE) {
 
   pop <- x
   mc <- match.call()
@@ -55,28 +59,10 @@ plot.population <- function(x, ...) {
     color <- eval(mc$col)
   }
 
-  if (is.null(mc$text_print)) {
-    text_print <- TRUE
-  } else {
-    text_print <- eval(mc$text_print)
-  }
-
   if (is.null(mc$text_x)) {
     text_x <- 0
   } else {
     text_x <- eval(mc$text_x)
-  }
-
-  if (is.null(mc$capacity_line)) {
-    capacity_line <- TRUE
-  } else {
-    capacity_line <- eval(mc$capacity_line)
-  }
-
-  if (is.null(mc$capacity_lty)) {
-    capacity_lty <- 3
-  } else {
-    capacity_lty <- eval(mc$capacity_lty)
   }
 
   if (is.null(mc$type)) {
