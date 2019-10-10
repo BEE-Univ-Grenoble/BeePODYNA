@@ -38,7 +38,8 @@
 #' @rdname summary
 #' @export
 
-summary.population <- function(populations, d.printing = as.integer(getOption("digits"))) {
+summary.population <- function(populations,
+                               d.printing = as.integer(getOption("digits"))) {
 
   if (!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
 
@@ -50,7 +51,7 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     summaries = as.list(2:length(populations))
     pop = populations[[2]] # # # NEEDS CHECK HERE
-#  how to refer to the elements other than the "community" label ; that is community[[1]] ????
+# How to refer to the elements other than the "community" label ; that is community[[1]] ????
   }  else {
 
     pop = populations
@@ -67,7 +68,8 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     #[[1]] Label
     label = pop$label; summaries_sub[[1]] = label
-    cat("[[1]] - Population label:  ", toString(label, width = 50), "\n", "\n")
+    cat("[[1]] - Population label:  ",
+        toString(label, width = 50), "\n", "\n")
 
 
 
@@ -76,11 +78,13 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     if (length(pop$size)>1) {
 
-      sizes = c(pop$size[length(pop$size)], pop$size[length(pop$size)-1], pop$size[1])
+      sizes = c(pop$size[length(pop$size)],
+                pop$size[length(pop$size)-1], pop$size[1])
 
-      data.s = data.frame("Generations" =
-                           c("current", "previous generation", "initial"),
-                          "Size" = sizes, stringsAsFactors = F)
+      data.s = data.frame(
+        "Generations" =
+          c("current", "previous generation", "initial"),
+          "Size" = sizes, stringsAsFactors = F)
 
       print(data.s,
             justify = "none",
@@ -105,7 +109,8 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     #[[3]] Generations
     cat("[[3]] - Generations:  ", "\n")
-    cat("This population has subsisted for ", pop$time[length(pop$time)], " generations.")
+    cat("This population has subsisted for ",
+        pop$time[length(pop$time)], " generations.")
 
     cat("\n", "\n")
 
@@ -115,10 +120,12 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     if (length(pop$size)>1) {
 
-      gr.current = as.numeric(sizes[length(sizes)]/sizes[length(sizes)-1])
+      gr.current =
+        as.numeric(sizes[length(sizes)]/sizes[length(sizes)-1])
 
       if (length(pop$size) > 2 ) {
-        gr.previous =as.numeric(sizes[length(sizes)-1])/as.numeric(pop$size[length(pop$size)-2])
+        gr.previous =
+          as.numeric(sizes[length(sizes)-1])/as.numeric(pop$size[length(pop$size)-2])
 
         } else {
 
@@ -129,7 +136,8 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
       rates = c(gr.current, gr.previous,gr.initial)
 
-      data.r = data.frame("Generations" = c("current", "previous generation", "initial"),
+      data.r = data.frame("Generations" =
+                            c("current", "previous generation", "initial"),
                           "Rates" = rates, stringsAsFactors = F)
 
       print(data.r,
@@ -140,8 +148,15 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
     } else {
 
-      data.r = data.frame("Generations" = "current", "Rate" = pop$growth_rate, stringsAsFactors = F)
-      print(data.r, justify = "none", right= F, row.names = c("[n]"))
+      data.r = data.frame(
+        "Generations" = "current",
+        "Rate" = pop$growth_rate,
+        stringsAsFactors = F)
+
+      print(data.r,
+            justify = "none",
+            right= F,
+            row.names = c("[n]"))
     }
 
     summaries_sub[[4]] = data.r #; names(summary[3]) = "Rates"
@@ -161,7 +176,8 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
       N_K = pop$size[length(pop$size)]/pop$capacity*100
 
       cat("Biotic capacity is = ", pop$capacity, "\n")
-      cat("Population has reached the ", format(N_K, digits = 2), "%  of it at generation 'n'.", "\n")
+      cat("Population has reached the ",
+          format(N_K, digits = 2), "%  of it at generation 'n'.", "\n")
     }
 
 
