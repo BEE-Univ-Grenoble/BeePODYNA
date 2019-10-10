@@ -37,12 +37,14 @@
 #'
 #' @rdname summary
 #' @export
+
 summary.population <- function(populations, d.printing = as.integer(getOption("digits"))) {
 
   if (!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
-  if (!is.integer(d.printing)) d.printing = as.integer(d.printing)
 
-  if (!is.community(populations) && !is.population(populations) ) stop ("Your 'pop' argument does not contain a 'population' class object or a list of 'population' objects")
+   if (!is.integer(d.printing)) d.printing = as.integer(d.printing)
+
+  if (!is.community(populations) && !is.population(populations)) stop ("Your 'pop' argument does not contain a 'population' class object or a list of 'population' objects")
 
   if (is.community(populations)) {
 
@@ -59,7 +61,7 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
   end = F
   i = 1
 
-  while(end == F) {
+  while (end == F) {
 
     summaries_sub = pop
 
@@ -76,15 +78,26 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
       sizes = c(pop$size[length(pop$size)], pop$size[length(pop$size)-1], pop$size[1])
 
-      data.s = data.frame("Generations" = c("current", "previous generation", "initial"),
+      data.s = data.frame("Generations" =
+                           c("current", "previous generation", "initial"),
                           "Size" = sizes, stringsAsFactors = F)
 
-      print(data.s, justify = "none", right= F, row.names = c("[n]", "[n-1]", "[n0]"))
+      print(data.s,
+            justify = "none",
+            right= F,
+            row.names = c("[n]", "[n-1]", "[n0]"))
 
     } else {
 
-      data.s = data.frame("Generations" = "current", "Size" = pop$size, stringsAsFactors = F)
-      print(data.s, justify = "none", right= F, row.names = c("[n]"))
+      data.s = data.frame(
+        "Generations" = "current",
+        "Size" = pop$size,
+        stringsAsFactors = F)
+
+      print(data.s,
+            justify = "none",
+            right= F,
+            row.names = c("[n]"))
     }
 
     summaries_sub[[2]] = data.s #; names(summary[2]) = "Sizes"
@@ -106,7 +119,9 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
       if (length(pop$size) > 2 ) {
         gr.previous =as.numeric(sizes[length(sizes)-1])/as.numeric(pop$size[length(pop$size)-2])
-      } else {
+
+        } else {
+
         gr.previous = gr.current
       }
 
@@ -122,7 +137,6 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
             right= F,
             row.names = c("[n]", "[n-1]", "[n0]"),
             digits = d.printing)
-
 
     } else {
 
