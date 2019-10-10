@@ -37,14 +37,14 @@
 #'
 #' @rdname summary
 #' @export
-summary.population <- function(populations, d.printing = as.integer(getOption("digits"))){
+summary.population <- function(populations, d.printing = as.integer(getOption("digits"))) {
 
-  if(!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
-  if(!is.integer(d.printing)) d.printing = as.integer(d.printing)
+  if (!is.numeric(d.printing)) stop ("'d.printing' parameter must be an integer number")
+  if (!is.integer(d.printing)) d.printing = as.integer(d.printing)
 
-  if(!is.community(populations) && !is.population(populations) ) stop ("Your 'pop' argument does not contain a 'population' class object or a list of 'population' objects")
+  if (!is.community(populations) && !is.population(populations) ) stop ("Your 'pop' argument does not contain a 'population' class object or a list of 'population' objects")
 
-  if(is.community(populations)){
+  if (is.community(populations)) {
 
     summaries = as.list(2:length(populations))
     pop = populations[[2]] # # # NEEDS CHECK HERE
@@ -72,7 +72,7 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
     #[[2]] Size(s)
     cat("[[2]] - Population size:  ", "\n")
 
-    if(length(pop$size)>1){
+    if (length(pop$size)>1) {
 
       sizes = c(pop$size[length(pop$size)], pop$size[length(pop$size)-1], pop$size[1])
 
@@ -81,7 +81,7 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
       print(data.s, justify = "none", right= F, row.names = c("[n]", "[n-1]", "[n0]"))
 
-    }else{
+    } else {
 
       data.s = data.frame("Generations" = "current", "Size" = pop$size, stringsAsFactors = F)
       print(data.s, justify = "none", right= F, row.names = c("[n]"))
@@ -100,11 +100,11 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
     #[[4]] Growth rate(s)
     cat("[[4]] - Growth rates:  ", "\n")
 
-    if(length(pop$size)>1){
+    if (length(pop$size)>1) {
 
       gr.current = as.numeric(sizes[length(sizes)]/sizes[length(sizes)-1])
 
-      if(length(pop$size) > 2 ){
+      if (length(pop$size) > 2 ) {
         gr.previous =as.numeric(sizes[length(sizes)-1])/as.numeric(pop$size[length(pop$size)-2])
       } else {
         gr.previous = gr.current
@@ -124,7 +124,7 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
             digits = d.printing)
 
 
-    }else{
+    } else {
 
       data.r = data.frame("Generations" = "current", "Rate" = pop$growth_rate, stringsAsFactors = F)
       print(data.r, justify = "none", right= F, row.names = c("[n]"))
@@ -138,11 +138,11 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
     #[[4]] Biotic capacity
     cat("[[5]] - Biotic capacity:  ", "\n")
 
-    if(is.infinite(pop$capacity)){
+    if (is.infinite(pop$capacity)) {
 
       cat("\t", "No biotic capacity was specified.", "\n")
 
-    } else{
+    } else {
 
       N_K = pop$size[length(pop$size)]/pop$capacity*100
 
@@ -157,28 +157,28 @@ summary.population <- function(populations, d.printing = as.integer(getOption("d
 
 
 
-    if(is.population(populations)) { # this check might not be necessary ?
+    if (is.population(populations)) { # this check might not be necessary ?
 
       summaries = summaries_sub
       end = T
 
-    }else{
+    } else {
 
-      if(is.community(populations)){
+      if (is.community(populations)) {
 
-        if(i == length(populations)){
+        if (i == length(populations)) {
           end = T
 
-        }else{
+        } else {
 
           summaries[[i]] = summaries_sub
           end = F
 
-          if(i+1 != length(populations)){
+          if(i+1 != length(populations)) {
             i = i+1
             pop = populations[[i+1]]  # MIGHT NEED CHECK HERE AS WELL IF YOU CHANGE LINE 49
 
-          }  else {
+          } else {
 
             end = T}
 
