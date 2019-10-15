@@ -12,8 +12,12 @@
 #' @format A community with 2 populations:
 #' \describe{
 #'   \item{hudson}{the label of the community}
-#'   \item{hare}{the population of hares, interpolated from the number of pelts}
-#'   \item{lynx}{the population of hares, interpolated from the number of pelts}
+#'   \item{populations}{the list of two populations}
+#'   \itemize{
+#'   \item{hare : the population of hares, interpolated from the number of pelts}
+#'   \item{lynx : the population of hares, interpolated from the number of pelts}
+#'   }
+#'
 #' }
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>

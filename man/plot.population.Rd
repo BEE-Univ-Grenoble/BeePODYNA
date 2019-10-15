@@ -5,7 +5,7 @@
 \title{plot_population}
 \usage{
 \method{plot}{population}(x, ..., capacity_line = TRUE,
-  capacity_lty = 3, text_print = TRUE)
+  capacity_lty = 3, text_print = TRUE, add = FALSE)
 }
 \arguments{
 \item{x}{a population object}
@@ -14,7 +14,6 @@
 Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 \itemize{
   \item \strong{type} for the size line, set to \code{'b'} by default.
-  \item \strong{add} set to \code{TRUE} by default, to add another population plot on a precedent one.
   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
@@ -26,6 +25,8 @@ Classical \code{\link[graphics]{graphical parameter}} applies on the population 
 \item{capacity_lty}{set to \code{3} by default.}
 
 \item{text_print}{set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).}
+
+\item{add}{set to \code{FALSE} by default, to add another population plot on a precedent one.}
 }
 \description{
 plot one given population and its capacity line.
