@@ -4,29 +4,40 @@
 \alias{com_plot}
 \title{com_plot}
 \usage{
-com_plot(x, ...)
+com_plot(x, ..., xpop = 1, ypop = 2, capacity_line = c(TRUE, TRUE),
+  capacity_lty = c(3, 3), text_print = c(TRUE, TRUE), first_p = 1,
+  white = 0.8)
 }
 \arguments{
-\item{x}{a population object}
+\item{x}{a community object}
 
-\item{...}{every argument for the \code{\link[graphics]{plot}} function such as graphical parameters for lines.
+\item{...}{every argument for the \code{\link[graphics]{plot}} function such as titles, labels and windows limitation.
 Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 \itemize{
-  \item \strong{capacity_line} set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
-  \item \strong{capacity_lty} set to \code{3} by default.
-  \item \strong{type} for the size line, set to \code{'b'} by default.
-  \item \strong{text_print} set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
-  \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
   }}
+
+\item{xpop}{the population for the x axise}
+
+\item{ypop}{the population for the y axise}
+
+\item{capacity_line}{set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.}
+
+\item{capacity_lty}{set to \code{3} by default.}
+
+\item{text_print}{set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).}
+
+\item{first_p}{the first point in the time serie to be drawn. All points are drawn by default.}
+
+\item{white}{the percentage of white for the beginning of the color scale. \code{0.8} by default.}
 }
 \description{
 plot a given community of length = 2 with 2 dimmensionnal place.
 }
 \note{
-For \strong{capacity_line}, \strong{capacity_lty}, \strong{type}, \strong{text_print} and \strong{text_x} parameters, values can be a single value or a vector of value. If the vector length is inferior to the population number in the community, the value or the vector will be copy.
+For \strong{capacity_line}, \strong{capacity_lty} and \strong{text_print} parameters, values can be a single value or a vector of value. If the vector length is inferior to the population number in the community, the value or the vector will be copy.
 }
 \examples{
 data(hudson)
