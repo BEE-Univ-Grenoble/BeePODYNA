@@ -6,8 +6,6 @@
 #' @name beepodyna
 NULL
 
-
-
 #' beepodyna
 #'
 #' The \code{beepodyna} function creates a \code{R} object of the class \code{beepodyna}.
