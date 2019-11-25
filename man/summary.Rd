@@ -5,13 +5,15 @@
 \title{Population summaries and trends
 #' @author Julia Guerra <jguerra_1995@hotmail.es>}
 \usage{
-\method{summary}{population}(populations,
-  d.printing = as.integer(getOption("digits")))
+summary(population, d.print)
 }
 \arguments{
-\item{populations}{an object of class "population"}
+\item{populations}{an object of class "population" or "community"}
 
-\item{d.printing}{the number of decimal digits to be printed in statistics}
+\item{d.print}{the number of decimal digits to be printed in statistics}
+}
+\value{
+A list containing calculated summaries for a population. See 'examples'.
 }
 \description{
 This function will allow the user to easily read
@@ -20,28 +22,28 @@ population-class objects. When dealing with a list of population-type objects, i
 recursively print the summaries for each one of them.
 }
 \examples{
-# Default usage
-pop = population("mypop", 1, 0.8, 500)
-summary(pop)
+#Default usage
+pop1 = population("mypop", 1, 0.8, 500)
+summary(pop1)
+
+
 
 
 
 # Several generations and population lists
-pop1 = population("eva", 1, 0.8, 500)
-pop2 = population("teo", 1, 0.7, 850)
-pop2$size = c(1,50,750)
+data(hudson)
+pop1 = hudson$hare
+sumrs1 = summary(pop1)   #for saving summaries list
+sumrsc = summary(hudson)
 
-pops = community('pops', pop1, pop2)
+sumrs1$Rates_of_change        # taking a look into last growth tendencies
+sumrsc$hare$Rates_of_change   # same for community object
 
-summary(pop2)
-
-toto = summary(pops) #for saving summaries list
-toto
-
+'
 
 # In case you want to modify digits' printing settings
 
-summary(pop,11)
-summary(pop,getOption("digits")+2)
+summary(pop1,11)
+summary(pop1,getOption("digits")+2)
 
 }
