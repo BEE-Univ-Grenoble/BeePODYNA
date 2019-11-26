@@ -6,7 +6,7 @@
 \usage{
 com_plot(x, ..., xpop = 1, ypop = 2, capacity_line = c(TRUE, TRUE),
   capacity_lty = c(3, 3), text_print = c(TRUE, TRUE), first_p = 1,
-  white = 0.8)
+  white = 0.8, add = FALSE)
 }
 \arguments{
 \item{x}{a community object}
@@ -32,6 +32,8 @@ Classical \code{\link[graphics]{graphical parameter}} applies on the population 
 \item{first_p}{the first point in the time serie to be drawn. All points are drawn by default.}
 
 \item{white}{the percentage of white for the beginning of the color scale. \code{0.8} by default.}
+
+\item{add}{set to \code{FALSE} by default, to add another com_plot plot on a precedent one.}
 }
 \description{
 plot a given community of length = 2 with 2 dimmensionnal place.
