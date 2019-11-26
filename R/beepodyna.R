@@ -56,25 +56,26 @@ beepodyna <- function(label,
   if (class(interactions) != "interactions") {
     stop("The interactions matrix given is not of the class interactions")
   }
-  if (class(functions) != "function" && class(functions) != "list") {
-    stop("The functions given are not a single function or a list.")
-  }
+
+  if (class(functions) == "function")
+    functions <- list(functions)
+
   if (class(functions) == "list") {
-    for (l in 1:length(functions)) {
-      if (class(functions[[l]]) != "function") {
-        stop(sprintf("The %d element of the functions list in not a function."))
-      }
-    }
+    not_func <- sapply(functions, class)
+
+    if (any(not_func != "function"))
+        stop(sprintf("The %d element of the functions list in not a function.",
+                     which(not_func)[1]))
   }
   else {
-    functions <- list(functions)
+    stop("The functions given are not a single function or a list.")
   }
 
   ### check the length of the parameters
 
   nb_pop <- length(community)
 
-  if (dim(interactions)[1] != nb_pop) {
+  if (nrow(interactions) != nb_pop) {
     stop("All the parameters haven't the same size.")
   }
 
