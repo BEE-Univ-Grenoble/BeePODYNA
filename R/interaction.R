@@ -1,19 +1,27 @@
 #' @import R.utils
 NULL
 
-#' interactions
+#' Builds an interaction matrix instance
 #'
 #' \code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
-#' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
-#' The interaction of a population on itself is equal to 0. The element \code{[i,j]} of the matrix is the effect of the population on the j column on the population of the i line.
+#' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the
+#' first one. The interaction of a population on itself is equal to 0.
+#' The element \code{[i,j]} of the matrix is the effect of the population on
+#' the j column on the population of the i line.
+#'
 #' If no interaction vector is given, the default values are 0.
 #'
-#' @param nb_pop is the number of populations in the model. The matrix interaction with only one population is set to 0.
-#' @param list.interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
-#' A positive value means a positive impact (facilitation) while a negative value means a negative impact (predation, competition).
-#' The vector starts with the vector of the interactions of the first population on the other ones (ranging from 2 to the last one, not including itself),
-#' and then the vector of the interactions of the second population on the others...
+#' @param nb_pop is the number of populations in the model. The matrix interaction
+#'        with only one population is set to 0.
+#' @param list.interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving
+#'        the interaction of each population on the other one.
+#'        A positive value means a positive impact (facilitation) while a negative value
+#'        means a negative impact (predation, competition).
+#'        The vector starts with the vector of the interactions of the first population
+#'        on the other ones (ranging from 2 to the last one, not including itself),
+#'        and then the vector of the interactions of the second population on the others...
 #' @param labels is a vector of characters giving the labels of the populations.
+#' @param verbose Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.
 #'
 #' @examples
 #'   interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
@@ -25,10 +33,13 @@ NULL
 #' @export
 interactions <- function(nb_pop,
                             list.interactions = rep(0, nb_pop * (nb_pop - 1)),
-                            labels = sprintf("Pop_%d",seq_len(nb_pop))
+                            labels = sprintf("Pop_%d",seq_len(nb_pop)),
+                            verbose = TRUE
                            ) {
   if (nb_pop == 1) {
-    warning("As there is only one population, the interaction matrix has only one element equal to 0.")
+    if (verbose)
+      warning("As there is only one population, the interaction matrix has only one element equal to 0.")
+
     it <- matrix(0)
     rownames(it) <- labels
     colnames(it) <- labels
@@ -82,13 +93,22 @@ is_interactions <- function(x){
 
 #' as_interactions
 #'
-#' \code{as_interactions} transforms a vector in an interactions matrix object defining the positive and negative interactions between populations.
-#' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the first one.
-#' The interaction of a population on itself is equal to 0. If no interaction vector is given, the default values are 0.
-#' See \code{\link[BeePODYNA]{interactions}} function to create a new interaction matrix from scratch.
-#' If the object is of the type \code{numeric}, it should be a vector of numeric of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population on the other one.
-#' Each interaction is a decimal ranging between -1 and 1. A positive value means a positive impact like facilitation while a negative value means a negative impact like predation, competition.
-#' The vector starts with the vector of the interactions of the first population on the other ones ranging from 2 to the last one, not including itself,
+#' \code{as_interactions} transforms a vector in an interactions matrix object
+#' defining the positive and negative interactions between populations.
+#' The interaction is not assumed symetrical, so a population can have a
+#' different effect on a population than this latest has on the first one.
+#' The interaction of a population on itself is equal to 0. If no interaction
+#' vector is given, the default values are 0.
+#' See \code{\link[BeePODYNA]{interactions}} function to create a new interaction
+#' matrix from scratch.
+#' If the object is of the type \code{numeric}, it should be a vector of numeric
+#' of length \code{nb_pop*(nb_pop-1)} giving the interaction of each population
+#' on the other one.
+#' Each interaction is a decimal ranging between -1 and 1. A positive value means
+#' a positive impact like facilitation while a negative value means a negative
+#' impact like predation, competition.
+#' The vector starts with the vector of the interactions of the first population
+#' on the other ones ranging from 2 to the last one, not including itself,
 #' and then the vector of the interactions of the second population on the others...
 #'
 #' @param object is an \code{R} object to transform into an interaction matrix.
