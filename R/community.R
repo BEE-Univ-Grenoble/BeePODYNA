@@ -1,7 +1,5 @@
 #' Create a community with giving its name and a minimum of one population.
 #'
-#' @usage
-#' community(label, ...)
 #'
 #' @param label the name of the community (character string)
 #' @param ... one or several population objects. All other objects will be rejected and a warning will be print.
