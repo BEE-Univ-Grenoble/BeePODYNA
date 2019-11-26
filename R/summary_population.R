@@ -41,11 +41,13 @@ summary.population <- function(object, ...,
   populations <- object
   not_imp <- list(...)
 
-  if (!is.numeric(d.print)) stop("'d.print' parameter must be an integer number")
+  if (!is.numeric(d.print))
+    stop("'d.print' parameter must be an integer number")
 
   if (!is.integer(d.print)) d.print <- as.numeric(d.print)
 
-  if(!is_population(populations)) stop("Your 'pop' argument does not contain a 'population' class object ")
+  if (!is_population(populations))
+    stop("Your 'pop' argument does not contain a 'population' class object ")
 
 
   pop <- populations
@@ -146,7 +148,7 @@ summary.population <- function(object, ...,
   cat("[[4]] - Rates of population change between generations:  ", "\n")
 
   ##### Only one time step .......................................
-  if(gens == 1){
+  if (gens == 1) {
 
     # dataframe creation
     data.ch = data.frame(
@@ -173,11 +175,14 @@ summary.population <- function(object, ...,
   ##### More than two time steps .......................................
   if (gens > 2) {
 
-    toto <- 1:(length(names.all.s)-1) # indexing
+    toto <- 1:(length(names.all.s) - 1) # indexing
     for (e in 1:length(toto)) {
-      if(!is.na(names.all.s[e+1])){
+      if (!is.na(names.all.s[e + 1])) {
         toto[e] <- paste(names.all.s[e], "over [", names.all.s[e + 1], "]")
-      } else{ toto[e] = NA}}
+      } else {
+        toto[e] = NA
+      }
+    }
 
     names.ch <- c( "[ n ]", "n over [ n-1 ]", toto[!is.na(toto)], "(n1 over [ n0 ])"  )
 
@@ -188,7 +193,7 @@ summary.population <- function(object, ...,
 
 
 
-    if(gens >= 7){
+    if (gens >= 7) {
 
       ch <- c(ch[1:5], as.numeric(sizes[length(sizes) - 1] / sizes[length(sizes)])) # including n0
 
@@ -200,7 +205,7 @@ summary.population <- function(object, ...,
 
     }else{
 
-      ch <- c(ch[1:(length(ch)-1)], as.numeric(sizes[length(sizes) - 1] / sizes[length(sizes)])) # including n0
+      ch <- c(ch[1:(length(ch) - 1)], as.numeric(sizes[length(sizes) - 1] / sizes[length(sizes)])) # including n0
 
       data.ch <- data.frame(
         "Generations" = names.ch,
@@ -319,7 +324,7 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   sizes <- as.list(1:length(subpops))
   names <- names(subpops)
 
-  for(i in 1:length(subpops)) {
+  for (i in 1:length(subpops)) {
     gens[i] <- as.numeric(length(subpops[[i]][["size"]])) # number of generations
     sizes[[i]] <- subpops[[i]][["size"]]
   }
@@ -425,7 +430,7 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   cat("[[4]] - Rates of population change between generations:  ", "\n")
 
   ##### Only one time step .......................................
-  if(gens1 == 1) {
+  if (gens1 == 1) {
 
 
     # dataframe creation ----
