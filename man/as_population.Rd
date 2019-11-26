@@ -29,7 +29,7 @@ The fonction \code{'as_population'} takes as argument a list
 containing the population caracteristics (population,
 number at initial time, growth rates or birth rate and
 death rate).
-And return a list duable by \code{\link[BeePODYNA]} package
+And return a list duable by \code{BeePODYNA} package
 }
 \examples{
 obj = list(label ="pop.test",size= 100,growth_rate = 0.1,capacity = 500)

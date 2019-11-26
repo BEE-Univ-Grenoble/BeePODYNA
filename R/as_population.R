@@ -4,7 +4,8 @@
 #' containing the population caracteristics (population,
 #' number at initial time, growth rates or birth rate and
 #' death rate).
-#' And return a list duable by \code{\link[BeePODYNA]} package
+#' And return a list duable by \code{BeePODYNA} package
+#'
 #'
 #' @param object if it is list of populations objects (information on the population)
 #'

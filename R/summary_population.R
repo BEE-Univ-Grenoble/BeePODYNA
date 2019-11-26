@@ -6,10 +6,12 @@
 #' trends and characteristics (label, population size(s), growth rate(s)...) of a
 #' population-class object.
 #'
-#' @usage
-#' summary(population, d.print)
+#' @usage{
+#' @method{summary}{population}(object,..., d.print)
+#' }
 #'
-#' @param population an object of class "population"
+#' @param object an object of class "population"
+#' @param ... not implemented yet
 #' @param d.print the number of decimal digits to be printed in statistics
 #'
 #' @return
@@ -37,11 +39,13 @@
 #' summary(pop1,11)
 #' summary(pop1,getOption("digits")+2)
 #'
-#' @rdname summary
 #' @export
-
-summary.population <- function(populations,
+summary.population <- function(object, ...,
                                d.print = as.numeric(getOption("digits"))) {
+
+  populations <- object
+  not_imp <- list(...)
+
   if (!is.numeric(d.print)) stop("'d.print' parameter must be an integer number")
 
   if (!is.integer(d.print)) d.print <- as.numeric(d.print)
@@ -261,10 +265,12 @@ summary.population <- function(populations,
 #' trends and characteristics (label, population size(s), growth rate(s)...) of one
 #' community-class object.
 #'
-#' @usage
-#' summary(community, d.print)
+#' @usage{
+#' @method{summary}{community}(object,..., d.print)
+#' }
 #'
-#' @param community an object of class "community"
+#' @param object an object of class "community"
+#' @param ... not implemented yet
 #' @param d.print the number of decimal digits to be printed in statistics
 #'
 #' @return
@@ -289,10 +295,11 @@ summary.population <- function(populations,
 #'
 #' summary(hudson,11)
 #'
-#' @rdname summary
 #' @export
+summary.community <- function(object,...,d.print = as.numeric(getOption("digits"))) {
 
-summary.community <- function(community,d.print = as.numeric(getOption("digits"))) {
+  community <- object
+  not_imp <- list(...)
 
   if (!is.numeric(d.print)) stop("'d.print' parameter must be an integer number")
 
