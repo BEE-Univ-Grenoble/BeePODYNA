@@ -11,7 +11,6 @@ NULL
 #' Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 #' \itemize{
 #'   \item \strong{type} for the size line, set to \code{'b'} by default.
-#'   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
 #'   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
@@ -51,9 +50,6 @@ plot.population <- function(x,
                             capacity_lty = 3,
                             text_print = TRUE,
                             add = FALSE) {
-
-
-
   delta_x <- (max(x$time) - min(x$time)) * 0.1
   delta_y <- (max(x$size) - min(x$size)) * 0.2
 
@@ -76,10 +72,10 @@ plot.population <- function(x,
     }
   }
 
-  if("log" %in% names(call_par)){
-    call_par$log <- sub("x","",call_par$log)
-    if(regexec("y", call_par$log)[[1]]> 0){
-      if(default_par$ylim[1]<0) call_par$ylim[1] = 1
+  if ("log" %in% names(call_par)) {
+    call_par$log <- sub("x", "", call_par$log)
+    if (regexec("y", call_par$log)[[1]] > 0) {
+      if (default_par$ylim[1] < 0) call_par$ylim[1] <- 1
     }
   }
 
@@ -114,7 +110,6 @@ plot.population <- function(x,
     )
   }
 }
-
 #' plot.community
 #'
 #' plot one given community and its capacity line.
@@ -124,7 +119,6 @@ plot.population <- function(x,
 #' Classical \code{\link[graphics]{graphical parameter}} applies on the population curve, NOT on the capacity line (custom parameter need to be given, as exemple capacity_lty).
 #' \itemize{
 #'   \item \strong{type} for the size line, set to \code{'b'} by default.
-#'   \item \strong{text_x} set to \code{0} by default, where to position the capacity text on X axis, Y axis is the capacity value.
 #'   \item \strong{xlab} set to \code{'Time'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{ylab} set to \code{'Size'} by default, see \code{\link[graphics]{title}}.
 #'   \item \strong{main} set to use the pop label by default, see \code{\link[graphics]{title}}.
@@ -132,7 +126,7 @@ plot.population <- function(x,
 #' @param capacity_line set to \code{TRUE} by default, if a dashed line must be drawned to show the capacity.
 #' @param capacity_lty set to \code{3} by default.
 #' @param text_print set to \code{TRUE} by default, whether there is a text on the capacipty line or not (writting population 'K label' by default).
-#' @param add set to \code{TRUE} by default, to add another population plot on a precedent one.
+#' @param add set to \code{FALSE} by default, to add another population plot on a precedent one.
 #'
 #' @note For \strong{capacity_line}, \strong{capacity_lty}, \strong{type}, \strong{text_print} and \strong{text_x} parameters, values can be a single value or a vector of value. If the vector length is inferior to the population number in the community, the value or the vector will be copy.
 #'
@@ -154,130 +148,90 @@ plot.community <- function(x, ...,
                            capacity_line = TRUE,
                            capacity_lty = 3,
                            text_print = TRUE,
-                           add = TRUE) {
-  com <- x
-  n_pop <- length(com)
-  mc <- match.call()
+                           add = FALSE) {
+  n_pop <- length(x)
 
-  # checks for arguments
-  if (!is_community(com)) {
-    stop("The object must be a community.")
-  }
-  # check for custom graphical parameters
-  if (is.null(mc$col)) {
-    color <- rep(1, n_pop)
-  } else {
-    color <- eval(mc$col)
-    if (length(color) < n_pop) color <- rep(color, n_pop)
-  }
+  capacity_line <- rep(capacity_line, n_pop)
+  capacity_lty <- rep(capacity_lty, n_pop)
+  text_print <- rep(text_print, n_pop)
 
-  if (length(text_print) < n_pop) text_print <- rep(text_print, n_pop)
+  com_time <- as.vector(sapply(x$populations, "[[", 3))
+  delta_x <- (max(com_time) - min(com_time)) * 0.1
 
-  if (length(capacity_line) < n_pop) capacity_line <- rep(capacity_line, n_pop)
+  com_size <- as.vector(sapply(x$populations, "[[", 2))
+  delta_y <- (max(com_size) - min(com_size)) * 0.1
 
-  if (length(capacity_lty) < n_pop) capacity_lty <- rep(capacity_lty, n_pop)
+  default_par <- list(
+    col = rep(1, n_pop),
+    type = rep("b", n_pop),
+    xlab = "Time",
+    ylab = "Population size",
+    main = x$label,
+    xlim = c(min(com_time) - delta_x, max(com_time) + delta_x),
+    ylim = c(min(com_size) - delta_y, max(com_size) + delta_y)
+  )
 
-  if (length(add) < n_pop) add <- rep(add, n_pop)
+  call_par <- list(...)
 
-  if (is.null(mc$text_x)) {
-    text_x <- rep(0, n_pop)
-  } else {
-    text_x <- eval(mc$text_x)
-    if (length(text_x) < n_pop) text_x <- rep(text_x, n_pop)
-  }
-
-  if (is.null(mc$type)) {
-    type <- rep("b", n_pop)
-  } else {
-    type <- eval(mc$type)
-    if (length(type) < n_pop) type <- rep(type, n_pop)
-  }
-
-  if (is.null(mc$xlab)) {
-    xlab <- "Time"
-  } else {
-    xlab <- eval(mc$xlab)
-  }
-
-  if (is.null(mc$ylab)) {
-    ylab <- "Size"
-  } else {
-    ylab <- eval(mc$ylab)
-  }
-
-  if (is.null(mc$main)) {
-    main <- com[[1]]
-  } else {
-    main <- eval(mc$main)
-  }
-
-  # limitations
-  if (is.null(mc$xlim)) {
-    time_min <- min(as.vector(sapply(com$populations, "[[", 3)))
-    time_max <- max(as.vector(sapply(com$populations, "[[", 3)))
-    x_dist <- time_max - time_min
-    time_min <- time_min - x_dist * 0.1
-    time_max <- time_max + x_dist * 0.1
-
-    xlim <- c(time_min, time_max)
-  } else {
-    xlim <- eval(mc$xlim)
-    time_min <- xlim[1]
-    time_max <- xlim[2]
-  }
-  text_x <- rep(xlim[1], n_pop)
-
-  if (is.null(mc$ylim)) {
-    com_min <- min(as.vector(sapply(com$populations, "[[", 2)))
-    com_max <- max(as.vector(sapply(com$populations, "[[", 2)))
-    y_dist <- com_max - com_min
-    com_min <- com_min - y_dist * 0.1
-    com_max <- com_max + y_dist * 0.1
-
-    ylim <- c(com_min, com_max)
-  } else {
-    ylim <- eval(mc$ylim)
-    com_min <- ylim[1]
-    com_max <- ylim[2]
-  }
-
-  # plotting env
-  localplot <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main,
-                        capacity_lty, capacity_line, text_x, text_print) {
-    plot(x, y, ..., type = "n", xlab = " ", ylab = " ", main = " ")
-  }
-  localplot(x = 1, y = 1, xlim, ylim, ...)
-
-  # setting titles
-  localTitle <- function(..., type, xlim, ylim, xlab, ylab, main,
-                         capacity_lty, capacity_line, text_x, text_print) {
-    title(...)
-  }
-  localTitle(main, sub = NULL, xlab, ylab)
-
-  # plotting the com itself
-  localLines <- function(x, y, ..., type, xlim, ylim, xlab, ylab, main, col,
-                         capacity_lty, capacity_line, log_pop, add, text_x, text_print) {
-    lines(x, y, ..., col = color[i])
-  }
-  localAbline <- function(..., type, xlim, ylim, xlab, ylab, main,
-                          capacity_lty, capacity_line, log_pop, add, text_x, text_print) {
-    abline(...)
-  }
-  localTexte <- function(..., type, xlim, ylim, xlab, ylab, main,
-                         capacity_lty, capacity_line, log_pop, add, text_x, text_print) {
-    text(...)
-  }
-  for (i in 1:n_pop) {
-    if (add[i]) localLines(x = com$populations[[i]][[3]], y = com$populations[[i]][[2]], type[i], ...)
-    if (capacity_line[i]) {
-      localAbline(h = com$populations[[i]]$capacity, lty = capacity_lty[i], col = color[i])
+  names_defaut_par <- names(default_par)
+  for (i in seq_along(default_par)) {
+    if (!names_defaut_par[i] %in% names(call_par) | is.null(call_par[[names_defaut_par[i]]])) {
+      call_par[[names_defaut_par[i]]] <- default_par[[names_defaut_par[i]]]
     }
+  }
+
+  for (i in seq_along(call_par)) {
+    if(length(call_par[[i]]) < n_pop) call_par[[i]] <- rep(call_par[[i]], n_pop)
+  }
+
+  if ("log" %in% names(call_par)) {
+    call_par$log <- paste(sub("x", "", call_par$log), collapse = "")
+    if (regexec("y", call_par$log)[[1]] > 0) {
+      if (default_par$ylim[1] < 0) call_par$ylim[1] <- 1
+    }
+  }
+
+  if (!add) {
+    empty_par <- c(list(x = 1, y = 1), call_par)
+    tmpx <- empty_par$xlim
+    tmpy <- empty_par$ylim
+    empty_par <- lapply(empty_par, FUN = function(x) x[1])
+    empty_par$xlim <- tmpx
+    empty_par$ylim <- tmpy
+    empty_par$type <- "n"
+
+    do.call(plot, empty_par)
+  }
+
+  for (i in 1:n_pop) {
+    line_par <- call_par
+    line_par <- lapply(line_par, FUN = function(x) x[i])
+    line_par <- c(list(x = x$populations[[i]]$time, y = x$populations[[i]]$size), line_par)
+    line_par$xlim <- NULL
+    line_par$xlim <- NULL
+    line_par$ylim <- NULL
+    line_par$xlab <- NULL
+    line_par$ylab <- NULL
+    line_par$main <- NULL
+    line_par$log <- NULL
+
+    do.call(lines, line_par)
+
+    if (capacity_line[i]) {
+      abline(h = x$populations[[i]]$capacity, lty = capacity_lty[i], col = call_par$col[i])
+    }
+
     if (text_print[i]) {
-      localTexte(text_x[i], com$populations[[i]]$capacity, paste("K", com$populations[[i]]$label, sep = " "), pos = 4, col = color[i])
+      text(
+        x = x$populations[[i]]$time[1], y = x$populations[[i]]$capacity,
+        paste("K", x$populations[[i]]$label, sep = " "),
+        pos = 3,
+        col = call_par$col[i]
+      )
     }
   }
 }
+
 
 #' com_plot
 #'
