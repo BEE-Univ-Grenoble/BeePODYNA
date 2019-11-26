@@ -7,8 +7,8 @@
 \title{BeePODYNA}
 \usage{
 beepodyna(label, community,
-  interactions = interactions(length(community)), functions = identity,
-  verbose = TRUE)
+  interactions = interactions(length(community)),
+  functions = exponential_growth, verbose = TRUE)
 }
 \arguments{
 \item{label}{is the label of the \code{beepodyna} object.}
@@ -39,7 +39,7 @@ hudson = community("hudson",hare,lynx)
 beepodyna(label="model_1",
           community=hudson,
           interactions=interactions(2),
-          exp,
+          exponential_growth,
           verbose = FALSE
           )
 

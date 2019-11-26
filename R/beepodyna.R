@@ -30,7 +30,7 @@ NULL
 #' beepodyna(label="model_1",
 #'           community=hudson,
 #'           interactions=interactions(2),
-#'           exp,
+#'           exponential_growth,
 #'           verbose = FALSE
 #'           )
 #'
@@ -40,7 +40,7 @@ NULL
 beepodyna <- function(label,
                       community,
                       interactions = interactions(length(community)),
-                      functions = identity,
+                      functions = exponential_growth,
                       verbose = TRUE) {
 
   ### check the class of the parameters
