@@ -9,7 +9,6 @@
 #'
 #' Ref : Howard, P. (2009). Modeling basics. Lecture Notes for Math 442, Texas A&M University.
 #'
-#'
 #' @format A Beepodyna object with 1 community of 2 populations:
 #' \describe{
 #'   \item{hudson}{the label of the community}
@@ -22,37 +21,32 @@
 #'
 #' }
 #'
-#'
-#'
-#' @rdname hudson
-#' can also be used as a comunity without the interaction matrix
-#'
-#'
-#' }
-#'
-#'
-#' @examples
-#' data(hudson)
-#' plot(hudson)
-#' summary(hudson)
-#'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @source \url{https://mc-stan.org/users/documentation/case-studies/lotka-volterra-predator-prey.html#data-lynx-and-hare-pelts-in-canada}
 "beepod_hudson"
 
+#'@rdname hudson
+#' can also be used as a comunity without the interaction matrix
+#'  @examples
+#'   data(hudson)
+#'   plot(hudson)
+#'   summary(hudson)
+"hudson"
 
 #' Data Sweden : 3 populations in iteraction in Sweden
-#'
 #'
 #' 3 polpulations in interactions have been reported between red foxes its major prey voles and
 #' most rarely grouve if voles are not available. Here is a classical case of bottom-up control.
 #'
+#' Red fox population is characterized by low growth rate and a little capacity.
+#' Gouse population is characterized by a medium growth rate and a medium capacity.
+#' Vole population is characterized by a high growth rate and a high capacity.
 #'
 #' @format A Beepodyna object of 1 community with 3 populations:
 #' \describe{
 #'   \item{Sweden}{the label of the community}
-#'   \item{interaction}{the matrix of interaction of the 3 populations, here 0 interaction}}
+#'   \item{interaction}{the matrix of interaction of the 3 populations, here 0 interaction}
 #'  \item{populations}{the list of two populations}
 #'    \itemize{
 #'    \item{red_fox : the population of red, a list of : growth rate, biotic capacity,initial size}
@@ -61,22 +55,17 @@
 #'   }
 #'
 #' }
-#'
-#' @rdname Sweden
-#'  Can also be used as 1 community with 3 populations:
-#'
-#'
-#'
-#' Red fox population is characterized by low growth rate and a little capacity.
-#' Gouse population is characterized by a medium growth rate and a medium capacity.
-#' Vole population is characterized by a high growth rate and a high capacity.
-#'
-#' further readings https://www.nature.com/scitable/knowledge/library/dynamics-of-predation-13229468/
-#'
-#' @examples
-#' data(Sweden)
-#' plot(Sweden)
-#' summary(Sweden)
+#' @source \url{https://www.nature.com/scitable/knowledge/library/dynamics-of-predation-13229468/}
 #'
 #'@author Leroy Martial <martial.leroy@etu.univ-grenoble-alpes.fr>
-"beepod_sweden"
+"Sweden"
+
+#'  @rdname Sweden
+#'  Can also be used as 1 community with 3 populations
+#'
+#' @examples
+#'  data(Sweden)
+#'  plot(Sweden)
+#'  summary(Sweden)
+#'
+"beepod_hudson"

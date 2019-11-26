@@ -15,7 +15,7 @@ hudson = community('Hudson',hare,lynx)
 
 usethis::use_data(hudson, overwrite = TRUE)
 
-# deuxieme communauté :
+# Sweden data preparation
 # further readings https://www.nature.com/scitable/knowledge/library/dynamics-of-predation-13229468/
 
 red_fox = population("red_fox",10,1.2,50)
@@ -25,7 +25,7 @@ Sweden = community('Sweden',red_fox,vole,gouse)
 
 usethis::use_data(Sweden, overwrite = TRUE)
 
-
+# Data beepodyna
 beepod_sweden = beepodyna(label="beepod_sweden",
                      community = Sweden,
                    interactions=interactions(3),
