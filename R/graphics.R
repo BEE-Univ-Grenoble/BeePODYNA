@@ -156,10 +156,12 @@ plot.community <- function(x, ...,
   text_print <- rep(text_print, n_pop)
 
   com_time <- as.vector(sapply(x$populations, "[[", 3))
-  delta_x <- (max(com_time) - min(com_time)) * 0.1
+  delta_x <- (max(com_time) - min(com_time))
+  if(delta_x == 0) delta_x <- 0.1 else  delta_x <- delta_x * 0.1
 
   com_size <- as.vector(sapply(x$populations, "[[", 2))
   delta_y <- (max(com_size) - min(com_size)) * 0.1
+  if(delta_y == 0) delta_y <- 0.1 else  delta_y <- delta_y * 0.1
 
   default_par <- list(
     col = rep(1, n_pop),
@@ -193,8 +195,8 @@ plot.community <- function(x, ...,
 
   if (!add) {
     empty_par <- c(list(x = 1, y = 1), call_par)
-    tmpx <- empty_par$xlim
-    tmpy <- empty_par$ylim
+    tmpx <- empty_par$xlim[1:2]
+    tmpy <- empty_par$ylim[1:2]
     empty_par <- lapply(empty_par, FUN = function(x) x[1])
     empty_par$xlim <- tmpx
     empty_par$ylim <- tmpy
