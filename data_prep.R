@@ -21,13 +21,13 @@ usethis::use_data(hudson, overwrite = TRUE)
 red_fox = population("red_fox",10,1.2,50)
 vole = population("vole",100,2,200)
 gouse = population("Gouse",30,1.5,80)
-Sweden = community('Sweden',red_fox,vole,gouse)
+sweden = community('sweden',red_fox,vole,gouse)
 
-usethis::use_data(Sweden, overwrite = TRUE)
+usethis::use_data(sweden, overwrite = TRUE)
 
 # Data beepodyna
 beepod_sweden = beepodyna(label="beepod_sweden",
-                     community = Sweden,
+                     community = sweden,
                    interactions=interactions(3),
                      c(exponential_growth,exponential_growth,exponential_growth),
                    verbose = FALSE)

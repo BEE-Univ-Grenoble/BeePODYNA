@@ -23,20 +23,25 @@
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
+#'
 #' @source \url{https://mc-stan.org/users/documentation/case-studies/lotka-volterra-predator-prey.html#data-lynx-and-hare-pelts-in-canada}
 "beepod_hudson"
 
-#'@rdname hudson
-#' can also be used as a comunity without the interaction matrix
-#'  @examples
-#'   data(hudson)
-#'   plot(hudson)
-#'   summary(hudson)
+#' hudson
+#'
+#' Community hudson
+#' @examples
+#' data(hudson)
+#' plot(hudson)
+#' summary(hudson)
+#' @seealso
+#' \code{\link[BeePODYNA]{beepod_hudson}} for description of the dataset.
+#'
 "hudson"
 
 #' Data Sweden : 3 populations in iteraction in Sweden
 #'
-#' 3 polpulations in interactions have been reported between red foxes its major prey voles and
+#' 3 populations in interactions have been reported between red foxes its major prey voles and
 #' most rarely grouve if voles are not available. Here is a classical case of bottom-up control.
 #'
 #' Red fox population is characterized by low growth rate and a little capacity.
@@ -57,15 +62,16 @@
 #' }
 #' @source \url{https://www.nature.com/scitable/knowledge/library/dynamics-of-predation-13229468/}
 #'
-#'@author Leroy Martial <martial.leroy@etu.univ-grenoble-alpes.fr>
-"Sweden"
+#' @author Leroy Martial <martial.leroy@etu.univ-grenoble-alpes.fr>
+"beepod_sweden"
 
-#'  @rdname Sweden
-#'  Can also be used as 1 community with 3 populations
+#' sweden
 #'
+#' Community sweden
 #' @examples
-#'  data(Sweden)
-#'  plot(Sweden)
-#'  summary(Sweden)
-#'
-"beepod_hudson"
+#' data(sweden)
+#' plot(sweden)
+#' summary(sweden)
+#' @seealso
+#' \code{\link[BeePODYNA]{beepod_sweden}} for description of the dataset.
+"sweden"
