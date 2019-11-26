@@ -66,6 +66,9 @@ beepodyna <- function(label,
       }
     }
   }
+  else {
+    functions <- list(functions)
+  }
 
   ### check the length of the parameters
 
@@ -86,7 +89,7 @@ beepodyna <- function(label,
     if (verbose) {
       warning("The functions list has been repeted since its length doesn't match the number of population.")
     }
-    functions <- rep(list(functions), ceiling(nb_pop / length(functions)))[1:nb_pop]
+    functions <- rep(functions, ceiling(nb_pop / length(functions)))[1:nb_pop]
   }
 
   ### Create the beepodyna object
