@@ -1,3 +1,19 @@
+#'Compute one time-step of  evolution of the populations contained in a beepodyna object
+#'
+#'@param beepodyna an object of class beepodyna
+#'
+#'@return A beepodyna object, every populations in it will be incremented with one more size value (calculated with the functions and interaction matrix) and time
+#'
+#'@examples
+#'   data(hudson)
+#'   beepop=beepodyna(label="model_1",
+#'   community=hudson,
+#'   interactions=interactions(2),
+#'   list(exponential_growth,exponential_growth),
+#'   verbose = FALSE
+#'   )
+#'   bepop1=simulate_onestep(beepop)
+#'
 #' @export
 simulate_onestep <- function(beepodyna) {
   npop <- length(beepodyna)
@@ -11,6 +27,19 @@ simulate_onestep <- function(beepodyna) {
   beepodyna
 }
 
+#' Function describing an exponential growth, has to bee included in a beepodyda object when creating it
+#'
+#' @param pop Index of the population that will be affected by the function
+#' @param community a community object created with community()
+#' @param interactions an interactions object created with interactions()
+#'
+#' @return The function return a community similare to the one given in `comunity` but the population selected with `pop` will have one more time index and size (calculed with its growth rate, according to an exponential growth)
+#'
+#' @examples
+#'     data(hudson)
+#'     exponential_growth(1,hudson,interactions(2))
+#'
+#'
 #' @export
 exponential_growth <- function(pop, community, interactions) {
   target_pop <- community$populations[[pop]]
@@ -28,6 +57,23 @@ exponential_growth <- function(pop, community, interactions) {
   community
 }
 
+#'Compute  n times steps of evolution of the populations contained in a beepodyna object
+#'
+#'@param beepodyna an object of class beepodyna
+#'@param n The number of times steps to be computed
+#'
+#'@return A beepodyna object, every populations in it will be incremented with n more size values (calculated with the functions and interaction object) and time values
+#'
+#'@examples
+#'    data(hudson)
+#'    beepop=beepodyna(label="model_1",
+#'    community=hudson,
+#'    interactions=interactions(2),
+#'    list(exponential_growth,exponential_growth),
+#'    verbose = FALSE
+#'     )
+#'     bepop10=simulate_n_pop_dynamic(beepop,10)
+#'
 #' @export
 simulate_n_pop_dynamic <- function(beepodyna,n) {
   for (i in seq_len(n))
