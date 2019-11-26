@@ -40,6 +40,7 @@ plot(hare,
   col = "red", pch = 15, type = "b", capacity_lty = 3,
   lty = 2, main = "Hudson data"
 )
+
 plot(lynx,
   col = "blue", pch = 15, type = "b", capacity_lty = 3,
   add = TRUE, lty = 1, capacity_line = TRUE

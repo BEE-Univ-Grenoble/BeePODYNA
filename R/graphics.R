@@ -37,6 +37,7 @@ NULL
 #'   col = "red", pch = 15, type = "b", capacity_lty = 3,
 #'   lty = 2, main = "Hudson data"
 #' )
+#'
 #' plot(lynx,
 #'   col = "blue", pch = 15, type = "b", capacity_lty = 3,
 #'   add = TRUE, lty = 1, capacity_line = TRUE
@@ -50,6 +51,9 @@ plot.population <- function(x,
                             capacity_lty = 3,
                             text_print = TRUE,
                             add = FALSE) {
+
+
+
   delta_x <- (max(x$time) - min(x$time)) * 0.1
   delta_y <- (max(x$size) - min(x$size)) * 0.2
 
@@ -67,8 +71,15 @@ plot.population <- function(x,
 
   names_defaut_par <- names(default_par)
   for (i in seq_along(default_par)) {
-    if (!names_defaut_par[i] %in% call_par | is.null(call_par[[names_defaut_par[i]]])) {
+    if (!names_defaut_par[i] %in% names(call_par) | is.null(call_par[[names_defaut_par[i]]])) {
       call_par[[names_defaut_par[i]]] <- default_par[[names_defaut_par[i]]]
+    }
+  }
+
+  if("log" %in% names(call_par)){
+    call_par$log <- sub("x","",call_par$log)
+    if(regexec("y", call_par$log)[[1]]> 0){
+      if(default_par$ylim[1]<0) call_par$ylim[1] = 1
     }
   }
 
@@ -86,6 +97,7 @@ plot.population <- function(x,
   line_par$xlab <- NULL
   line_par$ylab <- NULL
   line_par$main <- NULL
+  line_par$log <- NULL
 
   do.call(lines, line_par)
 
