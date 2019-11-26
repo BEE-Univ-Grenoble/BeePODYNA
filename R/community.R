@@ -1,5 +1,3 @@
-#' community
-#'
 #' Create a community with giving its name and a minimum of one population.
 #'
 #' @usage
@@ -7,22 +5,22 @@
 #'
 #' @param label the name of the community (character string)
 #' @param ... one or several population objects. All other objects will be rejected and a warning will be print.
+#' @param verbose Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.
 #'
 #' @details There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 #'
 #' @seealso \code{\link[BeePODYNA]{population}} to see how to make an object of class population.
 #'
 #' @examples
-#'hare = population("hirsuta",30,2,80)
-#'lynx = population("daonensis",4,1.2,60)
+#'    hare = population("hirsuta",30,2,80)
+#'    lynx = population("daonensis",4,1.2,60)
 #'
-#'hudson = community('hudson',hare,lynx)
+#'    hudson = community('hudson',hare,lynx)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @export
-community <- function(label,
-                      ...) {
+community <- function(label, ..., verbose = TRUE) {
   # checking entry
   if (!is.character(label) ||
     length(label) > 1) {
@@ -41,11 +39,12 @@ community <- function(label,
   }
 
   if (length(bad_pops) > 0) {
-    warning(sprintf(
-      "%d provided arguments (%s) are not belonging the population class",
-      length(bad_pops),
-      which(!is_pops) + 1
-    ))
+    if (verbose)
+      warning(sprintf(
+        "%d provided arguments (%s) are not belonging the population class",
+        length(bad_pops),
+        which(!is_pops) + 1
+      ))
   }
 
   name_pops <- sapply(good_pops, function(x) x$label)
@@ -79,11 +78,11 @@ community <- function(label,
 #' @seealso \code{\link[BeePODYNA]{community}} to see how to make an object of class community.
 #'
 #' @examples
-#'hare = population("hirsuta",30,2,80)
-#'lynx = population("daonensis",4,1.2,60)
+#'     hare = population("hirsuta",30,2,80)
+#'     lynx = population("daonensis",4,1.2,60)
 #'
-#'hudson = community('hudson',hare,lynx)
-#'is_community(hudson)
+#'     hudson = community('hudson',hare,lynx)
+#'     is_community(hudson)
 #'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
@@ -103,6 +102,18 @@ is_community <- function(x){
   x[["populations"]][[name]]
 }
 
+#' Returns the number of species described in the community
+#'
+#' @param x the considered community
+#'
+#' @examples
+#'    hare = population("hirsuta",30,2,80)
+#'    lynx = population("daonensis",4,1.2,60)
+#'
+#'    hudson = community('hudson',hare,lynx)
+#'    length(hudson)
+#'
+#' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #' @export
 length.community <- function(x) {
   length(x[["populations"]])
