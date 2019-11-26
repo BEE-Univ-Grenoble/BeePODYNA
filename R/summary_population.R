@@ -6,9 +6,6 @@
 #' trends and characteristics (label, population size(s), growth rate(s)...) of a
 #' population-class object.
 #'
-#' @usage{
-#' @method{summary}{population}(object,..., d.print)
-#' }
 #'
 #' @param object an object of class "population"
 #' @param ... not implemented yet
@@ -265,9 +262,6 @@ summary.population <- function(object, ...,
 #' trends and characteristics (label, population size(s), growth rate(s)...) of one
 #' community-class object.
 #'
-#' @usage{
-#' @method{summary}{community}(object,..., d.print)
-#' }
 #'
 #' @param object an object of class "community"
 #' @param ... not implemented yet

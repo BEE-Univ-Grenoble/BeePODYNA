@@ -23,3 +23,20 @@ This function will allow the user to easily read
 trends and characteristics (label, population size(s), growth rate(s)...) of one
 community-class object.
 }
+\examples{
+  # Default usage
+  pop1 = population("mypop", 1, 0.8, 500)
+  comm1 = community("toto", pop1,pop1)
+  summary(comm1)
+
+  # long history community
+  data(hudson)
+  sumrsc = summary(hudson)
+
+  sumrsc$hare$Rates_of_change   # same for community object
+
+  # In case you want to modify digits printing settings
+
+  summary(hudson,11)
+
+}

@@ -20,6 +20,11 @@
 #'
 #' }
 #'
+#' @examples
+#' data(hudson)
+#' plot(hudson)
+#' summary(hudson)
+#'
 #' @author Jaunatre Maxime <maxime.jaunatre@etu.univ-grenoble-alpes.fr>
 #'
 #' @source \url{https://mc-stan.org/users/documentation/case-studies/lotka-volterra-predator-prey.html#data-lynx-and-hare-pelts-in-canada}

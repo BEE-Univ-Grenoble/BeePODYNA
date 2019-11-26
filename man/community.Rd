@@ -2,14 +2,16 @@
 % Please edit documentation in R/community.R
 \name{community}
 \alias{community}
-\title{community}
+\title{Create a community with giving its name and a minimum of one population.}
 \usage{
-community(label, ...)
+community(label, ..., verbose = TRUE)
 }
 \arguments{
 \item{label}{the name of the community (character string)}
 
 \item{...}{one or several population objects. All other objects will be rejected and a warning will be print.}
+
+\item{verbose}{Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.}
 }
 \description{
 Create a community with giving its name and a minimum of one population.
@@ -18,10 +20,10 @@ Create a community with giving its name and a minimum of one population.
 There is no need to put a name for additionnal populations, because each element of community will be named after the label which is in every population object you provide.
 }
 \examples{
-hare = population("hirsuta",30,2,80)
-lynx = population("daonensis",4,1.2,60)
+   hare = population("hirsuta",30,2,80)
+   lynx = population("daonensis",4,1.2,60)
 
-hudson = community('hudson',hare,lynx)
+   hudson = community('hudson',hare,lynx)
 
 }
 \seealso{

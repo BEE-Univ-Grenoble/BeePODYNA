@@ -16,11 +16,11 @@ a logical "TRUE" or "FALSE"
 Check if the object is a community or not.
 }
 \examples{
-hare = population("hirsuta",30,2,80)
-lynx = population("daonensis",4,1.2,60)
+    hare = population("hirsuta",30,2,80)
+    lynx = population("daonensis",4,1.2,60)
 
-hudson = community('hudson',hare,lynx)
-is_community(hudson)
+    hudson = community('hudson',hare,lynx)
+    is_community(hudson)
 
 }
 \seealso{

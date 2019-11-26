@@ -23,3 +23,21 @@ This function will allow the user to easily read
 trends and characteristics (label, population size(s), growth rate(s)...) of a
 population-class object.
 }
+\examples{
+  # Default usage
+  pop1 = population("mypop", 1, 0.8, 500)
+  summary(pop1)
+
+  # long history populations
+  data(hudson)
+  pop1 = hudson$hare
+  sumrs1 = summary(pop1)   #for saving summaries list
+
+  sumrs1$Rates_of_change        # taking a look into last growth tendencies
+
+  # In case you want to modify digits printing settings
+
+  summary(pop1,11)
+  summary(pop1,getOption("digits")+2)
+
+}

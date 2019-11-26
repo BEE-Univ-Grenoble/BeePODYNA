@@ -35,5 +35,7 @@ And return a list duable by \code{BeePODYNA} package
 obj = list(label ="pop.test",size= 100,growth_rate = 0.1,capacity = 500)
 as_population(obj)
 
-
+}
+\author{
+Martial
 }
