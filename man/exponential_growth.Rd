@@ -2,31 +2,25 @@
 % Please edit documentation in R/simulate.R
 \name{exponential_growth}
 \alias{exponential_growth}
-\title{Build an exponential function for population models}
+\title{Function describing an exponential growth, has to bee included in a beepodyda object when creating it}
 \usage{
 exponential_growth(pop, community, interactions)
 }
 \arguments{
-\item{pop}{is the number of the population in the community on which apply the function. Giving the name of the pop as character is also possible.}
+\item{pop}{index of the population that will be affected by the function, or the name of the pop}
 
-\item{community}{is an object of the class `community` on which to apply the function.}
+\item{community}{a `community` object created with community()}
 
-\item{interactions}{is the object of the class `interactions` use to describe the interactions within the community.}
+\item{interactions}{an `interactions` object created with interactions()}
+}
+\value{
+The function returns a community similare to the one given in `community` but the population selected with `pop` will have one more time index and size (calculed with its growth rate, according to an exponential growth)
 }
 \description{
-\code{exponential_growth} creates a fonction that can be used for an object of the class `beepodyna`.
+Function describing an exponential growth, has to bee included in a beepodyda object when creating it
 }
 \examples{
-  data(hudson)
-  species  = "hare"
-  community = hudson
-  int = interactions(2, c(-0.01,-0.09), labels=labels(hudson$populations))
-  beepo_exp = beepodyna(label = "hudson",
-                        community = hudson,
-                        interactions = int,
-                        functions = exponential_growth,
-                        verbose = TRUE)
-
-  plot(simulate_n_pop_dynamic(beepo_exp, 100)$community)
+    data(hudson)
+    exponential_growth(1,hudson,interactions(2))
 
 }
