@@ -2,24 +2,22 @@
 #'
 #' The fonction \code{'as_population'} takes as argument a list
 #' containing the population caracteristics (population,
-#' number at initial time, growth rates or birth rate and
-#' death rate).
-#' And return a list duable by \code{BeePODYNA} package
+#' number at initial time, growth rates.
+#' And check if is a class population and  return a list duable by \code{BeePODYNA} package
 #'
 #'
-#' @param object if it is list of populations objects (information on the population)
+#' @param object a list of populations objects (information on the population)
 #'
 #'
 #' @return If \code{'object'} is a list, the function will test if it match with the
 #'  the requirements of a class \code{'population'} object.
-#'  If \code{'object'} is a data frame the function will determine the growth rate,
-#'  and form a list of class \code{'population'} containing the parameter of the population.
+#'  If \code{'object'} is not a list an error message will be give.
 #'
 #' @examples
-#' obj = list(label ="pop.test",size= 100,growth_rate = 0.1,capacity = 500)
-#' as_population(obj)
+#'  obj = list(label ="pop.test",size= 100,growth_rate = 0.1,capacity = 500)
+#'  as_population(obj)
 #'
-#' @author Martial
+#' @author Martial <leroy.martial@etu.univ-grenoble-alpes.fr>
 #' @export
 
 as_population = function(object){
@@ -93,6 +91,5 @@ as_population.list <- function(object) {
    }
 
    newpop
-
 }
 
