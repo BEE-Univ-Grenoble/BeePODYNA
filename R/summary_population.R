@@ -18,26 +18,21 @@
 #' A list containing calculated summaries for a population. See 'examples'.
 #'
 #' @examples
-#' # Default usage
-#' pop1 = population("mypop", 1, 0.8, 500)
-#' summary(pop1)
+#'   # Default usage
+#'   pop1 = population("mypop", 1, 0.8, 500)
+#'   summary(pop1)
 #'
+#'   # long history populations
+#'   data(hudson)
+#'   pop1 = hudson$hare
+#'   sumrs1 = summary(pop1)   #for saving summaries list
 #'
+#'   sumrs1$Rates_of_change        # taking a look into last growth tendencies
 #'
+#'   # In case you want to modify digits printing settings
 #'
-#' # long history populations
-#' data(hudson)
-#' pop1 = hudson$hare
-#' sumrs1 = summary(pop1)   #for saving summaries list
-#'
-#' sumrs1$Rates_of_change        # taking a look into last growth tendencies
-#'
-#''
-#'
-#' # In case you want to modify digits printing settings
-#'
-#' summary(pop1,11)
-#' summary(pop1,getOption("digits")+2)
+#'   summary(pop1,11)
+#'   summary(pop1,getOption("digits")+2)
 #'
 #' @export
 summary.population <- function(object, ...,
@@ -273,27 +268,23 @@ summary.population <- function(object, ...,
 #' @param ... not implemented yet
 #' @param d.print the number of decimal digits to be printed in statistics
 #'
-#' @return
-#' A list containing calculated summaries for a community. See 'examples'.
+#' @return A list containing calculated summaries for a community. See 'examples'.
 #'
 #' @examples
-#' # Default usage
-#' pop1 = population("mypop", 1, 0.8, 500)
-#' comm1 = community("toto", pop1,pop1)
-#' summary(comm1)
+#'   # Default usage
+#'   pop1 = population("mypop", 1, 0.8, 500)
+#'   comm1 = community("toto", pop1,pop1)
+#'   summary(comm1)
 #'
+#'   # long history community
+#'   data(hudson)
+#'   sumrsc = summary(hudson)
 #'
-#' # long history community
-#' data(hudson)
-#' sumrsc = summary(hudson)
+#'   sumrsc$hare$Rates_of_change   # same for community object
 #'
-#' sumrsc$hare$Rates_of_change   # same for community object
+#'   # In case you want to modify digits printing settings
 #'
-#''
-#'
-#'# In case you want to modify digits printing settings
-#'
-#' summary(hudson,11)
+#'   summary(hudson,11)
 #'
 #' @export
 summary.community <- function(object,...,d.print = as.numeric(getOption("digits"))) {
@@ -328,7 +319,7 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   sizes <- as.list(1:length(subpops))
   names <- names(subpops)
 
-  for(i in 1:length(subpops)){
+  for(i in 1:length(subpops)) {
     gens[i] <- as.numeric(length(subpops[[i]][["size"]])) # number of generations
     sizes[[i]] <- subpops[[i]][["size"]]
   }
@@ -434,7 +425,7 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   cat("[[4]] - Rates of population change between generations:  ", "\n")
 
   ##### Only one time step .......................................
-  if(gens1 == 1){
+  if(gens1 == 1) {
 
 
     # dataframe creation ----
@@ -459,14 +450,14 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
 
     rates_c1 = function(v) {
       ratesv = c()
-      for (i in 1:length(v)){
-        ratesv[i] = v[i]/v[i+1]
+      for (i in 1:length(v)) {
+        ratesv[i] = v[i]/v[i + 1]
       }
       return(ratesv)}
 
 
     data.ch[,1] <- rev(subpops[[1]]$time)
-    data.ch[,2]<- names.ch
+    data.ch[,2] <- names.ch
     data.ch[3:ncol(data.ch)] <- lapply(X = sizes, FUN = rates_c1)
 
 
@@ -476,18 +467,20 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   ##### More than two time steps .......................................
   if (gens1 > 2) {
 
-    toto <- 1:(length(names.all.s)-1) # indexing
+    toto <- 1:(length(names.all.s) - 1) # indexing
     for (e in 1:length(toto)) {
-      if(!is.na(names.all.s[e+1])){
+      if (!is.na(names.all.s[e + 1])) {
         toto[e] <- paste(names.all.s[e], "over [", names.all.s[e + 1], "]")
-      } else{ toto[e] = NA}
+      } else {
+        toto[e] = NA
+      }
     }
 
     names.ch <- c( "[ n ]", "n over [ n-1 ]", toto[!is.na(toto)], "(n1 over [ n0 ])"  )
 
 
 
-    if(gens1 >= 7){
+    if (gens1 >= 7) {
 
       data.ch <- as.data.frame(matrix(nrow = 7, ncol = (2 + length(sizes)),
                                       dimnames = list(c(), c("Generations", "Rates of change for...", names(subpops)))))
@@ -495,38 +488,38 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
       # for filling column of "rates"
       rates_c2 = function(v) {
         ratesv = c(1:7)
-        for (i in 1:5){
-          ratesv[i+1] = v[i]/v[i+1]
+        for (i in 1:5) {
+          ratesv[i + 1] = v[i]/v[i + 1]
         }
         ratesv[1] = NA
-        ratesv[7] = v[length(v)-1]/v[length(v)]
+        ratesv[7] = v[length(v) - 1] / v[length(v)]
         return(ratesv)
       }
 
       timing = rev(subpops[[1]]$time)
-      data.ch[,1] <-timing[c(1:6,length(timing))]
-      data.ch[,2]<- names.ch
-      data.ch[,3:ncol(data.ch)] <-  lapply(X = sizes, FUN = rates_c2)
+      data.ch[, 1] <- timing[c(1:6,length(timing))]
+      data.ch[, 2] <- names.ch
+      data.ch[, 3:ncol(data.ch)] <-  lapply(X = sizes, FUN = rates_c2)
 
 
 
-    }else{
+    } else {
 
       data.ch <- as.data.frame(matrix(nrow = gens1, ncol = (2 + length(sizes)),
                                       dimnames = list(c(), c("Generations", "Rates of change for...", names(subpops)))))
       rates_c3 = function(v,n) {
         ratesv = c(1:n)
-        for (i in 1:(n-1)){
-          ratesv[i+1] = v[i]/v[i+1]
+        for (i in 1:(n - 1)) {
+          ratesv[i + 1] = v[i]/v[i + 1]
         }
         ratesv[1] = NA
-        ratesv[n] = v[length(v)-1]/v[length(v)]
+        ratesv[n] = v[length(v) - 1]/v[length(v)]
         return(ratesv)
       }
 
       timing = rev(subpops[[1]]$time)
-      data.ch[,1] <-timing[c(1:(gens1-1),length(timing))]
-      data.ch[,2]<- names.ch
+      data.ch[,1] <- timing[c(1:(gens1 - 1),length(timing))]
+      data.ch[,2] <- names.ch
       data.ch[,3:ncol(data.ch)] <-  lapply(X = sizes, FUN = rates_c3, n = gens1)
 
     }
@@ -570,7 +563,7 @@ summary.community <- function(object,...,d.print = as.numeric(getOption("digits"
   }
 
   data.cap[,1] <- " "
-  data.cap[,2:ncol(data.cap)]<- lapply(X = subpops, FUN = capacity_counting)
+  data.cap[,2:ncol(data.cap)] <- lapply(X = subpops, FUN = capacity_counting)
 
   print(data.cap,
         justify = "none",
