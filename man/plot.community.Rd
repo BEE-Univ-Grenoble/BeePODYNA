@@ -37,7 +37,6 @@ For \strong{capacity_line}, \strong{capacity_lty}, \strong{type}, \strong{text_p
 \examples{
 data(hudson)
 plot(hudson)
-
 }
 \seealso{
 \itemize{

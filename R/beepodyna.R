@@ -79,6 +79,56 @@ beepodyna <- function(label,
     stop("All the parameters haven't the same size.")
   }
 
+  ###### checks asked for in ISSUE #3 ########################
+  counts_function <- function(subpops, param){
+    count <- length(subpops[[param]])
+    return(count) }
+  szs <- lapply(community[["populations"]], FUN = counts_function, param = "size")
+  tms <- lapply(community[["populations"]], FUN = counts_function, param = "time")
+
+  if(length(unique(szs)) > 1){
+    if(verbose){
+      warning("The length of sizes data is not the same for all of your populations.")
+    }
+  }
+  if(length(unique(tms)) > 1){
+    if(verbose){
+      warning("The length of time data is not the same for all of your populations.")
+    }
+  }
+
+  if(length(unique(tms)) != length(unique(szs))){
+
+    for(i in (1:length(community[["populations"]]))){
+      length_sizes <- length(community[["populations"]][[i]][["size"]])
+      length_times <- length(community[["populations"]][[i]][["time"]])
+
+      maximum_length <- ifelse( length_sizes > length_times, "s", "t")
+
+      if(maximum_length == "t"){
+        if(verbose){
+          warning(paste0("The length of time data is higher than the number of size data for population ", i))
+        }
+        community[["populations"]][[i]][["size"]] <- c(
+          community[["populations"]][[i]][["size"]],
+          rep(NA, (length_times - length_sizes)))  # for filling first values
+      }
+
+      if(maximum_length == "s"){
+        if(verbose){
+          warning(paste0("The length of size data is higher than the number of time data for population ", i))
+        }
+        community[["populations"]][[i]][["time"]] <- c(
+          community[["populations"]][[i]][["time"]],
+          rep(NA, (length_sizes - length_times)))  # for filling first values]
+      }
+    }
+
+  }
+
+
+
+
   if (length(functions) > nb_pop) {
     if (verbose) {
       warning("The functions list is too long comparing to the number of populations. The last functions of the list are not used.")

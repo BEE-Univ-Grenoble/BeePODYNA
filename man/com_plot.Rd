@@ -42,7 +42,6 @@ For \strong{capacity_line}, \strong{capacity_lty} and \strong{text_print} parame
 \examples{
 data(hudson)
 com_plot(hudson)
-
 }
 \seealso{
 \itemize{
