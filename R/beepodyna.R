@@ -98,9 +98,7 @@ beepodyna <- function(label,
   }
 
   if(length(unique(tms)) != length(unique(szs))){
-    # Je désactive les autres ifs en bas pq je pense qu'il vaut mieux tout tester d'un coup ? discutible ?
 
-    #if(length(unique(tms)) > length(unique(szs))){
     for(i in (1:length(community[["populations"]]))){
       length_sizes <- length(community[["populations"]][[i]][["size"]])
       length_times <- length(community[["populations"]][[i]][["time"]])
@@ -111,19 +109,21 @@ beepodyna <- function(label,
         if(verbose){
           warning(paste0("The length of time data is higher than the number of size data for population ", i))
         }
-        community[["populations"]][[i]][["time"]][1:(length_times - length_sizes)] <- NA # for filling first values
+        community[["populations"]][[i]][["size"]] <- c(
+          community[["populations"]][[i]][["size"]],
+          rep(NA, (length_times - length_sizes)))  # for filling first values
       }
 
       if(maximum_length == "s"){
         if(verbose){
           warning(paste0("The length of size data is higher than the number of time data for population ", i))
         }
-        community[["populations"]][[i]][["size"]][1:(length_sizes - length_times)] <- NA # for filling first values
+        community[["populations"]][[i]][["time"]] <- c(
+          community[["populations"]][[i]][["time"]],
+          rep(NA, (length_sizes - length_times)))  # for filling first values]
       }
     }
-    #}
 
-    #if(length(unique(tms)) < length(unique(szs))){}
   }
 
 
