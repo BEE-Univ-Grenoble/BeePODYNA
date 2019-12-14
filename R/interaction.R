@@ -13,7 +13,7 @@ NULL
 #'
 #' @param nb_pop is the number of populations in the model. The matrix interaction
 #'        with only one population is set to 0.
-#' @param list.interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving
+#' @param x.interactions is a vector of length \code{nb_pop*(nb_pop-1)} giving
 #'        the interaction of each population on the other one.
 #'        A positive value means a positive impact (facilitation) while a negative value
 #'        means a negative impact (predation, competition).
@@ -24,7 +24,7 @@ NULL
 #' @param verbose Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.
 #'
 #' @examples
-#'   interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+#'   interactions(nb_pop=3, x.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
 #'   interactions(nb_pop=2)
 #'   interactions(nb_pop=1)
 #'
@@ -32,7 +32,7 @@ NULL
 #'
 #' @export
 interactions <- function(nb_pop,
-                            list.interactions = rep(0, nb_pop * (nb_pop - 1)),
+                            x.interactions = rep(0, nb_pop * (nb_pop - 1)),
                             labels = sprintf("Pop_%d",seq_len(nb_pop)),
                             verbose = TRUE
                            ) {
@@ -54,13 +54,13 @@ interactions <- function(nb_pop,
     stop("Nb_pop must be an integer superior or equal to 1.")
   }
 
-  if (!is.vector(list.interactions) ||
-      !is.numeric(list.interactions) ||
-      length(list.interactions) != nb_pop * (nb_pop - 1)) {
+  if (!is.vector(x.interactions) ||
+      !is.numeric(x.interactions) ||
+      length(x.interactions) != nb_pop * (nb_pop - 1)) {
     stop("Interactions vector must be fill with decimals ranging between -1 and 1, and is length must be equal to nb_pop*(nb_pop-1).")
   }
 
-  it <- insert(list.interactions, c(0:(nb_pop - 1)) * nb_pop + 1, 0)
+  it <- insert(x.interactions, c(0:(nb_pop - 1)) * nb_pop + 1, 0)
   dim(it) <- c(nb_pop, nb_pop)
   rownames(it) <- labels
   colnames(it) <- labels
@@ -80,7 +80,7 @@ interactions <- function(nb_pop,
 #'
 #' @examples
 #'   is_interactions(3)
-#'   x=interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+#'   x=interactions(nb_pop=3, x.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
 #'   is_interactions(x)
 #'
 #' @author Nicolas BARTALUCCI <bartalucci.nico@gmail.com>

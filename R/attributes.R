@@ -78,7 +78,7 @@ capacity_population <- function(pop) {
 
 #' grate_population
 #'
-#' \code{grate_population} returns the size of the population given in parameter.
+#' \code{grate_population} returns the growth rate of the population given in parameter.
 #'
 #' @param pop is an object of the class 'population'.
 #'

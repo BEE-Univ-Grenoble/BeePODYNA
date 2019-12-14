@@ -4,14 +4,14 @@
 \alias{interactions}
 \title{Builds an interaction matrix instance}
 \usage{
-interactions(nb_pop, list.interactions = rep(0, nb_pop * (nb_pop - 1)),
+interactions(nb_pop, x.interactions = rep(0, nb_pop * (nb_pop - 1)),
   labels = sprintf("Pop_\%d", seq_len(nb_pop)), verbose = TRUE)
 }
 \arguments{
 \item{nb_pop}{is the number of populations in the model. The matrix interaction
 with only one population is set to 0.}
 
-\item{list.interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving
+\item{x.interactions}{is a vector of length \code{nb_pop*(nb_pop-1)} giving
 the interaction of each population on the other one.
 A positive value means a positive impact (facilitation) while a negative value
 means a negative impact (predation, competition).
@@ -34,7 +34,7 @@ the j column on the population of the i line.
 If no interaction vector is given, the default values are 0.
 }
 \examples{
-  interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+  interactions(nb_pop=3, x.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
   interactions(nb_pop=2)
   interactions(nb_pop=1)
 

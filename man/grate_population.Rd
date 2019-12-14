@@ -13,7 +13,7 @@ grate_population(pop)
 It returns the growth rate of the population.
 }
 \description{
-\code{grate_population} returns the size of the population given in parameter.
+\code{grate_population} returns the growth rate of the population given in parameter.
 }
 \examples{
     pop<-population("Pop_1",42,2,200)

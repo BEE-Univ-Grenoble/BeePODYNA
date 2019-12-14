@@ -16,7 +16,7 @@ To create such an object you can use the \code{\link[BeePODYNA]{interactions}} f
 }
 \examples{
   is_interactions(3)
-  x=interactions(nb_pop=3, list.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
+  x=interactions(nb_pop=3, x.interactions=c(0.2,-0.5, 0.1,0.2,0.3,0.8))
   is_interactions(x)
 
 }
