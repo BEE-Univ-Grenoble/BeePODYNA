@@ -155,11 +155,11 @@ plot.community <- function(x, ...,
   capacity_lty <- rep(capacity_lty, n_pop)
   text_print <- rep(text_print, n_pop)
 
-  com_time <- as.vector(sapply(x$populations, "[[", 3))
+  com_time <- unlist(sapply(x$populations, "[[", 3))
   delta_x <- (max(com_time) - min(com_time))
   if(delta_x == 0) delta_x <- 0.1 else  delta_x <- delta_x * 0.1
 
-  com_size <- as.vector(sapply(x$populations, "[[", 2))
+  com_size <- unlist(sapply(x$populations, "[[", 2))
   delta_y <- (max(com_size) - min(com_size)) * 0.1
   if(delta_y == 0) delta_y <- 0.1 else  delta_y <- delta_y * 0.1
 
