@@ -21,6 +21,6 @@ Function describing a logistical growth, has to bee included in a beepodyda obje
 }
 \examples{
     data(hudson)
-    exponential_growth(1,hudson,interactions(2))
+    logistic_growth(1,hudson,interactions(2))
 
 }

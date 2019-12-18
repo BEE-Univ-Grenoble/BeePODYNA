@@ -91,7 +91,7 @@ simulate_n_pop_dynamic <- function(beepodyna,n) {
 #'
 #' @examples
 #'     data(hudson)
-#'     exponential_growth(1,hudson,interactions(2))
+#'     logistic_growth(1,hudson,interactions(2))
 #'
 #' @export
 logistic_growth <- function(pop, community, interactions) {
