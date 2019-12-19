@@ -1,7 +1,9 @@
 #' @import R.utils
 NULL
 
-#' Builds an interaction matrix instance
+#' mat_interaction
+#'
+#' Builds an interaction matrix
 #'
 #' \code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
 #' The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the
