@@ -2,7 +2,7 @@
 % Please edit documentation in R/interaction.R
 \name{interactions}
 \alias{interactions}
-\title{mat_interaction}
+\title{interactions}
 \usage{
 interactions(nb_pop, x.interactions = rep(0, nb_pop * (nb_pop - 1)),
   labels = sprintf("Pop_\%d", seq_len(nb_pop)), verbose = TRUE)
@@ -24,15 +24,13 @@ and then the vector of the interactions of the second population on the others..
 \item{verbose}{Default is \code{TRUE}. Set to \code{FALSE} if you don't want the warnings.}
 }
 \description{
-Builds an interaction matrix
-}
-\details{
-\code{mat_interaction} creates an interactions matrix object defining the positive and negative interactions between populations.
+\code{interactions} creates an interactions matrix object defining the positive and negative interactions between populations.
 The interaction is not assumed symetrical, so a population can have a different effect on a population than this latest has on the
 first one. The interaction of a population on itself is equal to 0.
 The element \code{[i,j]} of the matrix is the effect of the population on
 the j column on the population of the i line.
-
+}
+\details{
 If no interaction vector is given, the default values are 0.
 }
 \examples{
