@@ -1,0 +1,595 @@
+\documentclass[12pt,a4paper,notitlepage,colorinlistoftodos]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template pour rendus Master
+%draft ou pas
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc} %encodage
+\usepackage[T1]{fontenc}
+
+\usepackage{ifthen}
+
+\newboolean{notes}
+\setboolean{notes}{true}
+
+\usepackage[numbers]{natbib}
+
+%\usepackage{natbib} % bibliography
+
+\renewcommand{\bibsection}{}
+
+\usepackage[english]{babel} % langue
+% add '\-' to create custom hypernation if a word is difficult to cut or :
+\hyphenation{geo-graphique}
+
+%mise en page générale
+\usepackage{geometry}
+%\geometry{a4paper} % format de feuille
+\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm} %marges
+\usepackage{mathptmx} % Police Times si compilateur pdfLatex
+\usepackage{parskip}
+\usepackage{amsmath}
+
+\usepackage{times}
+
+\linespread{1.2} % interligne
+\usepackage{fancyhdr} %en tete et pied de page
+\usepackage{lastpage}
+
+\pagestyle{plain}
+
+%\pagestyle{fancy}
+%\chead{\includegraphics[width=\linewidth]{head.png}}
+%\setlength\headheight{2.5cm}
+%\lhead{}
+%\rhead{}
+%\cfoot{\thepage} % get rid of the page number
+%\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrulewidth}{1pt}
+
+\usepackage{lscape} % page en landscape
+
+\usepackage{hyperref,url} % lien cliquables
+\hypersetup{
+colorlinks = true,
+linkcolor = black,
+citecolor = black,
+urlcolor = black
+} % https://tex.stackexchange.com/questions/50747/options-for-appearance-of-links-in-hyperref
+\usepackage{lipsum} %Lorem ipsum
+
+\usepackage{wrapfig} %position d'images dans le texte
+\usepackage{graphicx, subcaption, setspace, booktabs, wrapfig}
+
+\usepackage[table]{xcolor}
+
+\usepackage{multicol} % 2 columns
+\setlength{\columnsep}{1cm}
+
+\usepackage{caption}
+%\DeclareCaptionType{annexe}[Annexe][Liste d'annexes] % rajout pour captions annexes
+%\DeclareCaptionType{web}[Web][Sites Web] % rajout pour mettre des captions web
+
+\ifthenelse{\boolean{notes}}{\usepackage[backgroundcolor=black]{todonotes} }{\usepackage[disable]{todonotes}}
+
+\usepackage{pagecolor}
+%\ifthenelse{\boolean{notes}}{\pagecolor{darkgray} \color{lightgray}}{}
+
+%\usepackage{todonotes} % notes et commentaires
+%\usepackage[disable]{todonotes} % pour supprimer les commentaires lors de la compil$
+\usepackage{xkeyval}
+
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+
+\usepackage{soul} %surligner
+\sethlcolor{cerulean} %couleur pour surligner
+\newcommand{\hlc}[2][yellow]{ {\sethlcolor{#1} \hl{#2}} }
+
+
+%%%%%%%%%%%% skip an all paragraphe, between this bornes %%%%%%%%%%%%%%%%%%
+%\iffalse
+%\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Code R   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+%http://latexcolor.com/
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{cerulean}{rgb}{0.0, 0.48, 0.65}
+\definecolor{beaublue}{rgb}{0.95, 0.95, 0.95}
+\definecolor{amber}{rgb}{1.0, 0.25, 0.0}
+\definecolor{indiagreen}{rgb}{0.07, 0.53, 0.03}
+\definecolor{number}{rgb}{0.01, 0.01, 0.01}
+\definecolor{saffron}{rgb}{0.96, 0.77, 0.19}
+\definecolor{fgcolor}{rgb}{0.5,0.5,0.5}
+
+\lstset{language = R,
+    basicstyle=\footnotesize,
+    breaklines=true,
+    keepspaces=true,
+    firstnumber=1,
+    numbers=left, % where line-numbers; possible values (none, left, right)
+    numbersep=5pt,  % how far the line-numbers are from the code
+    numberstyle=\color{number},
+    deletekeywords={_,/,C,troll,approx,min},
+    backgroundcolor=\color{beaublue},
+    commentstyle=\color{indiagreen},
+    keywordstyle=\color{amber},
+    stringstyle=\color{cerulean}
+    }
+
+%\begin{lstlisting}
+%  %%%% put the R code here %%%%
+%\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% nouvelles commandes spécifique au doc %%%%%%%%%%%%%%%%%%
+
+\DeclareRobustCommand{\rchi}{{\mathpalette\irchi\relax}}
+\newcommand{\irchi}[2]{\raisebox{\depth}{$#1\chi$}}
+
+\newcommand{\defi}[2]{\textbf{#1: }{#2}}
+
+\usepackage{moreverb} % for verbatim ouput
+\usepackage{alltt}
+% Count of words
+\immediate\write18{texcount -inc -incbib
+-sum review_jaunatre.tex > /tmp/wordcount.tex}
+\newcommand\wordcount{
+\begin{alltt}
+\input{/tmp/wordcount.tex}
+\end{alltt}
+}
+
+\newboolean{counter}
+\setboolean{counter}{false}
+
+
+\makeatletter
+    \def\@maketitle{%
+  \newpage
+  %\null
+  %\vskip 1em%
+  %\begin{center}%
+  %\includegraphics[width=\textwidth]{main_head.png}
+  %\end{center}%
+  \let \footnote \thanks
+    {\LARGE \noindent \@title  \par }%
+     \vskip .5em
+     \noindent  \textit{\@date} \\
+    \large \noindent  \@author \\
+    \footnotesize \noindent  \href{mailto:maxime.jaunatre@etu.univ-grenoble-alpes.fr}{Mail}
+   % \end{center}
+   % {\large
+      %\lineskip .5em%
+    %  \begin{tabular}[t]{l}%
+    %   \noindent  \@author \\
+     %  \noindent  \href{mailto:maxime.jaunatre@etu.univ-grenoble-alpes.fr}{Mail $^1$}
+     % \end{tabular}\par}%
+    %\vskip 1em%
+    %{\large \@date}%
+% \end{center}%
+  %\par
+  %\vskip .5em
+  }
+\makeatother
+
+\title{\textbf{BeePODYNA : A \textbf{R} tool to simulate populations dynamics.}}
+\author{Maxime Jaunatre, Master 2 BEE Grenoble}
+\date{\today}
+
+%\renewcommand*\contentsname{Table des matières}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<<packages , echo = FALSE, eval=TRUE>>=
+if("BeePODYNA" %in% installed.packages()) {
+  library(BeePODYNA)
+}else{
+  # library(devtools)
+  # install_github("BEE-Univ-Grenoble/BeePODYNA")
+  # library(BeePODYNA)
+}
+
+# knitr::opts_chunk$set(comment="# ", echo = TRUE, eval = TRUE, size="scriptsize"))
+@
+
+\maketitle
+
+\textbf{This document provide an introduction to the BeePODYNA package, a collective work produced by the M2 BEE class of Grenoble for a modelisation course. This package is made to provide a new tool for simulation and observation of population dynamics. To do so, this package regroup multiple functions to simulate a population, its interactions with other populations in a community and the dynamic result of interaction during a time period. Each element used in these simulations will be explain with the goal to provide a framework for each user to create it's own system.}
+
+~
+
+\hrule
+\tableofcontents
+
+~
+\hrule
+~
+
+First point, to install the package, you may want to load it from Github, as it's not yet avalaible on CRAN. This installation done with the devtools package.
+<<installation , echo = TRUE, eval=FALSE, size="scriptsize">>=
+if("BeePODYNA" %in% installed.packages()) {
+  library(BeePODYNA)
+}else{
+  library(devtools)
+  install_github("BEE-Univ-Grenoble/BeePODYNA")
+  library(BeePODYNA)
+}
+@
+
+\newpage
+
+Populations dynamics are difficult to apprehend, as they depend on many factors when their development take place in a complexe ecosystem. It is therefore usefull to modelize them with informatic and mathematic tools, starting off with simple mechanisms. The modelization approach illustrated here is using simulations to produce informatic communities, an usefull feature to compare with empiric observations. The main goal of the vignette is then to explain the different aspect of simulating a population dynamic and finally produce a simulation of two interacting populations.
+
+<<first , echo = FALSE, eval=FALSE, size="scriptsize", comment = "# ">>=
+lotka_prey <- function(pop, community, interactions){
+  target_pop <- community$populations[[pop]] # pop is the number of the population in the community
+  last_time  <- target_pop$time[length(target_pop$time)]
+  last_size  <- target_pop$size[length(target_pop$size)]
+
+  pred_pop <- community$populations[[-pop]]
+  pred <- label(pred_pop)
+  last_size_pred  <- pred_pop$size[length(pred_pop$size)]
+
+  int <- interactions[pop,pred]
+
+  new_size <- last_size + last_size * target_pop$growth_rate * (1 - last_size / target_pop$capacity) + int * last_size * last_size_pred
+  new_time <- last_time + 1
+
+  if(new_size<=0) new_size = 0
+
+  target_pop$size <- append(target_pop$size, new_size)
+  target_pop$time <- append(target_pop$time, new_time)
+
+  community$populations[[pop]] <- target_pop
+
+  community
+}
+
+lotka_pred <- function(pop, community, interactions){
+  target_pop <- community$populations[[pop]] # pop is the number of the population in the community
+  last_time  <- target_pop$time[length(target_pop$time)]
+  last_size  <- target_pop$size[length(target_pop$size)]
+
+  prey_pop <- community$populations[[-pop]]
+  prey <- label(prey_pop)
+  last_size_prey  <- prey_pop$size[length(prey_pop$size)]
+
+  int <- interactions[pop,prey]
+
+  new_size <- (1 - last_size / target_pop$capacity) * int * last_size * last_size_prey
+  new_time <- last_time + 1
+
+  if(new_size<=0) new_size = 0
+
+  target_pop$size <- append(target_pop$size, new_size)
+  target_pop$time <- append(target_pop$time, new_time)
+
+  community$populations[[pop]] <- target_pop
+
+  community
+}
+
+wasteland <- beepodyna(label = "Wasteland",
+                       community = community(label = "Wasteland",
+                                             cats = population("cats",20,-0.1,50),
+                                             rats = population("rats",100,2,250)),
+                       interactions = interactions(nb_pop  = 2, x.interactions = c(-0.001,0.009),
+                                                   labels = c("cats","rats"), verbose = TRUE),
+                       functions = c(lotka_pred,lotka_prey)
+                       )
+
+wasteland <- simulate_n_pop_dynamic(wasteland,5)
+@
+
+\section{Objects}
+
+\hypertarget{Populations}{
+\subsection{Populations}
+}
+
+At the very base of the simulation is the population. It can either be created from scratch \newline(\verb|population()|) or imported from a list into a population object (\verb|as_population()|). In every case, it can be useful to test if your object is a population before using it extensively. The population is defined as a very simple evolution of size during a time period, the maximum capacity of the environnement concerning this population and a growth rate. More complex populations with age levels (maturity for exemple) can be produced based on this model, but it require a carefull analysis of the growth rate and other interactions which be described later on.
+
+<<populations , echo = TRUE, eval=TRUE, size="scriptsize", comment = "# ", results = 'hold'>>=
+worms <- population(label = "worms", initial_size = 13, growth_rate = 10, capacity = 500)
+cats <- list(label = "cats", size = c(1,1.2,1.3,1.4,1.5), time = c(0:4),
+             growth_rate = 1.5, capacity = 24)
+is_population(cats)
+cats <- as_population(cats)
+is_population(cats)
+@
+
+If the growth rate of a population is missing in your dataset, you can compute it with a basic function (\verb|growth_rate()|) provided in this package.
+
+<<growth, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+growth_rate_cat = growth_rate(birth_rate = 2, death_rate = 0.5) ; growth_rate_cat
+@
+
+Different attributes of a population are needed for further computations and are accessible with different functions. All of these attributes are also accessible with the \verb|$| operator for more readible coding practices.
+
+<<pop_attr, echo = TRUE, eval = 1, size ="scriptsize", comment = "# ">>=
+size_population(worms) ; grate_population(worms) ; label(worms) ; capacity_population(worms)
+worms$size ; worms$growth_rate ; worms$label ; worms$capacity
+@
+%\todo[inline]{\verb|size_population()|}
+%\todo[inline]{\verb|grate_population()|}
+%\todo[inline]{\verb|label.population()|}
+%\todo[inline]{\verb|capacity_population()|}
+
+Finally, you can assess the different values of a populations object by opening it, but it is easier to get values from a summary, or  look at a graphic representations. This last option is also very close to the basic plot function of the \verb|graphic| package of R, enabling all the options for prettier plots.
+
+<<pop_sum, echo = -c(3,5), eval = TRUE, size ="scriptsize", comment = "# ">>=
+data(hudson)
+lynx <- hudson$lynx
+jpeg("figure/pop.jpg", width = 802, height = 445)
+plot(lynx)
+graphics.off()
+summary(lynx)
+@
+%\todo[inline]{\verb|summary.population()|}
+%\todo[inline]{\verb|plot.population()|}
+
+\begin{figure}
+\vspace{-20pt}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figure/pop.jpg}
+\end{center}
+\caption{\textbf{Plot of population "lynx"}, extracted from the "hudson" example dataset}
+\vspace{-10pt}
+\label{fig:pop}
+\end{figure}
+
+\hypertarget{Community}{\subsection{Community}}
+
+For studying populations interactions, they are grouped in a community object. This is done with the \verb|community()| function. There is also the possibility to check the class of a community object. As precised before for population, there is no theorical limit to the number of populations, and if they are from different species or not. Any user can then produce a great variety of model, from a multi-age species metapopulation to a complexe community with a rich trophic network.
+
+<<comm, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+worms <- population(label = "worms", initial_size = 13, growth_rate = 10, capacity = 500)
+rats <- population(label = "rats", initial_size = 2, growth_rate = 5, capacity = 100)
+cats <- population(label = "cats", initial_size = 1, growth_rate = 1, capacity = 20)
+wasteland <- community(label = 'wasteland',worms,rats , cats)
+is_community(wasteland)
+@
+%\todo[inline]{\verb|is\_ community()|}
+
+Like a population, different attributes of a community are accessible with multiple functions. There is a modification of the \verb|length()| function, providing the number of population composing it. The \verb|$| operator is still working, but the community is build with a different aspect than population and it is then trickier to access some information as the user need to dig a long way inside the object.
+
+<<comm_attr, echo = TRUE, eval = 1, size ="scriptsize", comment = "# ">>=
+label(wasteland) ; length(wasteland)
+wasteland$label ; length(wasteland$populations)
+wasteland$populations$rats$capacity # capacity of the rats population
+@
+%\todo[inline]{\verb|label.community()|}
+
+A summary function is also provided to expose different values of a community object. A function to graphically represent a community is close to the precedent one for population. The addition of multiple populations that are in a community put in perspective the need to differenciate them with graphical aspects as shown in the figure \ref{fig:com}.
+
+<<com_plot, echo = -c(2,4), eval = TRUE, size ="scriptsize", comment = "# ">>=
+data(hudson)
+jpeg("figure/com.jpg", width = 802, height = 445)
+plot(hudson, col = c("tan3","slateblue3"), cex = c(1,1.5), pch = c(1,2))
+legend("topright", c("hare","lynx"),col = c("tan3","slateblue3"), pch = c(1,2))
+graphics.off()
+summary(hudson)
+@
+%\todo[inline]{\verb|summary.community()|}
+%\todo[inline]{\verb|plot.community()|}
+
+\begin{figure}
+\vspace{-20pt}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figure/com.jpg}
+\end{center}
+\caption{\textbf{Plot of the "hudson" community}, composed of 2 populations; extracted from the "hudson" example dataset}
+\vspace{-10pt}
+\label{fig:com}
+\end{figure}
+
+Although there is a simple way to represent a community, this package provide another tool to visualize the interactions between two populations, with a line following the time period. It is however important to note that it is less open to modification of color (Figure \ref{fig:com_plot}).
+
+<<complot_plot, echo = 2, eval = TRUE, size ="scriptsize", comment = "# ">>=
+jpeg("figure/com_plot.jpg", width = 802, height = 445)
+com_plot(hudson)
+graphics.off()
+@
+%\todo[inline]{\verb|com\_ plot()|}
+
+\begin{figure}
+%\vspace{-20pt}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figure/com_plot.jpg}
+\end{center}
+\caption{\textbf{Plot with the com\_ plot() function of the "hudson" community}, composed of 2 populations; extracted from the "hudson" example dataset}
+\vspace{-10pt}
+\label{fig:com_plot}
+\end{figure}
+
+\textbf{Note:} for an easier utilisation of a community in different analysis, populations can be quickly assessed within the condition that their labels are known to the user. These two commands return the same thing, the lynx population of the hudson community example dataset.
+
+<<dollar_com, echo = TRUE, eval = FALSE, size ="scriptsize", comment = "# ">>=
+hudson$populations$lynx
+hudson$lynx
+@
+
+\hypertarget{Interaction matrix}{\subsection{Interaction matrix}}
+
+Even if the simulation is done with one population or multiple populations which don't interact, an interaction matrix must be provided. It can be created by hand or imported from a vector. However, as it is important to have a correct interaction matrix, it may be easier to build it by hand. Like all other objects, it's better to check if your object is correctly formated before using it in simulations.
+
+To remind every user, the interaction matrix is thought to use negative value for negative interaction, but this also depend on the functions you provide, as they take these values in account. This information is similar with the way interactions works, from the column value to the row value or the other way around. As this system offer great opportunities to the user, it is important to keep in mind that many issues can be created with different ways of building the functions and the interactions matrix.
+
+<<interact, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+hudson_int <- interactions(nb_pop  = 2, x.interactions = c(0.0006,-0.09),
+                           labels = names(hudson$populations), verbose = TRUE)
+is_interactions(hudson_int)
+wasteland_int <- c(0.2,0,-2,0.5,0,-0.5)
+is_interactions(wasteland_int)
+wasteland_int <- as_interactions(wasteland_int)
+is_interactions(wasteland_int)
+@
+%\todo[inline]{\verb|interactions()|}
+%\todo[inline]\verb|as\_ interactions()|}
+%\todo[inline]{\verb|as\_ interactions,default()|}
+%\todo[inline]{\verb|as\_ interactions,interactions()|}
+%\todo[inline]{\verb|as\_ interactions,numeric()|}
+%\todo[inline]{\verb|is\_ interactions()|}
+
+\subsection{BeePODYNA}
+
+Last object to regroup all informations, the beepodyna object is composed of a \hyperlink{Community}{community}, a \hyperlink{Interaction matrix}{matrix of interactions} between the populations of the community proposed and the functions to use in further simulations.
+
+<<beepodyna, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+hudson_logist <- beepodyna(label = "hudson_logist", community = hudson, interactions = hudson_int,
+                           functions = c(logistic_growth,logistic_growth), verbose = TRUE)
+@
+%\todo[inline]{\verb|beepodyna()|}
+
+It also have multiple attributes, which can be assessed by different functions.
+
+<<beepodyna_at, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+label(hudson_logist) ; length(hudson_logist)
+@
+%\todo[inline]{\verb|label,beepodyna()|}
+%\todo[inline]{\verb|length,beepodyna()|}
+
+\section{Simulations}
+
+The final point of this package is to simulate the effect of time over a community, based on the reiteration of interactions between populations.
+
+\subsection{Running a simulations} \label{Running a simulations}
+
+Different types of simulation can be produced. A one step iteration is possible, or multiple iterations (which is a loop of the one step process).
+
+<<simulations, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+hudson_logist <- simulate_onestep(hudson_logist)
+hudson_logist <- simulate_n_pop_dynamic(hudson_logist, n = 20)
+@
+%\todo[inline]{\verb|simulate\_ onestep()|}
+%\todo[inline]{\verb|simulate\_ n\_ pop\_ dynamic()|}
+
+\subsection{Different models} \label{Different models}
+
+As seen before, a great variety of models can simulated within this frameworks. But this package only provide basic functions for simulating a population dynamic. There is a exponential growth function (\verb|exponential_growth()|, see equation \ref{eq:exp}) and a logistic growth function (\verb|logistic_growth()|, see equation \ref{eq:log}).
+
+\begin{equation}
+size_{t+1} = size_{t} \cdot (1 + r)
+\label{eq:exp}
+\end{equation}
+\begin{equation}
+size_{t+1} = size_{t} + size_{t} \cdot r \cdot (1 - size_{t} / K )
+\label{eq:log}
+\end{equation}
+\textit{with : \textbf{r} the growth rate and \textbf{K} the capacity.} \\
+
+Any user can import it's own function, if such functions respect some rules that will be explained here. As you can see below, every function used in simulations used 3 variables : `pop`, `community`, `interactions`. This is obligatory even if these variables are not used in the code after (as seen with \verb|logistic_growth()|, which don't rely on the interactions matrix). Other obligatory usage is the community object it must return.
+
+<<exemple function, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+logistic_growth
+@
+
+A function modify a population at a time in the community given, and the simulation run each population at a time before going further if there is multiple iterations. This must be taken into account if the rythm of interaction or growth is not the same among populations : the time step is the same in all populations.
+
+Below is an example of a function based on a prey-predator interactions. In this example the two populations depend on different function to compute their $size_{t+1}$ (see equation \ref{eq:lotk}). Therefore, you must program 2 different functions because the dynamics are different. \textit{Note : this system of equations works with only two populations. Therefore users must be precautious when coding such functions and creating objects than will be used with.}
+
+\begin{equation}
+\begin{cases}
+prey_{t+1} = prey_{t} + prey_{t} \cdot r \cdot (1 - prey_{t} / K ) + int_{pred/prey} \cdot pred_{t} \\
+pred_{t+1} = pred_{t} + pred_{t} \cdot r \cdot (1 - pred_{t} / K ) + int_{prey/pred} \cdot prey_{t}
+\end{cases}
+\label{eq:lotk}
+\end{equation}
+\textit{with : \textbf{r} the growth rate and \textbf{K} the capacity.} \\
+
+<<lotka, echo = -c(9,12), eval = TRUE, size ="scriptsize", comment = "# ">>=
+lotka_prey <- function(pop, community, interactions){
+  target_pop <- community$populations[[pop]] # pop is the number of the population in the community
+  last_time  <- target_pop$time[length(target_pop$time)]
+  last_size  <- target_pop$size[length(target_pop$size)]
+
+  pred_pop <- community$populations[[-pop]]
+  pred <- label(pred_pop)
+  last_size_pred  <- pred_pop$size[length(pred_pop$size)]
+
+  int <- interactions[pop,pred]
+
+  new_size <- last_size + last_size * target_pop$growth_rate * (1 - last_size / target_pop$capacity) + int * last_size_pred
+  new_time <- last_time + 1
+
+  if(new_size<=0) new_size = 0
+
+  target_pop$size <- append(target_pop$size, new_size)
+  target_pop$time <- append(target_pop$time, new_time)
+
+  community$populations[[pop]] <- target_pop
+
+  community
+}
+
+lotka_pred <- function(pop, community, interactions){
+  target_pop <- community$populations[[pop]] # pop is the number of the population in the community
+  last_time  <- target_pop$time[length(target_pop$time)]
+  last_size  <- target_pop$size[length(target_pop$size)]
+
+  prey_pop <- community$populations[[-pop]]
+  prey <- label(prey_pop)
+  last_size_prey  <- prey_pop$size[length(prey_pop$size)]
+
+  int <- interactions[pop,prey]
+
+  new_size <- last_size + last_size * target_pop$growth_rate * (1 - last_size / target_pop$capacity) + int * last_size * last_size_prey
+  new_time <- last_time + 1
+
+  if(new_size<=0) new_size = 0
+
+  target_pop$size <- append(target_pop$size, new_size)
+  target_pop$time <- append(target_pop$time, new_time)
+
+  community$populations[[pop]] <- target_pop
+
+  community
+}
+
+# creating the beepodyna and simulating the community
+hudson$lynx$growth_rate = 0.1 # little tweak to produce a beautiful graph
+hudson_lotka <- beepodyna(label = "hudson_lotka", community = hudson, interactions = hudson_int,
+  functions = c(lotka_prey,lotka_pred), verbose = TRUE)
+
+jpeg("figure/lotka.jpg", width = 802, height = 445)
+plot(simulate_n_pop_dynamic(hudson_lotka,10)$community, col = c("tan3","slateblue3"),
+     pch = c(1,2), xlim = c(1910,1930), ylim = c(0,100))
+legend("bottomright", c("hare","lynx"),col = c("tan3","slateblue3"), pch = c(1,2))
+graphics.off()
+@
+
+\begin{figure}[!b]
+%\vspace{-20pt}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{figure/lotka.jpg}
+\end{center}
+\caption{\textbf{Simulation of the 'hudson' community with an interaction taking capacity into account}; extracted from the "hudson" example dataset}
+\vspace{-10pt}
+\label{fig:com_plot}
+\end{figure}
+
+
+\section{Dependances}
+
+This package depend on very few packages, which are naturally loaded when installing R. Please checks for the correct installation and update of the following package before reporting troubleshootings.
+<<test_dep, echo = TRUE, eval = TRUE, size ="scriptsize", comment = "# ">>=
+c("R.utils","grDevices","graphics") %in% installed.packages()
+@
+
+%\todo[inline]{export(label)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Références
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+%\cite{Boucher2016}
+%\subsection*{Bibliographie}
+%\todo[color = red]{change bibliography model}
+\bibliographystyle{tree}
+%%\bibliographystyle{tree}
+%%%\bibliographystyle{plain}
+%\bibliography{../../../../Mendeley/Primula}
+
+\end{document}

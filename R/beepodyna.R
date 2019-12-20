@@ -66,8 +66,7 @@ beepodyna <- function(label,
     if (any(not_func != "function"))
         stop(sprintf("The %d element of the functions list in not a function.",
                      which(not_func)[1]))
-  }
-  else {
+  } else {
     stop("The functions given are not a single function or a list.")
   }
 
